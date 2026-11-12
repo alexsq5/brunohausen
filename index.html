@@ -3,8 +3,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Brunohausen</title>
 <meta name="description" content="Brunohausen – eine Stadt, die von ihren Followern gebaut wird. Folgen heißt einziehen.">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800;900&display=swap">
+<style>@font-face{font-family:Inter;src:url(fonts/inter-500.woff) format('woff');font-weight:500;font-display:swap}@font-face{font-family:Inter;src:url(fonts/inter-700.woff) format('woff');font-weight:700;font-display:swap}@font-face{font-family:Inter;src:url(fonts/inter-800.woff) format('woff');font-weight:800;font-display:swap}@font-face{font-family:Inter;src:url(fonts/inter-900.woff) format('woff');font-weight:900;font-display:swap}</style>
 <style>
 /* Layout: lebendige Stadt als Bühne oben, darunter Karten wie die Pills aus den Videos */
 :root { --navy: #1d2440; --ink: #26314d; --muted: #6b7591; --sun: #ffd23d; --grass: #7cc85a; --red: #e8453c; --sky: #eaf6ff; --card: #ffffff; --line: #26314d;
@@ -97,7 +96,8 @@ h2 { margin: 0 0 14px; font-size: 28px; font-weight: 900; color: var(--navy); te
 .how .card b { display: block; font-size: 19px; font-weight: 900; margin: 6px 0 4px; }
 .how .card p { margin: 0; color: var(--muted); font-weight: 600; line-height: 1.45; }
 .how .card span { font-size: 30px; }
-footer { text-align: center; color: var(--muted); font-weight: 700; font-size: 14px; }
+footer { text-align: center; color: var(--muted); font-weight: 700; font-size: 14px; line-height: 1.8; }
+footer a { color: var(--navy); }
 @media (max-width: 520px) { .pill b { font-size: 18px; } .pill i { width: 36px; height: 36px; font-size: 18px; } .stop { width: 54px; } .stop .dot { width: 46px; height: 46px; font-size: 21px; } .rail { left: 40px; right: 40px; } .track { padding-inline: 8px; } }
 @media (prefers-reduced-motion: reduce) { .stop.next .dot { animation: none; } }
 </style></head><body>
@@ -801,7 +801,7 @@ CONFIG.named.forEach(([n], i) => { const b = el('button', 'chip pick', n); b.typ
 const more = CONFIG.residents - CONFIG.named.length; if (more > 0) $('chips').append(el('span', 'chip more', '+ ' + more + ' weitere'));
 CONFIG.episodes.slice().reverse().forEach(([n, h, p]) => { const e = el('article', 'card ep'); const no = el('div', 'no'); no.append('FOLGE', el('b', null, String(n)));
   const tx = el('div'); tx.style.minWidth = '0'; tx.append(el('h3', null, h), el('p', null, p)); e.append(no, tx); $('eps').append(e); });
-$('foot').textContent = 'Stand: ' + CONFIG.updated + ' · Brunohausen · Folgen heißt einziehen';
+$('foot').append('Stand: ' + CONFIG.updated + ' · Brunohausen · Folgen heißt einziehen', el('br'), Object.assign(el('a', null, 'Impressum'), { href: 'impressum.html' }), ' · ', Object.assign(el('a', null, 'Datenschutz'), { href: 'datenschutz.html' }));
 resize(); home(); view = { ...goal }; addEventListener('resize', () => { const k0 = fitK(); resize(); const f = fitK() / k0; goal.k *= f; view.k *= f; });
 (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => requestAnimationFrame(loop));
 
