@@ -768,16 +768,14 @@ function drawCity(t) {
     c.beginPath(); c.ellipse(p[0], p[1], r * CAM.k * 1.2, r * CAM.k * 0.62, 0, 0, Math.PI * 2); c.fill(); }); c.restore();
   post(t);
   // name tags
-  const fs = Math.max(11, CAM.k * 0.24);
-  WALK.forEach((w, wi) => { if (!w.name || (wi > 11 && w !== SEL)) return; const p = P(w.x, w.y, 1.15); ctx.font = `900 ${fs}px ${FONT}`; const tw = ctx.measureText(w.name).width + fs;
+  const fs = Math.max(9, Math.min(22, CAM.k * 0.17));
+  [...WALK.filter(o => o !== SEL), ...(SEL ? [SEL] : [])].forEach((w, wi) => { if (!w.name) return; ctx.globalAlpha = SEL && w !== SEL ? 0.35 : 1; const p = P(w.x, w.y, 1.15); ctx.font = `900 ${fs}px ${FONT}`; const tw = ctx.measureText(w.name).width + fs;
     rrect(ctx, p[0] - tw / 2, p[1] - fs * 1.6, tw, fs * 1.5, fs * 0.75); ctx.fillStyle = w.name === 'Justus' ? '#1d2440' : '#ffffff'; ctx.fill(); ctx.lineWidth = Math.max(2, fs * 0.14); ctx.strokeStyle = '#1d2440'; ctx.stroke();
     ctx.fillStyle = w.name === 'Justus' ? '#ffd23d' : '#1d2440'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(w.name, p[0], p[1] - fs * 0.83); });
-  if (SEL) { const p = P(SEL.x, SEL.y, 0), pu = 0.5 + 0.5 * Math.sin(T * 5);
-    ctx.beginPath(); ctx.ellipse(p[0], p[1], CAM.k * (0.55 + 0.1 * pu) * 1.22, CAM.k * (0.55 + 0.1 * pu) * 0.71, 0, 0, Math.PI * 2); ctx.lineWidth = Math.max(3, CAM.k * 0.06); ctx.strokeStyle = '#ffd23d'; ctx.stroke();
-    const q = P(SEL.x, SEL.y, 1.15), ay = q[1] - fs * 2.2 - pu * fs * 0.4; ctx.beginPath(); ctx.moveTo(q[0], ay + fs * 0.5); ctx.lineTo(q[0] - fs * 0.5, ay - fs * 0.2); ctx.lineTo(q[0] + fs * 0.5, ay - fs * 0.2); ctx.closePath(); ctx.fillStyle = '#ffd23d'; ctx.fill(); ctx.lineWidth = Math.max(2, fs * 0.12); ctx.strokeStyle = '#1d2440'; ctx.stroke();
-    if (SEL.role) { const r = P(SEL.x, SEL.y, 0), rf = fs * 0.95; ctx.font = `900 ${rf}px ${FONT}`; const rw = ctx.measureText(SEL.role).width + rf * 1.2;
-      rrect(ctx, r[0] - rw / 2, r[1] + rf * 0.6, rw, rf * 1.6, rf * 0.8); ctx.fillStyle = '#ffd23d'; ctx.fill(); ctx.lineWidth = Math.max(2, rf * 0.14); ctx.strokeStyle = '#1d2440'; ctx.stroke();
-      ctx.fillStyle = '#1d2440'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(SEL.role, r[0], r[1] + rf * 1.42); } }
+  ctx.globalAlpha = 1;
+  if (SEL) { const job = SEL.role || 'Dorfbewohner', q = P(SEL.x, SEL.y, 1.15), jf = fs * 1.05; ctx.font = `900 ${jf}px ${FONT}`; const jw = ctx.measureText(job).width + jf * 1.2, jy = q[1] - fs * 1.6 - jf * 1.9;
+    rrect(ctx, q[0] - jw / 2, jy, jw, jf * 1.6, jf * 0.8); ctx.fillStyle = '#ffd23d'; ctx.fill(); ctx.lineWidth = Math.max(2, jf * 0.14); ctx.strokeStyle = '#1d2440'; ctx.stroke();
+    ctx.fillStyle = '#1d2440'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(job, q[0], jy + jf * 0.82); }
 }
 let last = performance.now(), T = 0; const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
 function loop(now) { const dt = Math.max(0, Math.min(0.05, (now - last) / 1000)); last = now; T += dt;
