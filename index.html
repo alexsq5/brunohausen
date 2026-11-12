@@ -31,6 +31,21 @@ a { color: inherit; }
 .cta { pointer-events: auto; display: inline-flex; align-items: center; gap: 8px; background: var(--sun); color: var(--navy); border: 4px solid var(--navy); border-radius: 999px;
   padding: 10px 22px; font-weight: 900; font-size: 18px; text-decoration: none; box-shadow: 0 6px 0 var(--navy); transition: transform .12s, box-shadow .12s; }
 .cta:hover, .cta:focus-visible { transform: translateY(2px); box-shadow: 0 4px 0 var(--navy); outline: none; }
+.find { position: absolute; top: calc(92px + env(safe-area-inset-top, 0px)); left: max(14px, env(safe-area-inset-left, 0px)); width: min(340px, calc(100% - 90px)); z-index: 5; }
+.find form { display: flex; background: #fff; border: 4px solid var(--navy); border-radius: 999px; box-shadow: 0 8px 22px rgba(30,40,80,.28); overflow: hidden; }
+.find input { flex: 1; min-width: 0; border: 0; padding: 10px 16px; font: 800 16px var(--font); color: var(--navy); background: transparent; outline: none; }
+.find button { border: 0; border-left: 4px solid var(--navy); background: var(--sun); font: 900 16px var(--font); color: var(--navy); padding: 0 16px; cursor: pointer; }
+.find ul { list-style: none; margin: 6px 0 0; padding: 4px; background: #fff; border: 4px solid var(--navy); border-radius: 18px; box-shadow: 0 8px 22px rgba(30,40,80,.28); }
+.find ul:empty { display: none; }
+.find li { padding: 8px 12px; border-radius: 12px; font-weight: 800; color: var(--navy); cursor: pointer; }
+.find li.on, .find li:hover { background: var(--sun); }
+.find .msg { margin-top: 6px; background: #fff; border: 3px solid var(--navy); border-radius: 12px; padding: 6px 12px; font-weight: 800; color: var(--muted); }
+.find .msg:empty { display: none; }
+.chip.pick { cursor: pointer; }
+.title { transition: opacity .3s; }
+.stage.searching .title { opacity: 0; }
+.chip.pick:hover, .chip.pick:focus-visible { background: var(--sun); outline: none; }
+@media (max-width: 520px) { .find { top: calc(138px + env(safe-area-inset-top, 0px)); } }
 .zoom { position: absolute; right: max(14px, env(safe-area-inset-right, 0px)); top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 8px; }
 .zoom button { width: 46px; height: 46px; border-radius: 50%; background: #fff; border: 4px solid var(--navy); font: 900 22px var(--font); color: var(--navy); cursor: pointer; }
 .zoom button:focus-visible { outline: 3px solid var(--sun); }
@@ -98,6 +113,11 @@ footer { text-align: center; color: var(--muted); font-weight: 700; font-size: 1
     <p>Eine Stadt, gebaut von ihren Followern.</p>
     <a class="cta" id="cta" href="#mitmachen">Folgen heißt einziehen 🏠</a>
   </div>
+  <div class="find" id="find">
+    <form id="findForm" autocomplete="off" role="search"><input id="findIn" type="text" placeholder="Deinen Namen suchen…" aria-label="Einwohner suchen" aria-autocomplete="list" aria-controls="findList"><button type="submit">Suchen</button></form>
+    <ul id="findList" role="listbox"></ul>
+    <div class="msg" id="findMsg"></div>
+  </div>
   <div class="zoom"><button id="zin" aria-label="Hineinzoomen">+</button><button id="zout" aria-label="Herauszoomen">−</button><button id="zhome" aria-label="Ganze Stadt">⌂</button></div>
 </section>
 <main>
@@ -134,7 +154,7 @@ const CONFIG = {
   instagram: "",            // z. B. "https://www.instagram.com/brunohausen" – leer = Button springt zu "So ziehst du ein"
   updated: "12.11.2026",
   followers: 568, residents: 76, cash: 8500,
-  named: [["Justus", "Chef vom BBI"], ["Kevin", "wohnt einfach hier"], ["Lena"], ["Nikpe"], ["Theo"], ["Joschi"], ["Willi"], ["Orhan"], ["Hennes"], ["Paul"], ["Max"],
+  named: [["Justus", "Chef vom BBI", "bbi"], ["Kevin", "wohnt einfach hier"], ["Lena"], ["Nikpe"], ["Theo"], ["Joschi"], ["Willi"], ["Orhan"], ["Hennes"], ["Paul"], ["Max"],
     ["Bruno"], ["damjan"], ["Mario"], ["Claus"], ["Lennard"], ["Louiz"], ["Felix"], ["Lyam"], ["Jonas"], ["Lio"], ["Daniel"], ["Alexander"], ["Fati"], ["Lukas"], ["Elli"], ["Willi"],
     ["watchdogman"], ["Jay"], ["Jannis"], ["Alice"], ["Jona"], ["Matti"], ["Silver"], ["TCO"], ["Jan"], ["Sophie"], ["Luan"], ["Kyle"], ["Robert"], ["Florian"], ["Goldfisch", "ein echter Goldfisch"]],
   buildings: [
@@ -658,14 +678,18 @@ const free = (x, y) => x > 0.4 && x < 11.6 && y > 1.6 && y < 12.6 && !BLOCK.some
 const FOCUS = { rathaus: [6, 3.4], brunnen: [6, 8], wege: [6, 9.5], markt: [2.5, 5.4], bbi: [9.4, 5.4], doener: [2.3, 9.8], feuer: [2.2, 1.9], polizei: [10, 1.9] };
 const rr = rnd(91), COLS = ['#ff7a59', '#4d9be6', '#b06ad6', '#3fbf8f', '#f2b134', '#e85d8a', '#5ac8c8', '#8a6cff', '#ff9f1c', '#2ec4b6', '#e71d36', '#7b2cbf'];
 const WALK = [];
-for (let k = 0; k < 8000 && WALK.length < Math.min(CONFIG.residents, 60); k++) { const x = 0.6 + rr() * 11, y = 1.8 + rr() * 10.6;
+// Besitzer stehen vor ihrem Gebäude und laufen nur ein kleines Stück hin und her
+const HOMES = { bbi: [BBI.x + BBI.w - 0.55, BBI.y + BBI.d + 0.95], doener: [DLOT.x + 1.3, DLOT.y + DLOT.d + 0.6], markt: [MARKET.x + MARKET.w / 2, MARKET.y + MARKET.d + 0.75] };
+for (let k = 0; k < 20000 && WALK.length < Math.max(CONFIG.named.length, Math.min(CONFIG.residents, 80)); k++) { const x = 0.6 + rr() * 11, y = 1.8 + rr() * 10.6;
   if (!free(x, y) || WALK.some(o => Math.hypot(o.x - x, o.y - y) < 0.7)) continue;
-  const i = WALK.length; WALK.push({ x, y, tx: null, ty: null, wait: rr() * 4, col: COLS[i % COLS.length], s: 0.9 + rr() * 0.2, name: CONFIG.named[i] ? CONFIG.named[i][0] : null }); }
+  const i = WALK.length, nm = CONFIG.named[i] || [], own = nm[2] && HOMES[nm[2]];
+  WALK.push({ x: own ? own[0] : x, y: own ? own[1] : y, tx: null, ty: null, wait: rr() * 4, col: COLS[i % COLS.length], s: 0.9 + rr() * 0.2, name: nm[0] || null, role: nm[1] || null, home: own || null }); }
 function stepWalk(w, dt) {
+  if (w.tx == null && w.home) { w.wait -= dt; if (w.wait > 0) return; w.tx = w.home[0] + (rr() - 0.5) * 0.9; w.ty = w.home[1] + (rr() - 0.5) * 0.3; }
   if (w.tx == null) { w.wait -= dt; if (w.wait > 0) return; for (let k = 0; k < 20; k++) { const a = rr() * 6.283, d = 0.8 + rr() * 2.4, x = w.x + Math.cos(a) * d, y = w.y + Math.sin(a) * d;
       let ok = free(x, y); for (let u = 0.1; ok && u < 1; u += 0.1) ok = free(w.x + (x - w.x) * u, w.y + (y - w.y) * u); if (ok) { w.tx = x; w.ty = y; break; } } if (w.tx == null) w.wait = 1; return; }
   const dx = w.tx - w.x, dy = w.ty - w.y, d = Math.hypot(dx, dy), sp = 0.9 * dt;
-  if (d < sp) { w.x = w.tx; w.y = w.ty; w.tx = null; w.wait = 1 + rr() * 5; return; } w.x += dx / d * sp; w.y += dy / d * sp;
+  if (d < sp) { w.x = w.tx; w.y = w.ty; w.tx = null; w.wait = w.home ? 0.6 + rr() * 1.6 : 1 + rr() * 5; return; } w.x += dx / d * sp; w.y += dy / d * sp;
 }
 // camera with user control
 const st = document.getElementById('stage');
@@ -673,15 +697,16 @@ let view = { x: 0.4, y: 5.4, k: 40 }, goal = { ...view }, userZ = 1, dpr = 1;
 function fitK() { return Math.min(W / 22, H / 13); }
 function resize() { dpr = Math.min(2, window.devicePixelRatio || 1); const r = st.getBoundingClientRect(); W = Math.round(r.width * dpr); H = Math.round(r.height * dpr);
   [cv, off, blr].forEach(c => { c.width = W; c.height = H; }); CY = H * 0.5; }
-function home() { goal = { x: 0.4, y: 5.4, k: fitK() }; userZ = 1; }
+let SEL = null;
+function home() { SEL = null; goal = { x: 0.4, y: 5.4, k: fitK() }; userZ = 1; }
 function focusOn(id) { const f = FOCUS[id]; if (!f) return; goal = { x: (f[0] - f[1]) * 0.866, y: (f[0] + f[1]) * 0.5, k: fitK() * 2.2 };
   st.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
 document.getElementById('zin').onclick = () => { goal.k = Math.min(fitK() * 4, goal.k * 1.4); };
 document.getElementById('zout').onclick = () => { goal.k = Math.max(fitK() * 0.8, goal.k / 1.4); };
 document.getElementById('zhome').onclick = home;
-st.addEventListener('wheel', e => { e.preventDefault(); goal.k = Math.max(fitK() * 0.8, Math.min(fitK() * 4, goal.k * (e.deltaY < 0 ? 1.12 : 1 / 1.12))); }, { passive: false });
+st.addEventListener('wheel', e => { if (e.target.closest('.find')) return; e.preventDefault(); goal.k = Math.max(fitK() * 0.8, Math.min(fitK() * 4, goal.k * (e.deltaY < 0 ? 1.12 : 1 / 1.12))); }, { passive: false });
 const pts = new Map(); let pinch = 0;
-st.addEventListener('pointerdown', e => { if (e.target.closest('button,a')) return; st.setPointerCapture(e.pointerId); pts.set(e.pointerId, [e.clientX, e.clientY]); st.classList.add('drag'); });
+st.addEventListener('pointerdown', e => { if (e.target.closest('button,a,.find')) return; SEL = null; st.setPointerCapture(e.pointerId); pts.set(e.pointerId, [e.clientX, e.clientY]); st.classList.add('drag'); });
 st.addEventListener('pointermove', e => { if (!pts.has(e.pointerId)) return; const p = pts.get(e.pointerId); pts.set(e.pointerId, [e.clientX, e.clientY]);
   if (pts.size === 1) { const dx = (e.clientX - p[0]) * dpr / view.k, dy = (e.clientY - p[1]) * dpr / view.k; goal.x -= dx; goal.y -= dy; view.x -= dx; view.y -= dy; }
   else if (pts.size === 2) { const [a, b] = [...pts.values()], d = Math.hypot(a[0] - b[0], a[1] - b[1]); if (pinch) goal.k = Math.max(fitK() * 0.8, Math.min(fitK() * 4, goal.k * d / pinch)); pinch = d; } });
@@ -744,12 +769,20 @@ function drawCity(t) {
   post(t);
   // name tags
   const fs = Math.max(11, CAM.k * 0.24);
-  WALK.forEach((w, wi) => { if (!w.name || wi > 11) return; const p = P(w.x, w.y, 1.15); ctx.font = `900 ${fs}px ${FONT}`; const tw = ctx.measureText(w.name).width + fs;
+  WALK.forEach((w, wi) => { if (!w.name || (wi > 11 && w !== SEL)) return; const p = P(w.x, w.y, 1.15); ctx.font = `900 ${fs}px ${FONT}`; const tw = ctx.measureText(w.name).width + fs;
     rrect(ctx, p[0] - tw / 2, p[1] - fs * 1.6, tw, fs * 1.5, fs * 0.75); ctx.fillStyle = w.name === 'Justus' ? '#1d2440' : '#ffffff'; ctx.fill(); ctx.lineWidth = Math.max(2, fs * 0.14); ctx.strokeStyle = '#1d2440'; ctx.stroke();
     ctx.fillStyle = w.name === 'Justus' ? '#ffd23d' : '#1d2440'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(w.name, p[0], p[1] - fs * 0.83); });
+  if (SEL) { const p = P(SEL.x, SEL.y, 0), pu = 0.5 + 0.5 * Math.sin(T * 5);
+    ctx.beginPath(); ctx.ellipse(p[0], p[1], CAM.k * (0.55 + 0.1 * pu) * 1.22, CAM.k * (0.55 + 0.1 * pu) * 0.71, 0, 0, Math.PI * 2); ctx.lineWidth = Math.max(3, CAM.k * 0.06); ctx.strokeStyle = '#ffd23d'; ctx.stroke();
+    const q = P(SEL.x, SEL.y, 1.15), ay = q[1] - fs * 2.2 - pu * fs * 0.4; ctx.beginPath(); ctx.moveTo(q[0], ay + fs * 0.5); ctx.lineTo(q[0] - fs * 0.5, ay - fs * 0.2); ctx.lineTo(q[0] + fs * 0.5, ay - fs * 0.2); ctx.closePath(); ctx.fillStyle = '#ffd23d'; ctx.fill(); ctx.lineWidth = Math.max(2, fs * 0.12); ctx.strokeStyle = '#1d2440'; ctx.stroke();
+    if (SEL.role) { const r = P(SEL.x, SEL.y, 0), rf = fs * 0.95; ctx.font = `900 ${rf}px ${FONT}`; const rw = ctx.measureText(SEL.role).width + rf * 1.2;
+      rrect(ctx, r[0] - rw / 2, r[1] + rf * 0.6, rw, rf * 1.6, rf * 0.8); ctx.fillStyle = '#ffd23d'; ctx.fill(); ctx.lineWidth = Math.max(2, rf * 0.14); ctx.strokeStyle = '#1d2440'; ctx.stroke();
+      ctx.fillStyle = '#1d2440'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(SEL.role, r[0], r[1] + rf * 1.42); } }
 }
 let last = performance.now(), T = 0; const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
 function loop(now) { const dt = Math.max(0, Math.min(0.05, (now - last) / 1000)); last = now; T += dt;
+  if (SEL) { goal.x = (SEL.x - SEL.y) * 0.866; goal.y = (SEL.x + SEL.y) * 0.5 - 0.2; }
+  st.classList.toggle('searching', !!SEL);
   const e = 1 - Math.pow(0.002, dt); view.x += (goal.x - view.x) * e; view.y += (goal.y - view.y) * e; view.k += (goal.k - view.k) * e;
   if (!still) WALK.forEach(w => stepWalk(w, dt)); drawCity(T); requestAnimationFrame(loop); }
 // ===================== Seite =====================
@@ -766,12 +799,29 @@ CONFIG.buildings.forEach(b => { const planned = b.at && CONFIG.followers < b.at;
     el('span', 'cost' + (planned ? '' : ' neg'), (planned ? '' : '−') + fmt2(b.cost) + ' €'));
   d.onclick = () => focusOn(b.id); $('blds').append(d); });
 $('popTitle').textContent = 'Einwohner: ' + CONFIG.residents;
-CONFIG.named.forEach(([n, role]) => $('chips').append(el('span', 'chip' + (role ? ' chef' : ''), role ? n + ' · ' + role : n)));
+CONFIG.named.forEach(([n], i) => { const b = el('button', 'chip pick', n); b.type = 'button'; b.onclick = () => findPerson(WALK[i]); $('chips').append(b); });
 const more = CONFIG.residents - CONFIG.named.length; if (more > 0) $('chips').append(el('span', 'chip more', '+ ' + more + ' weitere'));
 CONFIG.episodes.slice().reverse().forEach(([n, h, p]) => { const e = el('article', 'card ep'); const no = el('div', 'no'); no.append('FOLGE', el('b', null, String(n)));
   const tx = el('div'); tx.style.minWidth = '0'; tx.append(el('h3', null, h), el('p', null, p)); e.append(no, tx); $('eps').append(e); });
 $('foot').textContent = 'Stand: ' + CONFIG.updated + ' · Brunohausen · Folgen heißt einziehen';
 resize(); home(); view = { ...goal }; addEventListener('resize', () => { const k0 = fitK(); resize(); const f = fitK() / k0; goal.k *= f; view.k *= f; });
 (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => requestAnimationFrame(loop));
+
+// ---- Suche: Name eingeben, Vorschläge, Ranzoomen ----
+const norm = s => s.toLocaleLowerCase('de-DE').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+const fIn = $('findIn'), fList = $('findList'), fMsg = $('findMsg'); let sugg = [], hi = 0;
+function suggest() { const q = norm(fIn.value.trim()); fList.innerHTML = ''; fMsg.textContent = ''; sugg = []; hi = 0; if (!q) return;
+  const all = WALK.map((w, i) => [w, i]).filter(([w]) => w.name);
+  const a = all.filter(([w]) => norm(w.name).startsWith(q)), b = all.filter(([w]) => !norm(w.name).startsWith(q) && norm(w.name).includes(q));
+  sugg = [...a, ...b].slice(0, 6).map(([w]) => w);
+  sugg.forEach((w, i) => { const li = el('li', i === hi ? 'on' : '', w.name); li.setAttribute('role', 'option'); li.onmousedown = e => { e.preventDefault(); findPerson(w); }; fList.append(li); }); }
+function mark() { [...fList.children].forEach((li, i) => li.classList.toggle('on', i === hi)); }
+function findPerson(w) { if (!w) return; SEL = w; goal.k = fitK() * 3.2; fIn.value = w.name; fList.innerHTML = ''; fMsg.textContent = '';
+  st.scrollIntoView({ behavior: 'smooth', block: 'start' }); fIn.blur(); }
+fIn.addEventListener('input', suggest);
+fIn.addEventListener('keydown', e => { if (!sugg.length) return; if (e.key === 'ArrowDown') { hi = (hi + 1) % sugg.length; mark(); e.preventDefault(); } else if (e.key === 'ArrowUp') { hi = (hi - 1 + sugg.length) % sugg.length; mark(); e.preventDefault(); } else if (e.key === 'Escape') { fList.innerHTML = ''; sugg = []; } });
+fIn.addEventListener('blur', () => setTimeout(() => { fList.innerHTML = ''; }, 150));
+$('findForm').addEventListener('submit', e => { e.preventDefault(); if (!fIn.value.trim()) return; suggest(); if (sugg.length) findPerson(sugg[hi] || sugg[0]);
+  else { fList.innerHTML = ''; fMsg.textContent = 'Nicht gefunden. Folg Brunohausen und kommentier deinen Namen, dann ziehst du ein!'; } });
 </script>
 </body></html>
