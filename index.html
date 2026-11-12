@@ -133,23 +133,26 @@ footer { text-align: center; color: var(--muted); font-weight: 700; font-size: 1
 const CONFIG = {
   instagram: "",            // z. B. "https://www.instagram.com/brunohausen" – leer = Button springt zu "So ziehst du ein"
   updated: "12.11.2026",
-  followers: 527, residents: 34, cash: 4000,
-  named: [["Justus", "Chef vom BBI"], ["Theo"], ["Nikpe"], ["Joschi"], ["Willi"], ["Orhan"], ["Hennes"], ["Paul"], ["Max"]],
+  followers: 558, residents: 66, cash: 3500,
+  named: [["Justus", "Chef vom BBI"], ["Kevin", "wohnt einfach hier"], ["Lena"], ["Nikpe"], ["Theo"], ["Joschi"], ["Willi"], ["Orhan"], ["Hennes"], ["Paul"], ["Max"],
+    ["Bruno"], ["damjan"], ["Mario"], ["Claus"], ["Lennard"], ["Louiz"], ["Felix"], ["Lyam"], ["Jonas"], ["Lio"], ["Daniel"], ["Alexander"], ["Fati"], ["Lukas"], ["Elli"], ["Willi"],
+    ["watchdogman"], ["Jay"], ["Jannis"], ["Alice"], ["Jona"], ["Matti"], ["Silver"], ["TCO"], ["Jan"], ["Sophie"], ["Luan"], ["Kyle"]],
   buildings: [
     { id: "rathaus", em: "🏛️", name: "Rathaus", cost: 32000, note: "Seit Folge 1" },
     { id: "brunnen", em: "⛲", name: "Brunnen", cost: 9000, note: "Seit Folge 1" },
     { id: "wege", em: "🛤️", name: "Straßen", cost: 7000, note: "Seit Folge 1" },
     { id: "markt", em: "🛒", name: "Bruno-Markt", cost: 8000, note: "Wunsch von Theo & Nikpe" },
     { id: "bbi", em: "🕶️", name: "BBI", cost: 7000, note: "Bruno-Büro für Ermittlungen · Chef: Justus" },
-    { id: "doener", em: "🥙", name: "Dönerbude", cost: 6000, note: "Wunsch von Lena", at: 531 },
-    { id: "feuer", em: "🚒", name: "Feuerwehr", cost: 10000, note: "Wunsch von Nikpe", at: 551 },
+    { id: "doener", em: "🥙", name: "Dönerbude", cost: 6000, note: "Wunsch von Lena · gebaut in Folge 4", at: 531 },
+    { id: "feuer", em: "🚒", name: "Feuerwehr", cost: 10000, note: "Wunsch von Nikpe · gebaut in Folge 4", at: 551 },
     { id: "polizei", em: "🚓", name: "Polizei", cost: 10000, note: "Wunsch von Nikpe", at: 571 },
   ],
-  goals: [[531, "Döner", "🥙"], [551, "Feuer\u00adwehr", "🚒"], [571, "Polizei", "🚓"], [600, "Über\u00adraschung", "❓"]],
+  goals: [[571, "Polizei", "🚓"], [600, "???", "☢️"]],
   episodes: [
     [1, "Diese Insel ist leer. Noch.", "Bruno wird Bürgermeister. 50.000 € Startkapital, Rathaus, Straßen und Brunnen gebaut. Es bleiben 2.000 € und ein Einwohner."],
     [2, "Brunohausen lebt!", "30 Einwohner. Theo und Nikpe bekommen ihren Bruno-Markt, Justus das BBI, und er ist Chef."],
     [3, "Döner? Wir sind pleite.", "Joschi, Willi, Orhan und Hennes ziehen ein. Lena wünscht sich eine Dönerbude, Nikpe Feuerwehr und Polizei. Der Plan steht."],
+    [4, "Ein zweiter Bruno?!", "31 neue Einwohner, darunter ein zweiter Bruno. Lena bekommt ihre Dönerbude, Nikpe die Feuerwehr. Kevin wohnt einfach hier und zahlt keine Steuern. Neue Wünsche: Kulturhaus, Gärtnerei, Finanzamt, Hafen und ein Atomkraftwerk. Chef wird nur, wer die meisten Likes bekommt."],
   ],
 };
 </script>
@@ -687,6 +690,29 @@ st.addEventListener('pointerup', up); st.addEventListener('pointercancel', up);
 // balloon loop: a new resident floats in every few seconds
 function balloonState(t) { const per = 9, ph = t % per, spots = [[4.8, 11.6], [7.3, 11.4], [4.7, 9.7], [7.4, 9.5]], s = spots[Math.floor(t / per) % spots.length];
   return { x: s[0], y: s[1], z: ph < 2.5 ? (1 - easeOut(ph / 2.5)) * 9 : ph < 4.5 ? 0 : easeIn((ph - 4.5) / 3.5) * 14 }; }
+function doenerBude(c, t) {
+  const x = DLOT.x + 0.5, y = DLOT.y + 0.5, w = 1.5, d = 1.3, z = 0;
+  box(c, x, y, z, w, d, 1.0, '#f3e2c4');
+  poly(c, [[x + 0.2, y + d, z + 0.35], [x + w - 0.2, y + d, z + 0.35], [x + w - 0.2, y + d, z + 0.82], [x + 0.2, y + d, z + 0.82]], '#6f4a33', OUT);
+  const sp = P(x + w / 2, y + d, z + 0.6); c.beginPath(); c.moveTo(sp[0] - CAM.k * 0.09, sp[1] - CAM.k * 0.2); c.lineTo(sp[0] + CAM.k * 0.09, sp[1] - CAM.k * 0.2); c.lineTo(sp[0] + CAM.k * 0.05, sp[1] + CAM.k * 0.18); c.lineTo(sp[0] - CAM.k * 0.05, sp[1] + CAM.k * 0.18); c.closePath(); c.fillStyle = '#b8692e'; c.fill(); c.strokeStyle = OUT; c.stroke();
+  box(c, x + 0.1, y + d, z + 0.3, w - 0.2, 0.22, 0.08, '#ffffff');
+  for (let i = 0; i < 6; i++) { const a0 = x + i * w / 6, a1 = a0 + w / 6; poly(c, [[a0, y + d, z + 0.98], [a1, y + d, z + 0.98], [a1, y + d + 0.38, z + 0.8], [a0, y + d + 0.38, z + 0.8]], i % 2 ? '#ffffff' : '#e8453c', OUT); }
+  box(c, x - 0.05, y - 0.05, z + 1.0, w + 0.1, d + 0.1, 0.14, '#c9443b');
+  box(c, x + 0.15, y + d - 0.1, z + 1.14, w - 0.3, 0.1, 0.5, '#ffd23d');
+  faceText(c, x + w / 2, y + d, z + 1.39, 'DÖNER 🥙', CAM.k * 0.24, '#c23a33');
+}
+function feuerwache(c, t) {
+  const x = FLOT.x + 0.3, y = FLOT.y + 0.3, w = 2.4, d = 2.0, z = 0;
+  box(c, x, y, z, w, d, 1.8, '#e8524a');
+  poly(c, [[x, y + d, z + 1.35], [x + w, y + d, z + 1.35], [x + w, y + d, z + 1.62], [x, y + d, z + 1.62]], '#ffffff', OUT);
+  faceText(c, x + w / 2, y + d, z + 1.485, 'FEUERWEHR', CAM.k * 0.2, '#c23a33');
+  [[0.2, 1.1], [1.3, 2.2]].forEach(([a, b]) => { poly(c, [[x + a, y + d, z + 0.02], [x + b, y + d, z + 0.02], [x + b, y + d, z + 1.1], [x + a, y + d, z + 1.1]], '#f2f2f2', OUT);
+    for (let k = 1; k < 4; k++) poly(c, [[x + a, y + d, z + k * 0.27], [x + b, y + d, z + k * 0.27]], 'none', 'rgba(40,30,60,0.3)'); });
+  for (let i = 0; i < 3; i++) { const a0 = y + 0.25 + i * 0.6; poly(c, [[x + w, a0, z + 0.7], [x + w, a0 + 0.38, z + 0.7], [x + w, a0 + 0.38, z + 1.1], [x + w, a0, z + 1.1]], '#9fd3f2', OUT); }
+  box(c, x - 0.05, y - 0.05, z + 1.8, w + 0.1, d + 0.1, 0.12, '#8f98ab');
+  box(c, x + 0.2, y + 0.2, z + 1.92, 0.6, 0.6, 1.0, '#e8524a');
+  const on = Math.floor(t * 3) % 2; box(c, x + 0.35, y + 0.35, z + 2.92, 0.3, 0.3, 0.2, on ? '#4a8bf0' : '#e5483f');
+}
 function drawCity(t) {
   CAM = { x: view.x + Math.sin(t * 0.07) * 0.25, y: view.y, k: view.k };
   octx.setTransform(1, 0, 0, 1, 0, 0); octx.clearRect(0, 0, W, H); const c = octx;
@@ -700,9 +726,14 @@ function drawCity(t) {
   items.push({ k: 15.8, f: () => sign(c, 0) });
   items.push({ k: 9.9, f: () => { shadow(c, MARKET.x, MARKET.y, MARKET.w, MARKET.d, 0.22); market(c, 0, 1, t); } });
   items.push({ k: 15.6, f: () => { shadow(c, BBI.x, BBI.y, BBI.w, BBI.d, 0.3); bbi(c, 0, 1, t); } });
-  items.push({ k: DLOT.x + 1.3 + DLOT.y + 2.3, f: () => board(c, DLOT.x + 1.3, DLOT.y + 2.3, ['DÖNERBUDE', 'Wunsch: Lena', 'ab 531 Follower'], '#c23a33', t, -1) });
-  items.push({ k: FLOT.x + 1.5 + FLOT.y + 2.6, f: () => board(c, FLOT.x + 1.5, FLOT.y + 2.6, ['FEUERWEHR', 'Wunsch: Nikpe', 'ab 551 Follower'], '#d62828', t, -1) });
-  items.push({ k: PLOT.x + 1.5 + PLOT.y + 2.6, f: () => board(c, PLOT.x + 1.5, PLOT.y + 2.6, ['POLIZEI', 'Wunsch: Nikpe', 'ab 571 Follower'], '#1d4ed8', t, -1) });
+  const has = id => { const b = CONFIG.buildings.find(q => q.id === id); return b && (!b.at || CONFIG.followers >= b.at); };
+  if (has('doener')) items.push({ k: DLOT.x + DLOT.w / 2 + DLOT.y + DLOT.d / 2, f: () => { shadow(c, DLOT.x + 0.5, DLOT.y + 0.5, 1.5, 1.3, 0.22); doenerBude(c, t); } });
+  else items.push({ k: DLOT.x + 1.3 + DLOT.y + 2.3, f: () => board(c, DLOT.x + 1.3, DLOT.y + 2.3, ['DÖNERBUDE', 'Wunsch: Lena', 'ab 531 Follower'], '#c23a33', t, -1) });
+  if (has('feuer')) items.push({ k: FLOT.x + FLOT.w / 2 + FLOT.y + FLOT.d / 2, f: () => { shadow(c, FLOT.x + 0.3, FLOT.y + 0.3, 2.4, 2.0, 0.22); feuerwache(c, t); } });
+  else items.push({ k: FLOT.x + 1.5 + FLOT.y + 2.6, f: () => board(c, FLOT.x + 1.5, FLOT.y + 2.6, ['FEUERWEHR', 'Wunsch: Nikpe', 'ab 551 Follower'], '#d62828', t, -1) });
+  const miss = 571 - CONFIG.followers;
+  items.push({ k: PLOT.x + 1.5 + PLOT.y + 2.6, f: () => board(c, PLOT.x + 1.5, PLOT.y + 2.6, ['POLIZEI', 'Wunsch: Nikpe', miss > 0 ? 'fehlen ' + miss + ' Follower' : 'ab 571 Follower'], '#1d4ed8', t, -1) });
+  items.push({ k: 12.4 + 3.6, f: () => board(c, 12.4, 3.6, ['ATOMKRAFTWERK ☢️', 'bei 600 Followern'], '#2e8b2e', t, -1) });
   items.push({ k: 3.9 + 10.9, f: () => { const p = P(3.9, 10.9, 0); c.save(); c.translate(p[0], p[1]); bruno(c, 0, -CAM.k * 0.95, CAM.k * 0.3, t, 0, (t % 8) < 2.5 ? 1 : 0); c.restore(); } });
   WALK.forEach((w, i) => items.push({ k: w.x + w.y + 0.1, f: () => person(c, w.x, w.y, 0, w.col, t + i, w.tx != null, w.s) }));
   const b = balloonState(t); items.push({ k: b.x + b.y + 0.5, f: () => { shadow(c, b.x - 0.35, b.y - 0.35, 0.7, 0.7, 0.18 * clamp(1 - b.z / 9)); balloon(c, b.x + 0.45, b.y + 0.2, b.z, t); } });
@@ -713,7 +744,7 @@ function drawCity(t) {
   post(t);
   // name tags
   const fs = Math.max(11, CAM.k * 0.24);
-  WALK.forEach(w => { if (!w.name) return; const p = P(w.x, w.y, 1.15); ctx.font = `900 ${fs}px ${FONT}`; const tw = ctx.measureText(w.name).width + fs;
+  WALK.forEach((w, wi) => { if (!w.name || wi > 11) return; const p = P(w.x, w.y, 1.15); ctx.font = `900 ${fs}px ${FONT}`; const tw = ctx.measureText(w.name).width + fs;
     rrect(ctx, p[0] - tw / 2, p[1] - fs * 1.6, tw, fs * 1.5, fs * 0.75); ctx.fillStyle = w.name === 'Justus' ? '#1d2440' : '#ffffff'; ctx.fill(); ctx.lineWidth = Math.max(2, fs * 0.14); ctx.strokeStyle = '#1d2440'; ctx.stroke();
     ctx.fillStyle = w.name === 'Justus' ? '#ffd23d' : '#1d2440'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(w.name, p[0], p[1] - fs * 0.83); });
 }
