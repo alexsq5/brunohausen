@@ -252,6 +252,19 @@ const TREES = [], TUFTS = [], FLOWERS = [];
     const d = Math.max(-x, -y, x - N, y - N); if (R0() > 0.1 + d * 0.07) continue;
     if (TREES.some(t => Math.abs(t.x - x) < 1.1 && Math.abs(t.y - y) < 1.1)) continue;
     TREES.push({ x, y, s: 0.8 + R0() * 0.6, k: R0() < 0.5 ? 'pine' : 'round', c: R0() }); }
+  // äußerer Waldring: Karte endet nie sichtbar (Kamera wird auf diesen Bereich begrenzt)
+  const R1 = rnd(21), G = new Map(), gk = (i, j) => i * 1000 + j;
+  TREES.forEach(t => G.set(gk(Math.floor(t.x / 1.15), Math.floor(t.y / 1.15)), [...(G.get(gk(Math.floor(t.x / 1.15), Math.floor(t.y / 1.15))) || []), t]));
+  const near = (x, y) => { const i = Math.floor(x / 1.15), j = Math.floor(y / 1.15);
+    for (let a = -1; a <= 1; a++) for (let b = -1; b <= 1; b++) for (const t of G.get(gk(i + a, j + b)) || []) if (Math.abs(t.x - x) < 1.15 && Math.abs(t.y - y) < 1.15) return true; return false; };
+  for (let i = 0; i < 30000 && TREES.length < 1600; i++) { const x = -42 + R1() * 96, y = -46 + R1() * 102;
+    if (x > -16 && x < 28 && y > -20 && y < 30) continue;
+    if (onLane(x, y) || onRiver(x, y)) continue;
+    if (R1() > 0.55) continue;
+    if (near(x, y)) continue;
+    const kk = gk(Math.floor(x / 1.15), Math.floor(y / 1.15)), nt = { x, y };
+    G.set(kk, [...(G.get(kk) || []), nt]);
+    Object.assign(nt, { s: 0.8 + R1() * 0.6, k: R1() < 0.5 ? 'pine' : 'round', c: R1() }); TREES.push(nt); }
   for (let i = 0; i < 260; i++) TUFTS.push({ x: -8 + R0() * 28, y: -6 + R0() * 30, s: 0.6 + R0() * 0.6 });
   for (let i = 0; i < 90; i++) FLOWERS.push({ x: -8 + R0() * 28, y: -6 + R0() * 30, c: ['#ff7aa8', '#ffe066', '#ffffff', '#b98cff'][i % 4] });
 })();
@@ -281,7 +294,7 @@ function islandBase(c, t) {
   for (let i = 0; i < 40; i++) { const x = -14 + r() * 40, y = -18 + r() * 46, rr = 1.5 + r() * 3.5; c.save(); c.globalAlpha = 0.16;
     ellipseW(c, x, y, 0, rr, r() < 0.5 ? '#5aa743' : '#9bd86c'); c.restore(); }
   // river in the back
-  const rv = []; for (let x = -40; x <= 50; x += 2) rv.push([x, -8.0 + Math.sin(x * 0.35) * 0.6, 0]);
+  const rv = []; for (let x = -96; x <= 106; x += 2) rv.push([x, -8.0 + Math.sin(x * 0.35) * 0.6, 0]);
   const rv2 = rv.map(p => [p[0], p[1] + 2.6, 0]).reverse();
   poly(c, [...rv.map(p => [p[0], p[1] - 0.35, 0]), ...rv2.map(p => [p[0], p[1] + 0.35, 0])], '#e3cf9a');
   poly(c, [...rv, ...rv2], '#5cb8e6');
@@ -289,7 +302,7 @@ function islandBase(c, t) {
   for (let i = 0; i < 26; i++) { const x = -30 + ((i * 3.7 + t * 0.8) % 70), y = -7.6 + (i % 3) * 0.7 + Math.sin(x * 0.35) * 0.6, a = P(x, y, 0), b = P(x + 0.8, y, 0);
     c.beginPath(); c.moveTo(a[0], a[1]); c.lineTo(b[0], b[1]); c.stroke(); } c.restore();
   // country lane from the front into the plot
-  poly(c, [[5.0, 11.8, 0], [7.0, 11.8, 0], [7.4, 40, 0], [4.6, 40, 0]], '#d9c08a');
+  poly(c, [[5.0, 11.8, 0], [7.0, 11.8, 0], [7.4, 60, 0], [4.6, 60, 0]], '#d9c08a');
   // build plot: mowed lighter square
   poly(c, [[-0.2, -0.2, 0], [N + 0.2, -0.2, 0], [N + 0.2, N + 0.2, 0], [-0.2, N + 0.2, 0]], '#86d061');
   c.save(); c.globalAlpha = 0.06;
@@ -694,6 +707,17 @@ function stepWalk(w, dt) {
 // camera with user control
 const st = document.getElementById('stage');
 let view = { x: 0.4, y: 5.4, k: 40 }, goal = { ...view }, userZ = 1, dpr = 1;
+// Kamera-Grenzen: Bildschirm bleibt immer innerhalb des Waldes (x/y in Weltkoordinaten)
+const BND = { x0: -36, x1: 48, y0: -40, y1: 50 };
+function minK() { return (W / 1.732 + H + 2 * 0.5 * 0.25 * 0) / Math.min(BND.x1 - BND.x0, BND.y1 - BND.y0) * 1.04; }
+function clampCam(o) {
+  o.k = Math.max(o.k, minK());
+  const a = (W / 2 + 0.3 * o.k) / o.k / 0.866, b = (H / 2) / o.k * 2;      // halbe Breite (in x-y) / halbe Höhe (in x+y)
+  const u = o.x / 0.866, v = o.y * 2; let S = u + v, D = v - u;
+  const lim = (val, lo, hi) => lo > hi ? (lo + hi) / 2 : Math.max(lo, Math.min(hi, val));
+  S = lim(S, 2 * BND.x0 + a + b, 2 * BND.x1 - a - b); D = lim(D, 2 * BND.y0 + a + b, 2 * BND.y1 - a - b);
+  o.x = (S - D) / 2 * 0.866; o.y = (S + D) / 4;
+}
 function fitK() { return Math.min(W / 22, H / 13); }
 function resize() { dpr = Math.min(2, window.devicePixelRatio || 1); const r = st.getBoundingClientRect(); W = Math.round(r.width * dpr); H = Math.round(r.height * dpr);
   [cv, off, blr].forEach(c => { c.width = W; c.height = H; }); CY = H * 0.5; }
@@ -781,7 +805,7 @@ let last = performance.now(), T = 0; const still = matchMedia('(prefers-reduced-
 function loop(now) { const dt = Math.max(0, Math.min(0.05, (now - last) / 1000)); last = now; T += dt;
   if (SEL) { goal.x = (SEL.x - SEL.y) * 0.866; goal.y = (SEL.x + SEL.y) * 0.5 - 0.2; }
   st.classList.toggle('searching', !!SEL);
-  const e = 1 - Math.pow(0.002, dt); view.x += (goal.x - view.x) * e; view.y += (goal.y - view.y) * e; view.k += (goal.k - view.k) * e;
+  clampCam(goal); const e = 1 - Math.pow(0.002, dt); view.x += (goal.x - view.x) * e; view.y += (goal.y - view.y) * e; view.k += (goal.k - view.k) * e; clampCam(view);
   if (!still) WALK.forEach(w => stepWalk(w, dt)); drawCity(T); requestAnimationFrame(loop); }
 // ===================== Seite =====================
 const fmt2 = n => n.toLocaleString('de-DE');
