@@ -152,11 +152,11 @@ footer a { color: var(--navy); }
 // ===================== DATEN – nach jeder Folge hier aktualisieren =====================
 const CONFIG = {
   instagram: "",            // z. B. "https://www.instagram.com/brunohausen" – leer = Button springt zu "So ziehst du ein"
-  updated: "12.11.2026",
-  followers: 568, residents: 76, cash: 8500,
+  updated: "14.11.2026",
+  followers: 571, residents: 79, cash: 500,
   named: [["Justus", "Chef vom BBI", "bbi"], ["Kevin", "wohnt einfach hier"], ["Lena"], ["Nikpe"], ["Theo"], ["Joschi"], ["Willi"], ["Orhan"], ["Hennes"], ["Paul"], ["Max"],
-    ["Bruno"], ["damjan"], ["Mario"], ["Claus"], ["Lennard"], ["Louiz"], ["Felix"], ["Lyam"], ["Jonas"], ["Lio"], ["Daniel"], ["Alexander"], ["Fati"], ["Lukas"], ["Elli"], ["Willi"],
-    ["watchdogman"], ["Jay"], ["Jannis"], ["Alice"], ["Jona"], ["Matti"], ["Silver"], ["TCO"], ["Jan"], ["Sophie"], ["Luan"], ["Kyle"], ["Robert"], ["Florian"], ["Goldfisch", "ein echter Goldfisch"]],
+    ["Bruno"], ["damjan"], ["Mario", "Chef vom Finanzamt"], ["Claus"], ["Lennard"], ["Louiz"], ["Felix"], ["Lyam"], ["Jonas"], ["Lio"], ["Daniel"], ["Alexander"], ["Fati"], ["Lukas"], ["Elli"], ["Willi"],
+    ["watchdogman"], ["Jay"], ["Jannis"], ["Alice"], ["Jona"], ["Matti"], ["Silver"], ["TCO"], ["Jan"], ["Sophie"], ["Luan"], ["Kyle"], ["Robert"], ["Florian"], ["Goldfisch", "ein echter Goldfisch"], ["Tim"], ["Julian"], ["Magigcram"]],
   buildings: [
     { id: "rathaus", em: "🏛️", name: "Rathaus", cost: 32000, note: "Seit Folge 1" },
     { id: "brunnen", em: "⛲", name: "Brunnen", cost: 9000, note: "Seit Folge 1" },
@@ -165,14 +165,16 @@ const CONFIG = {
     { id: "bbi", em: "🕶️", name: "BBI", cost: 7000, note: "Bruno-Büro für Ermittlungen · Chef: Justus" },
     { id: "doener", em: "🥙", name: "Dönerbude", cost: 6000, note: "Wunsch von Lena · gebaut in Folge 4", at: 531 },
     { id: "feuer", em: "🚒", name: "Feuerwehr", cost: 10000, note: "Wunsch von Nikpe · gebaut in Folge 4", at: 551 },
-    { id: "polizei", em: "🚓", name: "Polizei", cost: 10000, note: "Wunsch von Nikpe", at: 571 },
+    { id: "mfh", em: "🏢", name: "3 Mehrfamilienhäuser", cost: 4500, note: "Eure Abstimmung: Häuser statt Hafen · gebaut in Folge 5" },
+    { id: "polizei", em: "🚓", name: "Polizei", cost: 5000, note: "Wunsch von Nikpe · gebaut in Folge 5 · Chef gesucht", at: 571 },
   ],
-  goals: [[571, "Polizei", "🚓"], [600, "???", "☢️"]],
+  goals: [[600, "???", "☢️"]],
   episodes: [
     [1, "Diese Insel ist leer. Noch.", "Bruno wird Bürgermeister. 50.000 € Startkapital, Rathaus, Straßen und Brunnen gebaut. Es bleiben 2.000 € und ein Einwohner."],
     [2, "Brunohausen lebt!", "30 Einwohner. Theo und Nikpe bekommen ihren Bruno-Markt, Justus das BBI, und er ist Chef."],
     [3, "Döner? Wir sind pleite.", "Joschi, Willi, Orhan und Hennes ziehen ein. Lena wünscht sich eine Dönerbude, Nikpe Feuerwehr und Polizei. Der Plan steht."],
     [4, "Ein zweiter Bruno?!", "41 neue Einwohner, darunter ein zweiter Bruno und sogar ein Goldfisch. Lena bekommt ihre Dönerbude, Nikpe die Feuerwehr. Kevin wohnt einfach hier und zahlt keine Steuern. Neue Wünsche: Kulturhaus, Gärtnerei, Finanzamt, Hafen, Bank, Waffenladen, Kfz-Werkstatt und ein Atomkraftwerk. Chef wird nur, wer die meisten Likes bekommt."],
+    [5, "Ein Dieb in der Stadt!", "Nachts klaut der Neue seine 500 € Steuern zurück und haut ab. Tim, Julian und Magigcram ziehen ein. Ihr habt abgestimmt: 3 Mehrfamilienhäuser statt Hafen. Mit Follower 571 kommt die Polizei. Mario wird Chef vom Finanzamt. Justus will Lena fürs BBI, aber ein Job pro Person. Die Versicherung zahlt die 500 € zurück, wenn das Video 20 Kommentare bekommt."],
   ],
 };
 </script>
@@ -685,10 +687,11 @@ const EV = { bbi: -10, market: -10 };
 const MARKET = { x: 0.9, y: 4.2, w: 3.2, d: 2.5 }, BBI = { x: 7.9, y: 4.2, w: 3.0, d: 2.5 };
 const DLOT = { x: 1.0, y: 8.7, w: 2.6, d: 2.3 }, FLOT = { x: 0.7, y: 0.6, w: 3.0, d: 2.6 }, PLOT = { x: 8.5, y: 0.6, w: 3.0, d: 2.6 };
 const RAT = { x: 4.2, y: 2.2, w: 3.6, d: 2.4 };
+const HLOTS = [{ x: 4.6, y: -2.1, w: 1.5, d: 1.4 }, { x: 6.6, y: -2.1, w: 1.5, d: 1.4 }, { x: 8.6, y: -2.1, w: 1.5, d: 1.4 }];
 const inFoot = (x, y, b, m = 0.6) => x > b.x - m && x < b.x + b.w + m && y > b.y - m && y < b.y + b.d + m;
 const BLOCK = [MARKET, BBI, RAT, DLOT, FLOT, PLOT];
 const free = (x, y) => x > 0.4 && x < 11.6 && y > 1.6 && y < 12.6 && !BLOCK.some(b => inFoot(x, y, b, 0.35)) && Math.hypot(x - 6, y - 8) > 1.25;
-const FOCUS = { rathaus: [6, 3.4], brunnen: [6, 8], wege: [6, 9.5], markt: [2.5, 5.4], bbi: [9.4, 5.4], doener: [2.3, 9.8], feuer: [2.2, 1.9], polizei: [10, 1.9] };
+const FOCUS = { rathaus: [6, 3.4], brunnen: [6, 8], wege: [6, 9.5], markt: [2.5, 5.4], bbi: [9.4, 5.4], doener: [2.3, 9.8], feuer: [2.2, 1.9], polizei: [10, 1.9], mfh: [7.3, -1.4] };
 const rr = rnd(91), COLS = ['#ff7a59', '#4d9be6', '#b06ad6', '#3fbf8f', '#f2b134', '#e85d8a', '#5ac8c8', '#8a6cff', '#ff9f1c', '#2ec4b6', '#e71d36', '#7b2cbf'];
 const WALK = [];
 // Besitzer stehen vor ihrem Gebäude und laufen nur ein kleines Stück hin und her
@@ -762,13 +765,34 @@ function feuerwache(c, t) {
   box(c, x + 0.2, y + 0.2, z + 1.92, 0.6, 0.6, 1.0, '#e8524a');
   const on = Math.floor(t * 3) % 2; box(c, x + 0.35, y + 0.35, z + 2.92, 0.3, 0.3, 0.2, on ? '#4a8bf0' : '#e5483f');
 }
+function polizeiwache(c, t) {
+  const x = PLOT.x + 0.3, y = PLOT.y + 0.3, w = 2.4, d = 2.0, z = 0;
+  box(c, x, y, z, w, d, 1.7, '#f2f5fb');
+  poly(c, [[x, y + d, z + 1.25], [x + w, y + d, z + 1.25], [x + w, y + d, z + 1.55], [x, y + d, z + 1.55]], '#2f5fd0', OUT);
+  poly(c, [[x + w, y, z + 1.25], [x + w, y + d, z + 1.25], [x + w, y + d, z + 1.55], [x + w, y, z + 1.55]], '#2a54b8', OUT);
+  faceText(c, x + w / 2, y + d, z + 1.4, 'POLIZEI', CAM.k * 0.22, '#ffffff');
+  poly(c, [[x + 0.95, y + d, z + 0.02], [x + 1.45, y + d, z + 0.02], [x + 1.45, y + d, z + 0.95], [x + 0.95, y + d, z + 0.95]], '#2f5fd0', OUT);
+  [[0.2, 0.7], [1.7, 2.2]].forEach(([a, b]) => poly(c, [[x + a, y + d, z + 0.45], [x + b, y + d, z + 0.45], [x + b, y + d, z + 0.95], [x + a, y + d, z + 0.95]], '#9fd3f2', OUT));
+  for (let i = 0; i < 3; i++) { const a0 = y + 0.2 + i * 0.6; poly(c, [[x + w, a0, z + 0.45], [x + w, a0 + 0.4, z + 0.45], [x + w, a0 + 0.4, z + 0.95], [x + w, a0, z + 0.95]], '#8cc4e6', OUT); }
+  box(c, x - 0.05, y - 0.05, z + 1.7, w + 0.1, d + 0.1, 0.12, '#8f98ab');
+  const on = Math.floor(t * 4) % 2; box(c, x + w / 2 - 0.2, y + d / 2 - 0.2, z + 1.82, 0.4, 0.4, 0.22, on ? '#4a8bf0' : '#e5483f');
+}
+function mehrfamilienhaus(c, L, i) {
+  const x = L.x, y = L.y, w = L.w, d = L.d, h = 2.9, col = ['#f2e2c4', '#e7d0f0', '#cfe6f5'][i % 3];
+  box(c, x, y, 0, w, d, h, col);
+  for (let f = 0; f < 4; f++) { const z0 = 0.25 + f * 0.7;
+    [[0.15, 0.6], [0.9, 1.35]].forEach(([a, b]) => { poly(c, [[x + a, y + d, z0], [x + b, y + d, z0], [x + b, y + d, z0 + 0.38], [x + a, y + d, z0 + 0.38]], '#9fd3f2', OUT);
+      poly(c, [[x + w, y + a * d / w, z0], [x + w, y + b * d / w, z0], [x + w, y + b * d / w, z0 + 0.38], [x + w, y + a * d / w, z0 + 0.38]], '#8cc4e6', OUT); });
+    if (f > 0) box(c, x + 0.1, y + d, z0 - 0.08, 0.6, 0.18, 0.06, '#ffffff'); }
+  box(c, x - 0.05, y - 0.05, h, w + 0.1, d + 0.1, 0.14, '#c9564b');
+}
 function drawCity(t) {
   CAM = { x: view.x + Math.sin(t * 0.07) * 0.25, y: view.y, k: view.k };
   octx.setTransform(1, 0, 0, 1, 0, 0); octx.clearRect(0, 0, W, H); const c = octx;
   islandBase(c, t); PATH_P = 1; drawPaths(c, 1); grassDetail(c, t);
   lotGround(c, DLOT, t, 1); lotGround(c, FLOT, t, 1); lotGround(c, PLOT, t, 1);
   const items = [];
-  TREES.forEach(tr => { if ([MARKET, BBI, DLOT, FLOT, PLOT].some(b => inFoot(tr.x, tr.y, b))) return; const p = P(tr.x, tr.y, 0); if (p[0] < -200 || p[0] > W + 200 || p[1] < -200 || p[1] > H + 400) return;
+  TREES.forEach(tr => { if ([MARKET, BBI, DLOT, FLOT, PLOT, ...HLOTS].some(b => inFoot(tr.x, tr.y, b))) return; const p = P(tr.x, tr.y, 0); if (p[0] < -200 || p[0] > W + 200 || p[1] < -200 || p[1] > H + 400) return;
     items.push({ k: tr.x + tr.y, f: () => tree(c, tr, Math.sin(t * 1.6 + tr.x) * CAM.k * 0.03) }); });
   items.push({ k: 11.2, f: () => { shadow(c, 4.2, 2.2, 3.6, 2.4, 0.22); rathaus(c, 0, 1, t); } });
   items.push({ k: 14.1, f: () => brunnen(c, 0, 1, t) });
@@ -781,7 +805,9 @@ function drawCity(t) {
   if (has('feuer')) items.push({ k: FLOT.x + FLOT.w / 2 + FLOT.y + FLOT.d / 2, f: () => { shadow(c, FLOT.x + 0.3, FLOT.y + 0.3, 2.4, 2.0, 0.22); feuerwache(c, t); } });
   else items.push({ k: FLOT.x + 1.5 + FLOT.y + 2.6, f: () => board(c, FLOT.x + 1.5, FLOT.y + 2.6, ['FEUERWEHR', 'Wunsch: Nikpe', 'ab 551 Follower'], '#d62828', t, -1) });
   const miss = 571 - CONFIG.followers;
-  items.push({ k: PLOT.x + 1.5 + PLOT.y + 2.6, f: () => board(c, PLOT.x + 1.5, PLOT.y + 2.6, ['POLIZEI', 'Wunsch: Nikpe', miss > 0 ? 'fehlen ' + miss + ' Follower' : 'ab 571 Follower'], '#1d4ed8', t, -1) });
+  if (has('polizei')) items.push({ k: PLOT.x + PLOT.w / 2 + PLOT.y + PLOT.d / 2, f: () => { shadow(c, PLOT.x + 0.3, PLOT.y + 0.3, 2.4, 2.0, 0.22); polizeiwache(c, t); } });
+  else items.push({ k: PLOT.x + 1.5 + PLOT.y + 2.6, f: () => board(c, PLOT.x + 1.5, PLOT.y + 2.6, ['POLIZEI', 'Wunsch: Nikpe', miss > 0 ? 'fehlen ' + miss + ' Follower' : 'ab 571 Follower'], '#1d4ed8', t, -1) });
+  if (has('mfh')) HLOTS.forEach((L, i) => items.push({ k: L.x + L.w / 2 + L.y + L.d / 2, f: () => { shadow(c, L.x, L.y, L.w, L.d, 0.22); mehrfamilienhaus(c, L, i); } }));
   items.push({ k: 12.4 + 3.6, f: () => board(c, 12.4, 3.6, ['ATOMKRAFTWERK ☢️', 'bei 600 Followern'], '#2e8b2e', t, -1) });
   items.push({ k: 3.9 + 10.9, f: () => { const p = P(3.9, 10.9, 0); c.save(); c.translate(p[0], p[1]); bruno(c, 0, -CAM.k * 0.95, CAM.k * 0.3, t, 0, (t % 8) < 2.5 ? 1 : 0); c.restore(); } });
   WALK.forEach((w, i) => items.push({ k: w.x + w.y + 0.1, f: () => person(c, w.x, w.y, 0, w.col, t + i, w.tx != null, w.s) }));
