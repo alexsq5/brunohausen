@@ -687,11 +687,11 @@ const EV = { bbi: -10, market: -10 };
 const MARKET = { x: 0.9, y: 4.2, w: 3.2, d: 2.5 }, BBI = { x: 7.9, y: 4.2, w: 3.0, d: 2.5 };
 const DLOT = { x: 1.0, y: 8.7, w: 2.6, d: 2.3 }, FLOT = { x: 0.7, y: 0.6, w: 3.0, d: 2.6 }, PLOT = { x: 8.5, y: 0.6, w: 3.0, d: 2.6 };
 const RAT = { x: 4.2, y: 2.2, w: 3.6, d: 2.4 };
-const HLOTS = [{ x: 4.6, y: -2.1, w: 1.5, d: 1.4 }, { x: 6.6, y: -2.1, w: 1.5, d: 1.4 }, { x: 8.6, y: -2.1, w: 1.5, d: 1.4 }];
+const HLOTS = [{ x: 4.6, y: -3.7, w: 1.5, d: 1.4 }, { x: 6.6, y: -3.7, w: 1.5, d: 1.4 }, { x: 8.6, y: -3.7, w: 1.5, d: 1.4 }];
 const inFoot = (x, y, b, m = 0.6) => x > b.x - m && x < b.x + b.w + m && y > b.y - m && y < b.y + b.d + m;
 const BLOCK = [MARKET, BBI, RAT, DLOT, FLOT, PLOT];
 const free = (x, y) => x > 0.4 && x < 11.6 && y > 1.6 && y < 12.6 && !BLOCK.some(b => inFoot(x, y, b, 0.35)) && Math.hypot(x - 6, y - 8) > 1.25;
-const FOCUS = { rathaus: [6, 3.4], brunnen: [6, 8], wege: [6, 9.5], markt: [2.5, 5.4], bbi: [9.4, 5.4], doener: [2.3, 9.8], feuer: [2.2, 1.9], polizei: [10, 1.9], mfh: [7.3, -1.4] };
+const FOCUS = { rathaus: [6, 3.4], brunnen: [6, 8], wege: [6, 9.5], markt: [2.5, 5.4], bbi: [9.4, 5.4], doener: [2.3, 9.8], feuer: [2.2, 1.9], polizei: [10, 1.9], mfh: [7.3, -2.8] };
 const rr = rnd(91), COLS = ['#ff7a59', '#4d9be6', '#b06ad6', '#3fbf8f', '#f2b134', '#e85d8a', '#5ac8c8', '#8a6cff', '#ff9f1c', '#2ec4b6', '#e71d36', '#7b2cbf'];
 const WALK = [];
 // Besitzer stehen vor ihrem Gebäude und laufen nur ein kleines Stück hin und her
@@ -700,7 +700,14 @@ for (let k = 0; k < 20000 && WALK.length < Math.max(CONFIG.named.length, Math.mi
   if (!free(x, y) || WALK.some(o => Math.hypot(o.x - x, o.y - y) < 0.7)) continue;
   const i = WALK.length, nm = CONFIG.named[i] || [], own = nm[2] && HOMES[nm[2]];
   WALK.push({ x: own ? own[0] : x, y: own ? own[1] : y, tx: null, ty: null, wait: rr() * 4, col: COLS[i % COLS.length], s: 0.9 + rr() * 0.2, name: nm[0] || null, role: nm[1] || null, home: own || null }); }
+// Wohnungen: jeder Follower hat eine eigene Wohnungsnummer in einem der Mehrfamilienhäuser
+const MFH_BUILT = CONFIG.buildings.some(b => b.id === 'mfh');
+const NOFLAT = { Kevin: 'wohnt einfach hier', Goldfisch: 'wohnt im Goldfischglas' };
+WALK.forEach((w, i) => { if (!w.name || NOFLAT[w.name]) return; w.flat = { haus: i % 3, nr: i + 1 }; });
+function flatText(w) { if (!w.name) return ''; if (NOFLAT[w.name]) return '🏕️ ' + NOFLAT[w.name]; if (!w.flat || !MFH_BUILT) return ''; return '🏢 Haus ' + (w.flat.haus + 1) + ' · Wohnung ' + w.flat.nr; }
+function flatDoor(w) { const L = HLOTS[w.flat.haus], k = (w.flat.nr % 5) - 2; return [L.x + L.w * 0.5 + k * 0.22, L.y + L.d + 0.55 + (k & 1) * 0.12]; }
 function stepWalk(w, dt) {
+  if (w === SEL && w.atDoor) return;
   if (w.tx == null && w.home) { w.wait -= dt; if (w.wait > 0) return; w.tx = w.home[0] + (rr() - 0.5) * 0.9; w.ty = w.home[1] + (rr() - 0.5) * 0.3; }
   if (w.tx == null) { w.wait -= dt; if (w.wait > 0) return; for (let k = 0; k < 20; k++) { const a = rr() * 6.283, d = 0.8 + rr() * 2.4, x = w.x + Math.cos(a) * d, y = w.y + Math.sin(a) * d;
       let ok = free(x, y); for (let u = 0.1; ok && u < 1; u += 0.1) ok = free(w.x + (x - w.x) * u, w.y + (y - w.y) * u); if (ok) { w.tx = x; w.ty = y; break; } } if (w.tx == null) w.wait = 1; return; }
@@ -725,7 +732,7 @@ function fitK() { return Math.min(W / 22, H / 13); }
 function resize() { dpr = Math.min(2, window.devicePixelRatio || 1); const r = st.getBoundingClientRect(); W = Math.round(r.width * dpr); H = Math.round(r.height * dpr);
   [cv, off, blr].forEach(c => { c.width = W; c.height = H; }); CY = H * 0.5; }
 let SEL = null;
-function home() { SEL = null; goal = { x: 0.4, y: 5.4, k: fitK() }; userZ = 1; }
+function home() { release(); SEL = null; goal = { x: 0.4, y: 5.4, k: fitK() }; userZ = 1; }
 function focusOn(id) { const f = FOCUS[id]; if (!f) return; goal = { x: (f[0] - f[1]) * 0.866, y: (f[0] + f[1]) * 0.5, k: fitK() * 2.2 };
   st.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
 document.getElementById('zin').onclick = () => { goal.k = Math.min(fitK() * 4, goal.k * 1.4); };
@@ -733,7 +740,7 @@ document.getElementById('zout').onclick = () => { goal.k = Math.max(fitK() * 0.8
 document.getElementById('zhome').onclick = home;
 st.addEventListener('wheel', e => { if (e.target.closest('.find')) return; e.preventDefault(); goal.k = Math.max(fitK() * 0.8, Math.min(fitK() * 4, goal.k * (e.deltaY < 0 ? 1.12 : 1 / 1.12))); }, { passive: false });
 const pts = new Map(); let pinch = 0;
-st.addEventListener('pointerdown', e => { if (e.target.closest('button,a,.find')) return; SEL = null; st.setPointerCapture(e.pointerId); pts.set(e.pointerId, [e.clientX, e.clientY]); st.classList.add('drag'); });
+st.addEventListener('pointerdown', e => { if (e.target.closest('button,a,.find')) return; release(); SEL = null; st.setPointerCapture(e.pointerId); pts.set(e.pointerId, [e.clientX, e.clientY]); st.classList.add('drag'); });
 st.addEventListener('pointermove', e => { if (!pts.has(e.pointerId)) return; const p = pts.get(e.pointerId); pts.set(e.pointerId, [e.clientX, e.clientY]);
   if (pts.size === 1) { const dx = (e.clientX - p[0]) * dpr / view.k, dy = (e.clientY - p[1]) * dpr / view.k; goal.x -= dx; goal.y -= dy; view.x -= dx; view.y -= dy; }
   else if (pts.size === 2) { const [a, b] = [...pts.values()], d = Math.hypot(a[0] - b[0], a[1] - b[1]); if (pinch) goal.k = Math.max(fitK() * 0.8, Math.min(fitK() * 4, goal.k * d / pinch)); pinch = d; } });
@@ -785,6 +792,7 @@ function mehrfamilienhaus(c, L, i) {
       poly(c, [[x + w, y + a * d / w, z0], [x + w, y + b * d / w, z0], [x + w, y + b * d / w, z0 + 0.38], [x + w, y + a * d / w, z0 + 0.38]], '#8cc4e6', OUT); });
     if (f > 0) box(c, x + 0.1, y + d, z0 - 0.08, 0.6, 0.18, 0.06, '#ffffff'); }
   box(c, x - 0.05, y - 0.05, h, w + 0.1, d + 0.1, 0.14, '#c9564b');
+  faceText(c, x + w / 2, y + d, h - 0.17, 'HAUS ' + (i + 1), CAM.k * 0.2, '#1d2440');
 }
 function drawCity(t) {
   CAM = { x: view.x + Math.sin(t * 0.07) * 0.25, y: view.y, k: view.k };
@@ -825,7 +833,10 @@ function drawCity(t) {
   ctx.globalAlpha = 1;
   if (SEL) { const job = SEL.role || 'Dorfbewohner', q = P(SEL.x, SEL.y, 1.15), jf = fs * 1.05; ctx.font = `900 ${jf}px ${FONT}`; const jw = ctx.measureText(job).width + jf * 1.2, jy = q[1] - fs * 1.6 - jf * 1.9;
     rrect(ctx, q[0] - jw / 2, jy, jw, jf * 1.6, jf * 0.8); ctx.fillStyle = '#ffd23d'; ctx.fill(); ctx.lineWidth = Math.max(2, jf * 0.14); ctx.strokeStyle = '#1d2440'; ctx.stroke();
-    ctx.fillStyle = '#1d2440'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(job, q[0], jy + jf * 0.82); }
+    ctx.fillStyle = '#1d2440'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(job, q[0], jy + jf * 0.82);
+    const ft = flatText(SEL); if (ft) { const g = P(SEL.x, SEL.y, 0), ff = fs * 0.95; ctx.font = `900 ${ff}px ${FONT}`; const fw = ctx.measureText(ft).width + ff * 1.4, fy = g[1] + ff * 0.7;
+      rrect(ctx, g[0] - fw / 2, fy, fw, ff * 1.6, ff * 0.8); ctx.fillStyle = '#ffffff'; ctx.fill(); ctx.lineWidth = Math.max(2, ff * 0.14); ctx.strokeStyle = '#1d2440'; ctx.stroke();
+      ctx.fillStyle = '#1d2440'; ctx.fillText(ft, g[0], fy + ff * 0.82); } }
 }
 let last = performance.now(), T = 0; const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
 function loop(now) { const dt = Math.max(0, Math.min(0.05, (now - last) / 1000)); last = now; T += dt;
@@ -864,7 +875,9 @@ function suggest() { const q = norm(fIn.value.trim()); fList.innerHTML = ''; fMs
   sugg = [...a, ...b].slice(0, 6).map(([w]) => w);
   sugg.forEach((w, i) => { const li = el('li', i === hi ? 'on' : '', w.name); li.setAttribute('role', 'option'); li.onmousedown = e => { e.preventDefault(); findPerson(w); }; fList.append(li); }); }
 function mark() { [...fList.children].forEach((li, i) => li.classList.toggle('on', i === hi)); }
-function findPerson(w) { if (!w) return; SEL = w; goal.k = fitK() * 3.2; fIn.value = w.name; fList.innerHTML = ''; fMsg.textContent = '';
+function release() { if (SEL && SEL.prev) { SEL.x = SEL.prev[0]; SEL.y = SEL.prev[1]; SEL.prev = null; } if (SEL) SEL.atDoor = false; }
+function findPerson(w) { if (!w) return; release(); SEL = w;
+  if (w.flat && MFH_BUILT && !w.home) { w.prev = [w.x, w.y]; const d = flatDoor(w); w.x = d[0]; w.y = d[1]; w.tx = null; w.atDoor = true; } goal.k = fitK() * 3.2; fIn.value = w.name; fList.innerHTML = ''; fMsg.textContent = '';
   st.scrollIntoView({ behavior: 'smooth', block: 'start' }); fIn.blur(); }
 fIn.addEventListener('input', suggest);
 fIn.addEventListener('keydown', e => { if (!sugg.length) return; if (e.key === 'ArrowDown') { hi = (hi + 1) % sugg.length; mark(); e.preventDefault(); } else if (e.key === 'ArrowUp') { hi = (hi - 1 + sugg.length) % sugg.length; mark(); e.preventDefault(); } else if (e.key === 'Escape') { fList.innerHTML = ''; sugg = []; } });
