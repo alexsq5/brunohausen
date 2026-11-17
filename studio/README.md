@@ -42,7 +42,7 @@ Alle weiteren Namen stehen in `index.html` (CONFIG.named).
 - Seit Folge 9 gilt: Follower bringen 500 €, aber Einwohner + Name + Wohnung nur mit Kommentar „Ich zieh ein + Name“
 
 ## Video-Baukasten (`studio/`)
-- `folge9/` – Folge 9 (`main9.js`, `build9.py`: baut aus folge7-Dateien + main8.js + main9.js; `events9.py` erzeugt die Geräusch-Zeitpunkte aus words.json; `cover9.js`)
+- `folge9/` – Folge 9 (`main9.js`, `build9.py`: baut aus folge7-Dateien + main8.js + main9.js; `events9.py` erzeugt die Geräusch-Zeitpunkte aus words.json; `cover9.js`; `clear9.py` macht `plateD9.jpg`: Hintergrund mit freier Wiese am Fluss fürs AKW, ab Folge 9 diesen Hintergrund nehmen)
 - `folge8/` – Änderungen Folge 8 (`main8.js`, `build8.py`: baut aus folge7-Dateien + main8.js)
 - `folge7/` – Renderer-Basis: `build.py` baut `render.html` aus Kopf, `chunks.js` und `main7.js`; `render.js` rendert mit Playwright in 4 Teilen, ffmpeg fügt zusammen und legt Ton drunter
 - Wort-Timing: `make_words.sh` (vo.mp3 → vo16.wav → `nuclei.py` → `align5.py` → words.json)

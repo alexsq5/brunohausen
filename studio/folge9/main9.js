@@ -241,7 +241,7 @@ function frame(t){
 }
 
 window.init=async function(words,res4){
- IMG.plateC=await load('plateC.jpg');IMG.plateD=await load('plateD.jpg');IMG.occ=await load('occ_fw.png');IMG.occBBI=await load('occ_bbi.png');
+ IMG.plateC=await load('plateC.jpg');IMG.plateD=await load('plateD9.jpg');IMG.occ=await load('occ_fw.png');IMG.occBBI=await load('occ_bbi.png');
  IMG.bruno=await load('bruno_big.png');IMG.pj=await load('bruno_pj.png');
  WORDS=words.map(w=>({...w,d:DISP[w.w]||w.w,key:w.w}));
  END=WORDS[WORDS.length-1].e+2.8;RES=res4;buildPhrases();
