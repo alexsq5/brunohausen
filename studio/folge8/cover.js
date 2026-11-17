@@ -1,0 +1,22 @@
+const {chromium}=require('playwright');const fs=require('fs');
+(async()=>{const words=JSON.parse(fs.readFileSync('words.json','utf8'));const res4=JSON.parse(fs.readFileSync('res4.json','utf8'));
+const b=await chromium.launch({args:['--allow-file-access-from-files']});const pg=await b.newPage({viewport:{width:1080,height:1920}});
+pg.on('pageerror',e=>console.log('ERR',e.message));
+await pg.goto('file://'+process.cwd()+'/render.html');await pg.evaluate(w=>window.init(w[0],w[1]),[words,res4]);
+await pg.evaluate(()=>{
+ const t=T.offen+0.6;
+ captions=()=>{};hud=()=>{};bottomPill=()=>{};yelPill=()=>{};tag=()=>{};bubble=()=>{};cam=()=>[330,1150,1.45];frame(t);
+ let g=ctx.createRadialGradient(540,1000,380,540,1000,1250);g.addColorStop(0,'rgba(10,30,40,0)');g.addColorStop(1,'rgba(10,30,40,.55)');ctx.fillStyle=g;ctx.fillRect(0,0,1080,1920);
+ g=ctx.createLinearGradient(0,0,0,450);g.addColorStop(0,'rgba(15,30,45,.35)');g.addColorStop(1,'rgba(15,30,45,0)');ctx.fillStyle=g;ctx.fillRect(0,0,1080,450);
+ const gl=ctx.createRadialGradient(540,960,20,540,960,380);gl.addColorStop(0,'rgba(120,255,120,.75)');gl.addColorStop(1,'rgba(120,255,120,0)');ctx.fillStyle=gl;ctx.fillRect(120,560,840,800);
+ keyShape(560,960,1.45,-0.2);
+ const bx=560+Math.cos(-0.2)*(-120*1.45),by=960+Math.sin(-0.2)*(-120*1.45);ctx.font='84px "Noto Color Emoji"';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('☢️',bx,by+4);
+ bigBruno(540,2050,0.85,true,0,false);
+ ctx.save();ctx.font=`900 118px ${F}`;const lab='FOLGE 8';const lw=ctx.measureText(lab).width+130;
+ rr(540-lw/2,240,lw,170,85);ctx.fillStyle=YEL;ctx.fill();ctx.lineWidth=16;ctx.strokeStyle=NAVY;ctx.stroke();
+ ctx.fillStyle=NAVY;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(lab,540,332);ctx.restore();
+ strokeText('BRUNOHAUSEN',540,495,132,'#fff',NAVY,30);
+ strokeText('Gleichstand! 2 : 2 🔑',540,640,64,YEL,NAVY,18);
+ strokeText('Der Schlüssel verrät alles…',540,1250,62,'#fff',NAVY,18);
+});
+await pg.screenshot({path:'cover_folge8.png'});await b.close();})();
