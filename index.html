@@ -2,7 +2,7 @@
 <html lang="de"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Brunohausen</title>
-<meta name="description" content="Brunohausen – eine Stadt, die von ihren Followern gebaut wird. Folgen heißt einziehen.">
+<meta name="description" content="Brunohausen – eine Stadt, die von ihren Followern gebaut wird. Kommentieren heißt einziehen.">
 <style>@font-face{font-family:Inter;src:url(fonts/inter-500.woff) format('woff');font-weight:500;font-display:swap}@font-face{font-family:Inter;src:url(fonts/inter-700.woff) format('woff');font-weight:700;font-display:swap}@font-face{font-family:Inter;src:url(fonts/inter-800.woff) format('woff');font-weight:800;font-display:swap}@font-face{font-family:Inter;src:url(fonts/inter-900.woff) format('woff');font-weight:900;font-display:swap}</style>
 <style>
 /* Layout: lebendige Stadt als Bühne oben, darunter Karten wie die Pills aus den Videos */
@@ -17,28 +17,29 @@ a { color: inherit; }
 #city { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 .hud { position: absolute; top: calc(14px + env(safe-area-inset-top, 0px)); left: max(14px, env(safe-area-inset-left, 0px)); right: max(14px, env(safe-area-inset-right, 0px));
   display: flex; gap: 10px; flex-wrap: wrap; pointer-events: none; }
-.pill { display: flex; align-items: center; gap: 10px; background: var(--card); border: 4px solid var(--line); border-radius: 999px; padding: 6px 18px 6px 6px;
-  box-shadow: 0 8px 22px rgba(30,40,80,.28); }
-.pill i { width: 44px; height: 44px; border-radius: 50%; border: 3px solid var(--line); display: grid; place-items: center; font-style: normal; font-weight: 900; font-size: 22px; }
-.pill small { display: block; font-size: 11px; font-weight: 800; letter-spacing: .08em; color: var(--muted); }
-.pill b { display: block; font-size: 22px; font-weight: 900; font-variant-numeric: tabular-nums; line-height: 1.05; }
-.title { position: absolute; left: max(16px, env(safe-area-inset-left, 0px)); right: max(16px, env(safe-area-inset-right, 0px)); bottom: 18px; pointer-events: none;
-  display: flex; flex-direction: column; gap: 8px; align-items: flex-start; }
-.title h1 { margin: 0; font-weight: 900; font-size: clamp(44px, 10vw, 92px); line-height: .9; color: #fff; letter-spacing: -.01em;
+.pill { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,.86); -webkit-backdrop-filter: blur(12px) saturate(1.4); backdrop-filter: blur(12px) saturate(1.4);
+  border: 2.5px solid var(--line); border-radius: 18px; padding: 6px 16px 6px 6px; box-shadow: 0 10px 30px rgba(20,30,70,.22); }
+.pill i { width: 40px; height: 40px; border-radius: 12px; border: 0; display: grid; place-items: center; font-style: normal; font-weight: 900; font-size: 20px; box-shadow: inset 0 -3px 0 rgba(0,0,0,.12); }
+.pill small { display: block; font-size: 10.5px; font-weight: 800; letter-spacing: .1em; color: var(--muted); }
+.pill b { display: block; font-size: 21px; font-weight: 900; font-variant-numeric: tabular-nums; line-height: 1.05; letter-spacing: -.01em; }
+.title { position: absolute; left: max(16px, env(safe-area-inset-left, 0px)); right: max(16px, env(safe-area-inset-right, 0px)); bottom: 22px; pointer-events: none;
+  display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
+.title h1 { margin: 0; font-weight: 900; font-size: clamp(44px, 10vw, 92px); line-height: .9; color: #fff; letter-spacing: -.02em;
   -webkit-text-stroke: 0; text-shadow: 0 4px 0 var(--navy), 4px 0 0 var(--navy), -4px 0 0 var(--navy), 0 -4px 0 var(--navy), 3px 3px 0 var(--navy), -3px 3px 0 var(--navy), 3px -3px 0 var(--navy), -3px -3px 0 var(--navy), 0 10px 24px rgba(0,0,0,.25); }
 .title p { margin: 0; font-weight: 800; font-size: 18px; color: #fff; text-shadow: 0 2px 0 var(--navy), 2px 0 0 var(--navy), -2px 0 0 var(--navy), 0 -2px 0 var(--navy); }
-.cta { pointer-events: auto; display: inline-flex; align-items: center; gap: 8px; background: var(--sun); color: var(--navy); border: 4px solid var(--navy); border-radius: 999px;
-  padding: 10px 22px; font-weight: 900; font-size: 18px; text-decoration: none; box-shadow: 0 6px 0 var(--navy); transition: transform .12s, box-shadow .12s; }
-.cta:hover, .cta:focus-visible { transform: translateY(2px); box-shadow: 0 4px 0 var(--navy); outline: none; }
-.find { position: absolute; top: calc(92px + env(safe-area-inset-top, 0px)); left: max(14px, env(safe-area-inset-left, 0px)); width: min(340px, calc(100% - 90px)); z-index: 5; }
-.find form { display: flex; background: #fff; border: 4px solid var(--navy); border-radius: 999px; box-shadow: 0 8px 22px rgba(30,40,80,.28); overflow: hidden; }
-.find input { flex: 1; min-width: 0; border: 0; padding: 10px 16px; font: 800 16px var(--font); color: var(--navy); background: transparent; outline: none; }
-.find button { border: 0; border-left: 4px solid var(--navy); background: var(--sun); font: 900 16px var(--font); color: var(--navy); padding: 0 16px; cursor: pointer; }
-.find ul { list-style: none; margin: 6px 0 0; padding: 4px; background: #fff; border: 4px solid var(--navy); border-radius: 18px; box-shadow: 0 8px 22px rgba(30,40,80,.28); }
+.cta { pointer-events: auto; display: inline-flex; align-items: center; gap: 8px; background: var(--sun); color: var(--navy); border: 3px solid var(--navy); border-radius: 16px;
+  padding: 11px 22px; font-weight: 900; font-size: 18px; text-decoration: none; box-shadow: 0 5px 0 var(--navy), 0 14px 30px rgba(20,30,70,.25); transition: transform .12s, box-shadow .12s; }
+.cta:hover, .cta:focus-visible { transform: translateY(2px); box-shadow: 0 3px 0 var(--navy), 0 10px 24px rgba(20,30,70,.25); outline: none; }
+.find { position: absolute; top: calc(90px + env(safe-area-inset-top, 0px)); left: max(14px, env(safe-area-inset-left, 0px)); width: min(360px, calc(100% - 90px)); z-index: 5; }
+.find form { display: flex; background: rgba(255,255,255,.9); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border: 2.5px solid var(--navy); border-radius: 18px; box-shadow: 0 10px 30px rgba(20,30,70,.22); overflow: hidden; padding: 4px; gap: 4px; }
+.find input { flex: 1; min-width: 0; border: 0; padding: 9px 12px; font: 800 16px var(--font); color: var(--navy); background: transparent; outline: none; }
+.find input::placeholder { color: #8a93ab; }
+.find button { border: 0; border-radius: 13px; background: var(--sun); font: 900 15px var(--font); color: var(--navy); padding: 0 16px; cursor: pointer; box-shadow: inset 0 -3px 0 rgba(0,0,0,.12); }
+.find ul { list-style: none; margin: 8px 0 0; padding: 6px; background: rgba(255,255,255,.95); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border: 2.5px solid var(--navy); border-radius: 18px; box-shadow: 0 10px 30px rgba(20,30,70,.22); }
 .find ul:empty { display: none; }
-.find li { padding: 8px 12px; border-radius: 12px; font-weight: 800; color: var(--navy); cursor: pointer; }
+.find li { padding: 9px 12px; border-radius: 12px; font-weight: 800; color: var(--navy); cursor: pointer; }
 .find li.on, .find li:hover { background: var(--sun); }
-.find .msg { margin-top: 6px; background: #fff; border: 3px solid var(--navy); border-radius: 12px; padding: 6px 12px; font-weight: 800; color: var(--muted); }
+.find .msg { margin-top: 8px; background: rgba(255,255,255,.95); border: 2.5px solid var(--navy); border-radius: 14px; padding: 8px 12px; font-weight: 800; color: var(--muted); }
 .find .msg:empty { display: none; }
 .chip.pick { cursor: pointer; }
 .title { transition: opacity .3s; }
@@ -46,60 +47,68 @@ a { color: inherit; }
 .chip.pick:hover, .chip.pick:focus-visible { background: var(--sun); outline: none; }
 @media (max-width: 520px) { .find { top: calc(138px + env(safe-area-inset-top, 0px)); } }
 .zoom { position: absolute; right: max(14px, env(safe-area-inset-right, 0px)); top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 8px; }
-.zoom button { width: 46px; height: 46px; border-radius: 50%; background: #fff; border: 4px solid var(--navy); font: 900 22px var(--font); color: var(--navy); cursor: pointer; }
+.zoom button { width: 46px; height: 46px; border-radius: 14px; background: rgba(255,255,255,.88); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border: 2.5px solid var(--navy); font: 900 22px var(--font); color: var(--navy); cursor: pointer; box-shadow: 0 8px 22px rgba(20,30,70,.2); }
+.zoom button:hover { background: var(--sun); }
 .zoom button:focus-visible { outline: 3px solid var(--sun); }
-main { max-width: 980px; margin: 0 auto; padding-block: 28px 56px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
-  display: flex; flex-direction: column; gap: 36px; }
-h2 { margin: 0 0 14px; font-size: 28px; font-weight: 900; color: var(--navy); text-wrap: balance; }
-.lead { margin: 0 0 14px; color: var(--muted); font-weight: 600; max-width: 60ch; line-height: 1.5; }
-.card { background: var(--card); border: 4px solid var(--line); border-radius: 22px; padding: 18px; box-shadow: 0 8px 0 rgba(29,36,64,.12); }
+body { background: linear-gradient(180deg, #eef4fb 0%, #f6f8fc 40%, #f6f8fc 100%); }
+main { max-width: 1040px; margin: 0 auto; padding-block: 40px 64px; padding-left: max(18px, env(safe-area-inset-left, 0px)); padding-right: max(18px, env(safe-area-inset-right, 0px));
+  display: flex; flex-direction: column; gap: 48px; }
+.eyebrow { margin: 0 0 6px; font-size: 12px; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; color: #4a8b34; }
+h2 { margin: 0 0 16px; font-size: clamp(26px, 4vw, 34px); font-weight: 900; color: var(--navy); letter-spacing: -.02em; text-wrap: balance; }
+.lead { margin: -6px 0 16px; color: var(--muted); font-weight: 600; max-width: 60ch; line-height: 1.5; }
+.card { background: var(--card); border: 1px solid #e2e7f1; border-radius: 22px; padding: 18px; box-shadow: 0 1px 2px rgba(16,24,40,.05), 0 10px 28px rgba(16,24,40,.06); }
 /* milestone track */
-.track { position: relative; padding: 70px 26px 56px; }
-.rail { position: absolute; left: 50px; right: 50px; top: 92px; height: 14px; border-radius: 99px; background: #e4e8f2; }
-.rail span { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 99px; background: var(--grass); }
+.track { position: relative; padding: 70px 26px 30px; }
+.rail { position: absolute; left: 50px; right: 50px; top: 92px; height: 10px; border-radius: 99px; background: #e9edf5; }
+.rail span { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 99px; background: linear-gradient(90deg, #6fc04e, #9be07a); }
 .stops { position: relative; display: flex; justify-content: space-between; }
 .stop { display: flex; flex-direction: column; align-items: center; gap: 6px; width: 70px; text-align: center; }
-.stop .n { font-weight: 900; font-size: 20px; font-variant-numeric: tabular-nums; position: absolute; transform: translateY(-46px); }
-.stop .dot { width: 56px; height: 56px; border-radius: 50%; background: #e4e8f2; border: 4px solid var(--line); display: grid; place-items: center; font-size: 26px; }
-.stop.now .dot { background: var(--grass); }
+.stop .n { font-weight: 900; font-size: 18px; font-variant-numeric: tabular-nums; position: absolute; transform: translateY(-44px); color: var(--navy); }
+.stop .dot { width: 54px; height: 54px; border-radius: 16px; background: #fff; border: 2.5px solid var(--line); display: grid; place-items: center; font-size: 25px; box-shadow: 0 6px 16px rgba(16,24,40,.1); }
+.stop.now .dot { background: #bfe9ad; }
 .stop.next .dot { background: var(--sun); animation: bob 1.2s ease-in-out infinite; }
 .stop .l { font-weight: 800; font-size: 13px; color: var(--muted); hyphens: manual; line-height: 1.15; }
-@media (max-width: 520px) { .stop .l { font-size: 11px; } .stop .n { font-size: 16px; } }
+@media (max-width: 520px) { .stop .l { font-size: 11px; } .stop .n { font-size: 15px; } }
 @keyframes bob { 50% { transform: translateY(-5px); } }
-.togo { margin-top: 18px; text-align: center; font-weight: 900; font-size: 20px; }
-.togo b { background: var(--sun); border: 3px solid var(--navy); border-radius: 10px; padding: 2px 10px; }
+.togo { margin-top: 22px; text-align: center; font-weight: 900; font-size: 19px; color: var(--navy); }
+.togo b { background: var(--sun); border-radius: 10px; padding: 3px 10px; box-shadow: inset 0 -3px 0 rgba(0,0,0,.1); }
 /* buildings */
-.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; }
-@media (max-width: 520px) { .grid { grid-template-columns: 1fr 1fr; gap: 10px; } .bld { padding: 12px; } .bld b { font-size: 17px; } .bld .em { font-size: 28px; } .title h1 { font-size: 46px; } }
-.bld { display: flex; flex-direction: column; gap: 6px; min-width: 0; text-align: left; font: inherit; color: inherit; cursor: pointer; }
-.bld:hover, .bld:focus-visible { transform: translateY(-2px); outline: none; border-color: var(--red); }
-.bld .em { font-size: 34px; }
-.bld b { font-size: 20px; font-weight: 900; }
-.bld small { color: var(--muted); font-weight: 700; }
-.bld .cost { font-weight: 900; font-variant-numeric: tabular-nums; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 14px; }
+@media (max-width: 520px) { .grid { grid-template-columns: 1fr 1fr; gap: 10px; } .bld { padding: 12px; } .bld b { font-size: 16px; } .bld .em { width: 44px; height: 44px; font-size: 24px; } .title h1 { font-size: 46px; } }
+.bld { display: flex; flex-direction: column; gap: 6px; min-width: 0; text-align: left; font: inherit; color: inherit; cursor: pointer; transition: transform .15s, box-shadow .15s, border-color .15s; }
+.bld:hover, .bld:focus-visible { transform: translateY(-3px); outline: none; border-color: #c9d2e3; box-shadow: 0 2px 4px rgba(16,24,40,.06), 0 18px 36px rgba(16,24,40,.12); }
+.bld .em { width: 52px; height: 52px; border-radius: 14px; background: #f2f5fa; display: grid; place-items: center; font-size: 28px; margin: 4px 0 2px; }
+.bld b { font-size: 19px; font-weight: 900; color: var(--navy); letter-spacing: -.01em; hyphens: auto; overflow-wrap: anywhere; }
+.bld small { color: var(--muted); font-weight: 600; line-height: 1.35; }
+.bld .cost { margin-top: auto; padding-top: 4px; font-weight: 900; font-variant-numeric: tabular-nums; }
 .bld .cost.neg { color: var(--red); }
-.tag { align-self: flex-start; font-size: 12px; font-weight: 900; letter-spacing: .06em; padding: 3px 9px; border-radius: 99px; border: 2px solid var(--line); }
-.tag.built { background: var(--grass); } .tag.plan { background: var(--sun); }
+.tag { align-self: flex-start; font-size: 11px; font-weight: 900; letter-spacing: .08em; padding: 4px 9px; border-radius: 8px; border: 0; }
+.tag.built { background: #e2f5da; color: #2d7a1c; } .tag.plan { background: #fff3c4; color: #8a6400; }
 /* residents */
 .chips { display: flex; flex-wrap: wrap; gap: 8px; }
-.chip { background: #fff; border: 3px solid var(--line); border-radius: 99px; padding: 6px 14px; font-weight: 800; }
+.chip { background: #fff; border: 1px solid #dfe5f0; border-radius: 12px; padding: 7px 13px; font: 800 15px var(--font); color: var(--navy); box-shadow: 0 1px 2px rgba(16,24,40,.05); transition: background .12s, transform .12s; }
+.chip.pick:hover, .chip.pick:focus-visible { background: var(--sun); border-color: var(--sun); transform: translateY(-1px); outline: none; }
 .chip.chef { background: var(--navy); color: #fff; }
-.chip.more { background: transparent; border-style: dashed; color: var(--muted); }
+.chip.more { background: transparent; border-style: dashed; color: var(--muted); box-shadow: none; }
 /* episodes */
 .eps { display: flex; flex-direction: column; gap: 12px; }
-.ep { display: grid; grid-template-columns: 74px 1fr; gap: 14px; align-items: start; }
-.ep .no { background: var(--sun); border: 4px solid var(--line); border-radius: 16px; text-align: center; font-weight: 900; padding: 8px 0; font-size: 13px; }
-.ep .no b { display: block; font-size: 30px; line-height: 1; }
-.ep h3 { margin: 2px 0 4px; font-size: 19px; font-weight: 900; }
-.ep p { margin: 0; color: var(--muted); font-weight: 600; line-height: 1.45; }
-.how { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
-.how .card b { display: block; font-size: 19px; font-weight: 900; margin: 6px 0 4px; }
-.how .card p { margin: 0; color: var(--muted); font-weight: 600; line-height: 1.45; }
+.ep { display: grid; grid-template-columns: 70px 1fr; gap: 16px; align-items: start; }
+.ep .no { background: var(--navy); color: #c8d1ea; border-radius: 16px; text-align: center; font-weight: 900; padding: 9px 0 8px; font-size: 11px; letter-spacing: .1em; }
+.ep .no b { display: block; font-size: 28px; line-height: 1.05; color: var(--sun); letter-spacing: 0; }
+.ep:first-child .no { background: var(--sun); color: var(--navy); } .ep:first-child .no b { color: var(--navy); }
+.ep h3 { margin: 2px 0 4px; font-size: 19px; font-weight: 900; color: var(--navy); letter-spacing: -.01em; }
+.ep p { margin: 0; color: var(--muted); font-weight: 600; line-height: 1.5; }
+.how { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+.how .card { position: relative; }
+.how .card b { display: block; font-size: 19px; font-weight: 900; margin: 8px 0 4px; color: var(--navy); }
+.how .card p { margin: 0; color: var(--muted); font-weight: 600; line-height: 1.5; }
 .how .card span { font-size: 30px; }
-footer { text-align: center; color: var(--muted); font-weight: 700; font-size: 14px; line-height: 1.8; }
+.how .card em { position: absolute; top: 14px; right: 16px; font-style: normal; font-weight: 900; font-size: 13px; color: #9aa3ba; }
+.how q { quotes: "„" "“"; font-weight: 900; color: var(--navy); background: #fff3c4; border-radius: 6px; padding: 0 4px; white-space: nowrap; }
+footer { text-align: center; color: var(--muted); font-weight: 700; font-size: 14px; line-height: 1.8; padding-top: 8px; border-top: 1px solid #e2e7f1; }
 footer a { color: var(--navy); }
-@media (max-width: 520px) { .pill b { font-size: 18px; } .pill i { width: 36px; height: 36px; font-size: 18px; } .stop { width: 54px; } .stop .dot { width: 46px; height: 46px; font-size: 21px; } .rail { left: 40px; right: 40px; } .track { padding-inline: 8px; } }
-@media (prefers-reduced-motion: reduce) { .stop.next .dot { animation: none; } }
+@media (max-width: 520px) { .pill b { font-size: 17px; } .pill i { width: 34px; height: 34px; font-size: 17px; border-radius: 10px; } .stop { width: 54px; } .stop .dot { width: 44px; height: 44px; font-size: 20px; border-radius: 13px; } .rail { left: 40px; right: 40px; } .track { padding-inline: 8px; } }
+@media (prefers-reduced-motion: reduce) { .stop.next .dot { animation: none; } .bld, .chip { transition: none; } }
 </style></head><body>
 <section class="stage" id="stage" aria-label="Lebendige Karte von Brunohausen">
   <canvas id="city" role="img" aria-label="Brunohausen von oben: Rathaus, Brunnen, Bruno-Markt, BBI, geplante Bauplätze und Einwohner, die herumlaufen"></canvas>
@@ -111,7 +120,7 @@ footer a { color: var(--navy); }
   <div class="title">
     <h1>BRUNOHAUSEN</h1>
     <p>Eine Stadt, gebaut von ihren Followern.</p>
-    <a class="cta" id="cta" href="#mitmachen">Folgen heißt einziehen 🏠</a>
+    <a class="cta" id="cta" href="#mitmachen">So ziehst du ein 🏠</a>
   </div>
   <div class="find" id="find">
     <form id="findForm" autocomplete="off" role="search"><input id="findIn" type="text" placeholder="Deinen Namen suchen…" aria-label="Einwohner suchen" aria-autocomplete="list" aria-controls="findList"><button type="submit">Suchen</button></form>
@@ -122,28 +131,33 @@ footer a { color: var(--navy); }
 </section>
 <main>
   <section>
+    <p class="eyebrow">Nächstes Ziel</p>
     <h2>Der Plan</h2>
     <div class="card track"><div class="rail"><span id="railFill"></span></div><div class="stops" id="stops"></div><div class="togo" id="togo"></div></div>
   </section>
   <section>
+    <p class="eyebrow">Stadt</p>
     <h2>Gebäude</h2>
     <p class="lead">Tipp auf ein Gebäude, um es in der Stadt anzuschauen.</p>
     <div class="grid" id="blds"></div>
   </section>
   <section>
+    <p class="eyebrow">Wer hier wohnt</p>
     <h2 id="popTitle">Einwohner</h2>
     <div class="chips" id="chips"></div>
   </section>
   <section>
+    <p class="eyebrow">Story</p>
     <h2>Die Folgen</h2>
     <div class="eps" id="eps"></div>
   </section>
   <section id="mitmachen">
+    <p class="eyebrow">Mitmachen</p>
     <h2>So ziehst du ein</h2>
     <div class="how">
-      <div class="card"><span>🏠</span><b>Folgen</b><p>Jeder neue Follower wird Einwohner von Brunohausen.</p></div>
-      <div class="card"><span>💰</span><b>500 € Steuern</b><p>Jeder Einwohner zahlt 500 € in die Stadtkasse. Davon wird gebaut.</p></div>
-      <div class="card"><span>💬</span><b>Mitbestimmen</b><p>Was als Nächstes gebaut wird, entscheidet ihr in den Kommentaren.</p></div>
+      <div class="card step"><em>1</em><span>❤️</span><b>Folgen</b><p>Jeder neue Follower wird Einwohner und bringt 500 € in die Stadtkasse.</p></div>
+      <div class="card step"><em>2</em><span>💬</span><b>Kommentieren</b><p>Schreib unter die neueste Folge <q>Ich zieh ein + Name</q>. Dann bekommst du deinen Namen und eine eigene Wohnung.</p></div>
+      <div class="card step"><em>3</em><span>🗳️</span><b>Mitbestimmen</b><p>Was als Nächstes gebaut wird, entscheidet ihr in den Kommentaren.</p></div>
     </div>
   </section>
   <footer id="foot"></footer>
@@ -167,6 +181,7 @@ const CONFIG = {
     { id: "feuer", em: "🚒", name: "Feuerwehr", cost: 10000, note: "Wunsch von Nikpe · gebaut in Folge 4", at: 551 },
     { id: "kh", em: "🏥", name: "Krankenhaus", cost: 10000, note: "Eure Abstimmung · gebaut in Folge 7 · Lesander ist Pflegefachkraft" },
     { id: "mfh", em: "🏢", name: "3 Mehrfamilienhäuser", cost: 4500, note: "Eure Abstimmung: Häuser statt Hafen · gebaut in Folge 5" },
+    { id: "akw", em: "☢️", name: "Atomkraftwerk", cost: 20000, note: "Bauplatz am Fluss · fehlen nur noch 500 €", at: 637 },
     { id: "schluessel", em: "🔑", name: "Schlüsselladen", cost: 5000, note: "Gleichstand 2:2, Bruno hat entschieden · gebaut in Folge 8 · Chef: Ekram" },
     { id: "polizei", em: "🚓", name: "Polizei", cost: 5000, note: "Wunsch von Nikpe · gebaut in Folge 5 · Chef gesucht", at: 571 },
   ],
@@ -694,11 +709,12 @@ const DLOT = { x: 1.0, y: 8.7, w: 2.6, d: 2.3 }, FLOT = { x: 0.7, y: 0.6, w: 3.0
 const RAT = { x: 4.2, y: 2.2, w: 3.6, d: 2.4 };
 const KLOT = { x: -2.6, y: 0.9, w: 2.4, d: 2.2 };
 const SLOT = { x: -2.5, y: 8.7, w: 1.9, d: 1.7 };
+const ALOT = { x: 11.6, y: -4.9, w: 3.0, d: 2.0 }; // Atomkraftwerk-Bauplatz am Fluss
 const HLOTS = [{ x: 4.6, y: -3.7, w: 1.5, d: 1.4 }, { x: 6.6, y: -3.7, w: 1.5, d: 1.4 }, { x: 8.6, y: -3.7, w: 1.5, d: 1.4 }];
 const inFoot = (x, y, b, m = 0.6) => x > b.x - m && x < b.x + b.w + m && y > b.y - m && y < b.y + b.d + m;
 const BLOCK = [MARKET, BBI, RAT, DLOT, FLOT, PLOT];
 const free = (x, y) => x > 0.4 && x < 11.6 && y > 1.6 && y < 12.6 && !BLOCK.some(b => inFoot(x, y, b, 0.35)) && Math.hypot(x - 6, y - 8) > 1.25;
-const FOCUS = { rathaus: [6, 3.4], brunnen: [6, 8], wege: [6, 9.5], markt: [2.5, 5.4], bbi: [9.4, 5.4], doener: [2.3, 9.8], feuer: [2.2, 1.9], polizei: [10, 1.9], mfh: [7.3, -2.8], kh: [-1.2, 2.2], schluessel: [-1.5, 9.6] };
+const FOCUS = { rathaus: [6, 3.4], brunnen: [6, 8], wege: [6, 9.5], markt: [2.5, 5.4], bbi: [9.4, 5.4], doener: [2.3, 9.8], feuer: [2.2, 1.9], polizei: [10, 1.9], mfh: [7.3, -2.8], kh: [-1.2, 2.2], schluessel: [-1.5, 9.6], akw: [13.1, -3.6] };
 const rr = rnd(91), COLS = ['#ff7a59', '#4d9be6', '#b06ad6', '#3fbf8f', '#f2b134', '#e85d8a', '#5ac8c8', '#8a6cff', '#ff9f1c', '#2ec4b6', '#e71d36', '#7b2cbf'];
 const WALK = [];
 // Besitzer stehen vor ihrem Gebäude und laufen nur ein kleines Stück hin und her
@@ -828,9 +844,9 @@ function drawCity(t) {
   CAM = { x: view.x + Math.sin(t * 0.07) * 0.25, y: view.y, k: view.k };
   octx.setTransform(1, 0, 0, 1, 0, 0); octx.clearRect(0, 0, W, H); const c = octx;
   islandBase(c, t); PATH_P = 1; drawPaths(c, 1); grassDetail(c, t);
-  lotGround(c, DLOT, t, 1); lotGround(c, FLOT, t, 1); lotGround(c, PLOT, t, 1);
+  lotGround(c, DLOT, t, 1); lotGround(c, FLOT, t, 1); lotGround(c, PLOT, t, 1); lotGround(c, ALOT, t, 1);
   const items = [];
-  TREES.forEach(tr => { if ([MARKET, BBI, DLOT, FLOT, PLOT, KLOT, SLOT, ...HLOTS].some(b => inFoot(tr.x, tr.y, b))) return; const p = P(tr.x, tr.y, 0); if (p[0] < -200 || p[0] > W + 200 || p[1] < -200 || p[1] > H + 400) return;
+  TREES.forEach(tr => { if ([MARKET, BBI, DLOT, FLOT, PLOT, KLOT, SLOT, ALOT, ...HLOTS].some(b => inFoot(tr.x, tr.y, b))) return; const p = P(tr.x, tr.y, 0); if (p[0] < -200 || p[0] > W + 200 || p[1] < -200 || p[1] > H + 400) return;
     items.push({ k: tr.x + tr.y, f: () => tree(c, tr, Math.sin(t * 1.6 + tr.x) * CAM.k * 0.03) }); });
   items.push({ k: 11.2, f: () => { shadow(c, 4.2, 2.2, 3.6, 2.4, 0.22); rathaus(c, 0, 1, t); } });
   items.push({ k: 14.1, f: () => brunnen(c, 0, 1, t) });
@@ -848,7 +864,7 @@ function drawCity(t) {
   if (has('kh')) items.push({ k: KLOT.x + KLOT.w / 2 + KLOT.y + KLOT.d / 2, f: () => { shadow(c, KLOT.x, KLOT.y, KLOT.w, KLOT.d, 0.22); krankenhausW(c); } });
   if (has('schluessel')) items.push({ k: SLOT.x + SLOT.w / 2 + SLOT.y + SLOT.d / 2, f: () => { shadow(c, SLOT.x + 0.2, SLOT.y + 0.2, 1.5, 1.3, 0.22); schluesselW(c, t); } });
   if (has('mfh')) HLOTS.forEach((L, i) => items.push({ k: L.x + L.w / 2 + L.y + L.d / 2, f: () => { shadow(c, L.x, L.y, L.w, L.d, 0.22); mehrfamilienhaus(c, L, i); } }));
-  items.push({ k: 12.4 + 3.6, f: () => board(c, 12.4, 3.6, ['ATOMKRAFTWERK ☢️', 'fehlen nur noch 500 €'], '#2e8b2e', t, -1) });
+  items.push({ k: ALOT.x + ALOT.w / 2 + ALOT.y + ALOT.d + 0.3, f: () => board(c, ALOT.x + ALOT.w / 2, ALOT.y + ALOT.d + 0.3, ['ATOMKRAFTWERK ☢️', 'Bauplatz am Fluss', 'fehlen nur noch 500 €'], '#2e8b2e', t, -1) });
   items.push({ k: 3.9 + 10.9, f: () => { const p = P(3.9, 10.9, 0); c.save(); c.translate(p[0], p[1]); bruno(c, 0, -CAM.k * 0.95, CAM.k * 0.3, t, 0, (t % 8) < 2.5 ? 1 : 0); c.restore(); } });
   WALK.forEach((w, i) => items.push({ k: w.x + w.y + 0.1, f: () => person(c, w.x, w.y, 0, w.col, t + i, w.tx != null, w.s) }));
   const b = balloonState(t); items.push({ k: b.x + b.y + 0.5, f: () => { shadow(c, b.x - 0.35, b.y - 0.35, 0.7, 0.7, 0.18 * clamp(1 - b.z / 9)); balloon(c, b.x + 0.45, b.y + 0.2, b.z, t); } });
@@ -894,7 +910,7 @@ CONFIG.named.forEach(([n], i) => { const b = el('button', 'chip pick', n); b.typ
 const more = CONFIG.residents - CONFIG.named.length; if (more > 0) $('chips').append(el('span', 'chip more', '+ ' + more + ' weitere'));
 CONFIG.episodes.slice().reverse().forEach(([n, h, p]) => { const e = el('article', 'card ep'); const no = el('div', 'no'); no.append('FOLGE', el('b', null, String(n)));
   const tx = el('div'); tx.style.minWidth = '0'; tx.append(el('h3', null, h), el('p', null, p)); e.append(no, tx); $('eps').append(e); });
-$('foot').append('Stand: ' + CONFIG.updated + ' · Brunohausen · Folgen heißt einziehen', el('br'), Object.assign(el('a', null, 'Impressum'), { href: 'impressum.html' }), ' · ', Object.assign(el('a', null, 'Datenschutz'), { href: 'datenschutz.html' }));
+$('foot').append('Stand: ' + CONFIG.updated + ' · Brunohausen · Kommentieren heißt einziehen', el('br'), Object.assign(el('a', null, 'Impressum'), { href: 'impressum.html' }), ' · ', Object.assign(el('a', null, 'Datenschutz'), { href: 'datenschutz.html' }));
 resize(); home(); view = { ...goal }; addEventListener('resize', () => { const k0 = fitK(); resize(); const f = fitK() / k0; goal.k *= f; view.k *= f; });
 (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => requestAnimationFrame(loop));
 
@@ -915,6 +931,6 @@ fIn.addEventListener('input', suggest);
 fIn.addEventListener('keydown', e => { if (!sugg.length) return; if (e.key === 'ArrowDown') { hi = (hi + 1) % sugg.length; mark(); e.preventDefault(); } else if (e.key === 'ArrowUp') { hi = (hi - 1 + sugg.length) % sugg.length; mark(); e.preventDefault(); } else if (e.key === 'Escape') { fList.innerHTML = ''; sugg = []; } });
 fIn.addEventListener('blur', () => setTimeout(() => { fList.innerHTML = ''; }, 150));
 $('findForm').addEventListener('submit', e => { e.preventDefault(); if (!fIn.value.trim()) return; suggest(); if (sugg.length) findPerson(sugg[hi] || sugg[0]);
-  else { fList.innerHTML = ''; fMsg.textContent = 'Nicht gefunden. Folg Brunohausen und kommentier deinen Namen, dann ziehst du ein!'; } });
+  else { fList.innerHTML = ''; fMsg.textContent = 'Nicht gefunden. Kommentier „Ich zieh ein + Name“ unter die neueste Folge, dann ziehst du ein!'; } });
 </script>
 </body></html>
