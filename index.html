@@ -166,11 +166,11 @@ footer a { color: var(--navy); }
 // ===================== DATEN – nach jeder Folge hier aktualisieren =====================
 const CONFIG = {
   instagram: "",            // z. B. "https://www.instagram.com/brunohausen" – leer = Button springt zu "So ziehst du ein"
-  updated: "17.11.2026",
-  followers: 636, residents: 144, cash: 19500,
+  updated: "18.11.2026",
+  followers: 674, residents: 149, cash: 18500,
   named: [["Justus", "Chef vom BBI", "bbi"], ["Kevin", "wohnt einfach hier"], ["Lena"], ["Nikpe"], ["Theo"], ["Joschi"], ["Willi"], ["Orhan"], ["Hennes"], ["Paul"], ["Max"],
     ["Bruno"], ["damjan"], ["Mario", "Chef vom Finanzamt"], ["Claus"], ["Lennard"], ["Louiz"], ["Felix"], ["Lyam"], ["Jonas"], ["Lio"], ["Daniel"], ["Alexander"], ["Fati"], ["Lukas"], ["Elli"], ["Willi"],
-    ["watchdogman"], ["Jay"], ["Jannis"], ["Alice"], ["Jona"], ["Matti"], ["Silver"], ["TCO"], ["Jan"], ["Sophie"], ["Luan"], ["Kyle"], ["Robert"], ["Florian"], ["Goldfisch", "ein echter Goldfisch"], ["Tim"], ["Julian"], ["Magigcram"], ["Leon", "Feuerwehrmann"], ["Lesander", "Pflegefachkraft im Krankenhaus"], ["Ekram", "Chef vom Schlüsselladen"], ["Levke"], ["Ole"], ["Emilio"], ["Duncan"], ["Finn"], ["Luvki"], ["Jonas"], ["Einer"], ["Rishi"], ["Mira"], ["Alex"], ["Miriam"], ["Philipp"], ["Dome", "Follower Nr. 600 🏅"], ["Xavi", "Ermittler beim BBI"], ["Ente"], ["Justus"], ["Stivi"], ["Halm"], ["Max"], ["Andre"], ["Felix"], ["Pia"], ["Sebastian", "will Landwirt werden (Bauernhof)"], ["was_geht_es_dir__an"], ["Fynn"], ["Jessy"], ["Luca"], ["Liam"], ["Nico"], ["Alexander"], ["3ilas"], ["Merlin"], ["Lukas"], ["Owen"], ["Marcel"], ["Emma"], ["Fraya"], ["Florian"], ["Laura"], ["Louis"], ["Damian"], ["Davit"], ["Lukas W.", "Feuerwehrmann"]],
+    ["watchdogman"], ["Jay"], ["Jannis"], ["Alice"], ["Jona"], ["Matti"], ["Silver"], ["TCO"], ["Jan"], ["Sophie"], ["Luan"], ["Kyle"], ["Robert"], ["Florian"], ["Goldfisch", "ein echter Goldfisch"], ["Tim"], ["Julian"], ["Magigcram"], ["Leon", "Feuerwehrmann"], ["Lesander", "Pflegefachkraft im Krankenhaus"], ["Ekram", "Chef vom Schlüsselladen"], ["Levke"], ["Ole"], ["Emilio"], ["Duncan"], ["Finn"], ["Luvki"], ["Jonas"], ["Einer"], ["Rishi"], ["Mira"], ["Alex"], ["Miriam"], ["Philipp"], ["Dome", "Follower Nr. 600 🏅"], ["Xavi", "Ermittler beim BBI"], ["Ente"], ["Justus"], ["Stivi"], ["Halm"], ["Max"], ["Andre"], ["Felix"], ["Pia"], ["Sebastian", "will Landwirt werden (Bauernhof)"], ["was_geht_es_dir__an"], ["Fynn"], ["Jessy"], ["Luca"], ["Liam"], ["Nico"], ["Alexander"], ["3ilas"], ["Merlin"], ["Lukas"], ["Owen"], ["Marcel"], ["Emma"], ["Fraya"], ["Florian"], ["Laura"], ["Louis"], ["Damian"], ["Davit"], ["Lukas W.", "Feuerwehrmann"], ["Janosch"], ["Justin"], ["Lionell"], ["Lisa"], ["Gastelgott", "will ein Casino"]],
   buildings: [
     { id: "rathaus", em: "🏛️", name: "Rathaus", cost: 32000, note: "Seit Folge 1" },
     { id: "brunnen", em: "⛲", name: "Brunnen", cost: 9000, note: "Seit Folge 1" },
@@ -181,11 +181,11 @@ const CONFIG = {
     { id: "feuer", em: "🚒", name: "Feuerwehr", cost: 10000, note: "Wunsch von Nikpe · gebaut in Folge 4", at: 551 },
     { id: "kh", em: "🏥", name: "Krankenhaus", cost: 10000, note: "Eure Abstimmung · gebaut in Folge 7 · Lesander ist Pflegefachkraft" },
     { id: "mfh", em: "🏢", name: "3 Mehrfamilienhäuser", cost: 4500, note: "Eure Abstimmung: Häuser statt Hafen · gebaut in Folge 5" },
-    { id: "akw", em: "☢️", name: "Atomkraftwerk", cost: 20000, note: "Bauplatz am Fluss · fehlen nur noch 500 €", at: 637 },
+    { id: "akw", em: "☢️", name: "Atomkraftwerk", cost: 20000, note: "Am Fluss · gebaut in Folge 9 · Kraftwerksmeister gesucht (Felix hat sich beworben)", at: 637 },
     { id: "schluessel", em: "🔑", name: "Schlüsselladen", cost: 5000, note: "Gleichstand 2:2, Bruno hat entschieden · gebaut in Folge 8 · Chef: Ekram" },
     { id: "polizei", em: "🚓", name: "Polizei", cost: 5000, note: "Wunsch von Nikpe · gebaut in Folge 5 · Chef gesucht", at: 571 },
   ],
-  goals: [[637, "Atomkraftwerk", "☢️"]],
+  goals: [[700, "Neues Gebäude", "🏗️"]],
   episodes: [
     [1, "Diese Insel ist leer. Noch.", "Bruno wird Bürgermeister. 50.000 € Startkapital, Rathaus, Straßen und Brunnen gebaut. Es bleiben 2.000 € und ein Einwohner."],
     [2, "Brunohausen lebt!", "30 Einwohner. Theo und Nikpe bekommen ihren Bruno-Markt, Justus das BBI, und er ist Chef."],
@@ -195,6 +195,7 @@ const CONFIG = {
     [6, "Wem gehört der Schlüssel?", "Der Dieb hat einen Schlüssel verloren, der zu keiner Tür passt. Die Versicherung zahlt nicht. 16 neue Einwohner ziehen ein, 3 ziehen aus. Abstimmung: Krankenhaus, Gym, Bank oder Luxushotel?"],
     [7, "600 Follower: Atomkraftwerk!", "Dome ist Follower Nr. 600 und das Atomkraftwerk ist freigeschaltet (20.000 €). 31 neue Einwohner. Ihr habt abgestimmt: Das Krankenhaus steht, Lesander ist Pflegefachkraft. Xavi wird BBI-Ermittler. Jeder hat jetzt eine eigene Wohnung. Ekram will einen Schlüsselladen."],
     [8, "Gleichstand!", "2:2 zwischen Schlüsselladen und Atomkraftwerk, Bruno entscheidet: Schlüsselladen (−5.000 €), Ekram ist Chef. 21 neue Einwohner. Der Schlüssel passt zu keiner Tür, weil die Tür noch nicht gebaut ist. Auf dem Schlüssel ist das Atomkraftwerk-Zeichen. Fürs AKW fehlen nur noch 500 €. Leon und Lukas sind bei der Feuerwehr. Neu: Einziehen nur mit Kommentar „Ich zieh ein + Name“."],
+    [9, "Das Atomkraftwerk steht!", "38 neue Follower, +19.000 €. Das Atomkraftwerk am Fluss wird gebaut (−20.000 €). Auf der Rückseite ist eine Tür mit dem AKW-Zeichen: Der Schlüssel des Diebs passt! Was dahinter liegt, kommt in Folge 10. Nur wer kommentiert, zieht ein: Janosch, Justin, Lionell, Lisa und Gastelgott. Felix will Kraftwerksmeister werden. Abstimmung: Hotel, Gym oder Casino?"],
   ],
 };
 </script>
@@ -808,6 +809,24 @@ function krankenhausW(c) {
   poly(c, [[cx - 0.15, cy - 0.55, z], [cx + 0.15, cy - 0.55, z], [cx + 0.15, cy + 0.55, z], [cx - 0.15, cy + 0.55, z]], '#e5483f', null);
   poly(c, [[cx - 0.55, cy - 0.15, z], [cx + 0.55, cy - 0.15, z], [cx + 0.55, cy + 0.15, z], [cx - 0.55, cy + 0.15, z]], '#e5483f', null);
 }
+function akwW(c, t) {
+  // Kühlturm (hinten)
+  const tp = P(ALOT.x + 1.1, ALOT.y - 0.2, 0), k = CAM.k, hb = 0.62 * k, hw = 0.4 * k, ht = 0.46 * k, H = 2.5 * k;
+  c.save(); c.translate(tp[0], tp[1]);
+  c.beginPath(); c.moveTo(-hb, 0); c.quadraticCurveTo(-hw * 0.7, -H * 0.62, -ht, -H); c.lineTo(ht, -H); c.quadraticCurveTo(hw * 0.7, -H * 0.62, hb, 0); c.ellipse(0, 0, hb, hb * 0.36, 0, 0, Math.PI); c.closePath();
+  const g = c.createLinearGradient(-hb, 0, hb, 0); g.addColorStop(0, '#f1f3f7'); g.addColorStop(0.6, '#d7dce4'); g.addColorStop(1, '#b9c1ce'); c.fillStyle = g; c.fill(); c.lineWidth = Math.max(1.5, k * 0.03); c.strokeStyle = OUT; c.stroke();
+  c.save(); c.clip(); c.fillStyle = '#e5483f'; c.fillRect(-hb, -H, hb * 2, 0.2 * k); c.fillStyle = '#fff'; c.fillRect(-hb, -H + 0.2 * k, hb * 2, 0.1 * k); c.fillStyle = '#e5483f'; c.fillRect(-hb, -H + 0.3 * k, hb * 2, 0.1 * k); c.restore();
+  c.beginPath(); c.ellipse(0, -H, ht, ht * 0.36, 0, 0, Math.PI * 2); c.fillStyle = '#5d6475'; c.fill(); c.stroke();
+  for (let i = 0; i < 6; i++) { const u = (t * 0.3 + i / 6) % 1; c.globalAlpha = 0.85 * (1 - u); c.beginPath(); c.arc(Math.sin(u * 5 + i) * 0.12 * k + u * 0.5 * k, -H - u * 2.2 * k, (0.25 + u * 0.5) * k, 0, Math.PI * 2); c.fillStyle = '#fff'; c.fill(); }
+  c.restore();
+  // Reaktorhalle (vorne)
+  const x = ALOT.x + 0.5, y = ALOT.y + 0.7, w = 1.9, d = 1.2;
+  box(c, x, y, 0, w, d, 1.0, '#eef1f5');
+  for (let i = 0; i < 8; i++) { const a0 = x + i * w / 8, a1 = a0 + w / 8; poly(c, [[a0, y + d, 0], [a1, y + d, 0], [a1, y + d, 0.16], [a0, y + d, 0.16]], i % 2 ? '#232845' : '#ffd23d', OUT); }
+  const dp = P(x + w / 2, y + d / 2, 1.0); c.save(); c.translate(dp[0], dp[1]); c.beginPath(); c.moveTo(-0.55 * k, 0); c.bezierCurveTo(-0.55 * k, -0.75 * k, 0.55 * k, -0.75 * k, 0.55 * k, 0); c.ellipse(0, 0, 0.55 * k, 0.2 * k, 0, 0, Math.PI); c.closePath();
+  const dg = c.createLinearGradient(-0.55 * k, 0, 0.55 * k, 0); dg.addColorStop(0, '#f7f8fa'); dg.addColorStop(1, '#b8c0cc'); c.fillStyle = dg; c.fill(); c.lineWidth = Math.max(1.5, k * 0.03); c.strokeStyle = OUT; c.stroke(); c.restore();
+  faceText(c, x + w / 2, y + d, 0.6, 'ATOMKRAFTWERK ☢️', k * 0.17, '#2e8b2e');
+}
 function schluesselW(c, t) {
   const x = SLOT.x + 0.2, y = SLOT.y + 0.2, w = 1.5, d = 1.3, z = 0;
   box(c, x, y, z, w, d, 1.1, '#f3e6cc');
@@ -864,7 +883,8 @@ function drawCity(t) {
   if (has('kh')) items.push({ k: KLOT.x + KLOT.w / 2 + KLOT.y + KLOT.d / 2, f: () => { shadow(c, KLOT.x, KLOT.y, KLOT.w, KLOT.d, 0.22); krankenhausW(c); } });
   if (has('schluessel')) items.push({ k: SLOT.x + SLOT.w / 2 + SLOT.y + SLOT.d / 2, f: () => { shadow(c, SLOT.x + 0.2, SLOT.y + 0.2, 1.5, 1.3, 0.22); schluesselW(c, t); } });
   if (has('mfh')) HLOTS.forEach((L, i) => items.push({ k: L.x + L.w / 2 + L.y + L.d / 2, f: () => { shadow(c, L.x, L.y, L.w, L.d, 0.22); mehrfamilienhaus(c, L, i); } }));
-  items.push({ k: ALOT.x + ALOT.w / 2 + ALOT.y + ALOT.d + 0.3, f: () => board(c, ALOT.x + ALOT.w / 2, ALOT.y + ALOT.d + 0.3, ['ATOMKRAFTWERK ☢️', 'Bauplatz am Fluss', 'fehlen nur noch 500 €'], '#2e8b2e', t, -1) });
+  if (has('akw')) items.push({ k: ALOT.x + ALOT.w / 2 + ALOT.y + ALOT.d / 2, f: () => { shadow(c, ALOT.x + 0.4, ALOT.y + 0.6, 2.1, 1.4, 0.22); akwW(c, t); } });
+  else items.push({ k: ALOT.x + ALOT.w / 2 + ALOT.y + ALOT.d + 0.3, f: () => board(c, ALOT.x + ALOT.w / 2, ALOT.y + ALOT.d + 0.3, ['ATOMKRAFTWERK ☢️', 'Bauplatz am Fluss', 'fehlen nur noch 500 €'], '#2e8b2e', t, -1) });
   items.push({ k: 3.9 + 10.9, f: () => { const p = P(3.9, 10.9, 0); c.save(); c.translate(p[0], p[1]); bruno(c, 0, -CAM.k * 0.95, CAM.k * 0.3, t, 0, (t % 8) < 2.5 ? 1 : 0); c.restore(); } });
   WALK.forEach((w, i) => items.push({ k: w.x + w.y + 0.1, f: () => person(c, w.x, w.y, 0, w.col, t + i, w.tx != null, w.s) }));
   const b = balloonState(t); items.push({ k: b.x + b.y + 0.5, f: () => { shadow(c, b.x - 0.35, b.y - 0.35, 0.7, 0.7, 0.18 * clamp(1 - b.z / 9)); balloon(c, b.x + 0.45, b.y + 0.2, b.z, t); } });

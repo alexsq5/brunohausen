@@ -1,13 +1,14 @@
 # Brunohausen – Stadtbuch & Video-Baukasten
 
-Stand: 17.11.2026, nach Folge 8
+Stand: 17.11.2026, nach Folge 9 (fertig, noch nicht gepostet)
 
 ## Stand der Stadt
-- 636 Follower · 144 Einwohner · 19.500 € Stadtkasse
-- Gebaut: Rathaus, Dönerbude, BBI, Polizei, 3 Mehrfamilienhäuser, Finanzamt, Krankenhaus, Platz mit Wegen und Spielplatz, Schlüsselladen (links am Weg, Chef Ekram)
-- Atomkraftwerk (20.000 €): fehlen nur noch 500 € = 1 Follower, kommt in Folge 9 an den Fluss (nicht ans alte Schild)
-- Rätsel: Der Schlüssel des Diebs passt zu keiner Tür, weil die Tür noch nicht gebaut ist. Auf dem Schlüssel ist das AKW-Zeichen (Xavi/BBI hat es entdeckt)
-- Wunschliste: Bauernhof mit Milchkühen (Sebastian will Landwirt sein), Tims Casino wartet immer noch, Rettungswache mit Hubschrauber (Davit)
+- 674 Follower · 149 Einwohner · 18.500 € Stadtkasse
+- Gebaut: Rathaus, Dönerbude, BBI, Polizei, 3 Mehrfamilienhäuser, Finanzamt, Krankenhaus, Platz mit Wegen und Spielplatz, Schlüsselladen (Ekram), Atomkraftwerk am Fluss (Folge 9, oberhalb vom Fluss, altes Schild ist weg)
+- Rätsel: Der Schlüssel passt zur Tür auf der Rückseite vom AKW. Die Tür ist offen, drin liegt etwas Unbekanntes (grün leuchtend, „?“) → Auflösung in Folge 10
+- Kraftwerksmeister gesucht: Felix hat sich beworben, weitere Bewerbungen per Kommentar
+- Abstimmung läuft: Hotel, Gym oder Casino? (Gastelgott und Tim wollen beide ein Casino)
+- Wunschliste: Bauernhof mit Milchkühen (Sebastian), Rettungswache mit Hubschrauber (Davit), Fußballverein (7aho78 als Trainer), Lukas-Gym, Biogasanlage, Tabakladen (Luvki)
 
 ## Regeln
 - 1 Follower = 1 Einwohner + 500 € (Insta-Bio sagt noch 1.000 €, ändern)
@@ -22,6 +23,7 @@ Stand: 17.11.2026, nach Folge 8
 ## Folgen
 | Folge | Follower | Einwohner | Kasse | Inhalt |
 |---|---|---|---|---|
+| 9 | 674 | 149 | 18.500 € | AKW gebaut (−20.000), +38 Follower (+19.000), nur 5 haben kommentiert und ziehen ein (Janosch, Justin, Lionell, Lisa, Gastelgott), Schlüssel passt zur AKW-Tür, Felix will Kraftwerksmeister, Umfrage Hotel/Gym/Casino |
 | 8 | 636 | 144 | 19.500 € | Gleichstand 2:2, Bruno entscheidet: Schlüsselladen (−5.000), 21 neue, Schlüssel trägt AKW-Zeichen, Leon + Lukas W. Feuerwehr, neue Einzieh-Regel |
 | 7 | 615 | 123 | 14.000 € | Krankenhaus (−10.000), AKW freigeschaltet, Dome = Nr. 600, Xavi BBI-Ermittler, Lesander Pflegefachkraft, Ekram will Schlüsselladen, Platz + Spielplatz |
 | 6 | 584 | 92 | 8.500 € | Schlüssel des Diebs passt nirgends, 16 neue, 3 weg, Versicherung zahlt nicht (<20 Kommentare) |
@@ -29,16 +31,18 @@ Stand: 17.11.2026, nach Folge 8
 | 4 | 568 | – | – | Fluss repariert |
 
 ## Rollen
-Mario – Finanzamt-Chef · Ekram – Chef Schlüsselladen · Leon, Lukas W. – Feuerwehr · Sebastian – will Landwirt werden · Davit – neu (will Rettungswache leiten) · Lena – Dönerbude · Justus – sucht BBI-Leute · Xavi – BBI-Ermittler · Dome – Follower Nr. 600 · Lesander – Pflegefachkraft · Kyle – Haus 3 · Wohnung 39 · Tim – wollte Casino · Kevin – wohnt einfach hier
+Felix – will Kraftwerksmeister werden · Gastelgott – neu, will Casino · Janosch, Justin, Lionell, Lisa – neu (Folge 9) · Mario – Finanzamt-Chef · Ekram – Chef Schlüsselladen · Leon, Lukas W. – Feuerwehr · Sebastian – will Landwirt werden · Davit – neu (will Rettungswache leiten) · Lena – Dönerbude · Justus – sucht BBI-Leute · Xavi – BBI-Ermittler · Dome – Follower Nr. 600 · Lesander – Pflegefachkraft · Kyle – Haus 3 · Wohnung 39 · Tim – wollte Casino · Kevin – wohnt einfach hier
 
 Alle weiteren Namen stehen in `index.html` (CONFIG.named).
 
-## Für Folge 9
-- Atomkraftwerk bauen (am Fluss), sobald 637+ Follower
-- Die Tür finden, zu der der Schlüssel passt (im AKW?)
-- Nur wer „Ich zieh ein + Name“ kommentiert, bekommt Namen + Wohnung
+## Für Folge 10
+- Was liegt hinter der AKW-Tür? (im Folgenplan: Spur zum Dieb, Auflösung Folge 12)
+- Ergebnis der Umfrage Hotel/Gym/Casino zählen
+- Kraftwerksmeister wählen (Felix + weitere Bewerber, nur wer noch keinen Job hat)
+- Seit Folge 9 gilt: Follower bringen 500 €, aber Einwohner + Name + Wohnung nur mit Kommentar „Ich zieh ein + Name“
 
 ## Video-Baukasten (`studio/`)
+- `folge9/` – Folge 9 (`main9.js`, `build9.py`: baut aus folge7-Dateien + main8.js + main9.js; `events9.py` erzeugt die Geräusch-Zeitpunkte aus words.json; `cover9.js`)
 - `folge8/` – Änderungen Folge 8 (`main8.js`, `build8.py`: baut aus folge7-Dateien + main8.js)
 - `folge7/` – Renderer-Basis: `build.py` baut `render.html` aus Kopf, `chunks.js` und `main7.js`; `render.js` rendert mit Playwright in 4 Teilen, ffmpeg fügt zusammen und legt Ton drunter
 - Wort-Timing: `make_words.sh` (vo.mp3 → vo16.wav → `nuclei.py` → `align5.py` → words.json)
