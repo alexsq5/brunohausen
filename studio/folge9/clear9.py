@@ -2,7 +2,7 @@ from PIL import Image, ImageDraw, ImageFilter
 import numpy as np
 im=Image.open('plateD.jpg').convert('RGB');W,H=im.size
 a=np.asarray(im).astype(np.float32)
-poly=[(680,425),(735,372),(830,358),(960,378),(1050,425),(1080,445),(1080,712),(1040,700),(960,650),(880,592),(800,522),(720,462),(690,445)]
+poly=[(625,420),(700,345),(830,322),(960,350),(1050,410),(1080,440),(1080,712),(1040,700),(960,650),(880,592),(800,522),(720,462),(660,440)]
 pm=Image.new('L',(W,H),0);ImageDraw.Draw(pm).polygon(poly,fill=255)
 inside=np.asarray(pm)>0
 # Stämme finden (braun)

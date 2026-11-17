@@ -1,7 +1,7 @@
 // ===================== FOLGE 9 =====================
 // Stand vorher (Folge 8): 636 Follower, 144 Einwohner, 19.500 € Kasse
 // Folge 9: 674 Follower (+38 = +19.000 €), AKW −20.000 €, 5 neue Einwohner (nur wer kommentiert hat)
-const AKWP=[790,515];           // Vorderkante Reaktorhalle, oberhalb vom Fluss
+const AKWP=[765,478];           // Vorderkante Reaktorhalle, oberhalb vom Fluss
 const F9_NEW=['Janosch','Justin','Lionell','Lisa','Gastelgott'];
 const F9_FOLLOW0=636,F9_FOLLOW1=674,F9_EINW0=144,F9_KASSE0=19500;
 let NEW9=[],COINS=[],FELIX=null,LISA=null,GASTEL=null,ALREADY=[];
