@@ -47,3 +47,8 @@ Alle weiteren Namen stehen in `index.html` (CONFIG.named).
 - `folgen/folgeN/` – Sprechertext und Wort-Timing jeder Folge
 
 Kein Token und keine Passwörter in dieses Repo!
+
+## Ton (ab Folge 8)
+- `studio/sound/`: `music.mp3` (fröhliche Aufbau-Musik, ohne Gesang, 90 s, ElevenLabs Music), `ambience.mp3` (Stadtplatz: Vögel, Leute, Brunnen) und Geräusche: `pop`, `whoosh`, `coin`, `kaching`, `build`, `stamp`, `shimmer`, `boom`, `cheer`, `typing` (alle auf -3 dB Spitze normalisiert)
+- `python3 studio/sound/mix.py vo.mp3 events.json out.m4a [dauer]` mischt Stimme + Musik (duckt automatisch unter der Stimme) + Atmo + Geräusche, Lautheit -14 LUFS für Instagram
+- `events.json` = Liste `{t, s, db}` aus den Zeitpunkten der Folge (Beispiel: `folge8/events8.json`): pop bei Einblendungen, coin pro neuem Einwohner, kaching bei Geld, build beim Bauen, stamp bei Stempeln, shimmer/boom bei Enthüllungen, whoosh bei Szenenwechseln, cheer am Ende
