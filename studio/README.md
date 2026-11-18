@@ -3,10 +3,11 @@
 Stand: 17.11.2026, nach Folge 9 (fertig, noch nicht gepostet)
 
 ## Stand der Stadt
-- 674 Follower · 149 Einwohner · 18.500 € Stadtkasse
+- 694 Follower · 157 Einwohner · 29.000 € Stadtkasse
 - Gebaut: Rathaus, Dönerbude, BBI, Polizei, 3 Mehrfamilienhäuser, Finanzamt, Krankenhaus, Platz mit Wegen und Spielplatz, Schlüsselladen (Ekram), Atomkraftwerk am Fluss (Folge 9, oberhalb vom Fluss, altes Schild ist weg)
-- Rätsel: Der Schlüssel passt zur Tür auf der Rückseite vom AKW. Die Tür ist offen, drin liegt etwas Unbekanntes (grün leuchtend, „?“) → Auflösung in Folge 10
-- Kraftwerksmeister gesucht: Felix hat sich beworben, weitere Bewerbungen per Kommentar
+- Rätsel: Der Schlüssel passt zur Tür hinten am AKW. Dahinter lagen die geklauten 500 € (zurück in der Kasse) und eine Schlafmütze. Folge 10: Bruno ist schlafgewandelt (Rückblende auf Folge 6 im Schlafanzug) – Bruno flüstert am Ende von Folge 9 „Hoffentlich findet das keiner raus…“
+- Neuer Stil ab Folge 9: Bruno hat Charakter (geldgeil, schummelt, redet mit den Zuschauern), kindgerechter Humor, alle 3–5 s passiert etwas, kein „seht ihr in Folge X“. Jede Folge bekommt ein eigenes neues Cover.
+- Kraftwerksmeister gesucht: Felix und Kilian wollen ins AKW
 - Abstimmung läuft: Hotel, Gym oder Casino? (Gastelgott und Tim wollen beide ein Casino)
 - Wunschliste: Bauernhof mit Milchkühen (Sebastian), Rettungswache mit Hubschrauber (Davit), Fußballverein (7aho78 als Trainer), Lukas-Gym, Biogasanlage, Tabakladen (Luvki)
 
@@ -23,7 +24,7 @@ Stand: 17.11.2026, nach Folge 9 (fertig, noch nicht gepostet)
 ## Folgen
 | Folge | Follower | Einwohner | Kasse | Inhalt |
 |---|---|---|---|---|
-| 9 | 674 | 149 | 18.500 € | AKW gebaut (−20.000), +38 Follower (+19.000), nur 5 haben kommentiert und ziehen ein (Janosch, Justin, Lionell, Lisa, Gastelgott), Schlüssel passt zur AKW-Tür, Felix will Kraftwerksmeister, Umfrage Hotel/Gym/Casino |
+| 9 | 694 | 157 | 29.000 € | AKW gebaut (−20.000), +58 Follower (+29.000), geklaute 500 € hinter der AKW-Tür gefunden (+500) + Schlafmütze, 13 ziehen ein (Janosch, Justin, Lionell, Lisa, Gastelgott, Marty, Timo, Pinguin, Theresa, Ben, Kilian, Celine, Jonas), Felix will Kraftwerksmeister, Umfrage Hotel/Gym/Casino |
 | 8 | 636 | 144 | 19.500 € | Gleichstand 2:2, Bruno entscheidet: Schlüsselladen (−5.000), 21 neue, Schlüssel trägt AKW-Zeichen, Leon + Lukas W. Feuerwehr, neue Einzieh-Regel |
 | 7 | 615 | 123 | 14.000 € | Krankenhaus (−10.000), AKW freigeschaltet, Dome = Nr. 600, Xavi BBI-Ermittler, Lesander Pflegefachkraft, Ekram will Schlüsselladen, Platz + Spielplatz |
 | 6 | 584 | 92 | 8.500 € | Schlüssel des Diebs passt nirgends, 16 neue, 3 weg, Versicherung zahlt nicht (<20 Kommentare) |
