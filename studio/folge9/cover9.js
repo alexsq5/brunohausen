@@ -11,7 +11,7 @@ await pg.evaluate(()=>{
  const gl=ctx.createRadialGradient(540,960,20,540,960,380);gl.addColorStop(0,'rgba(255,225,110,.8)');gl.addColorStop(1,'rgba(255,225,110,0)');ctx.fillStyle=gl;ctx.fillRect(120,560,840,800);
  [[430,1020,-.25],[540,1045,.08],[650,1015,.3],[470,965,.15],[610,960,-.18],[540,915,-.05]].forEach(([x,y,r])=>bill(x,y,r,1.55));
  nightcap(560,840,1.05,0.3);
- bigBruno(540,2050,0.85,true,0,false);
+ bigBruno(540,1950,0.85,true,0,false);
  ctx.save();ctx.font=`900 118px ${F}`;const lab='FOLGE 9';const lw=ctx.measureText(lab).width+130;
  rr(540-lw/2,240,lw,170,85);ctx.fillStyle=YEL;ctx.fill();ctx.lineWidth=16;ctx.strokeStyle=NAVY;ctx.stroke();
  ctx.fillStyle=NAVY;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(lab,540,332);ctx.restore();
