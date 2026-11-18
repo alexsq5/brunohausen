@@ -710,7 +710,7 @@ const DLOT = { x: 1.0, y: 8.7, w: 2.6, d: 2.3 }, FLOT = { x: 0.7, y: 0.6, w: 3.0
 const RAT = { x: 4.2, y: 2.2, w: 3.6, d: 2.4 };
 const KLOT = { x: -2.6, y: 0.9, w: 2.4, d: 2.2 };
 const SLOT = { x: -2.5, y: 8.7, w: 1.9, d: 1.7 };
-const ALOT = { x: -7.0, y: -11.4, w: 3.0, d: 2.0 }; // Atomkraftwerk-Bauplatz am Fluss
+const ALOT = { x: -7.3, y: -12.2, w: 3.0, d: 2.0 }; // Atomkraftwerk-Bauplatz am Fluss
 const HLOTS = [{ x: 4.6, y: -3.7, w: 1.5, d: 1.4 }, { x: 6.6, y: -3.7, w: 1.5, d: 1.4 }, { x: 8.6, y: -3.7, w: 1.5, d: 1.4 }];
 const inFoot = (x, y, b, m = 0.6) => x > b.x - m && x < b.x + b.w + m && y > b.y - m && y < b.y + b.d + m;
 const BLOCK = [MARKET, BBI, RAT, DLOT, FLOT, PLOT];
@@ -809,24 +809,46 @@ function krankenhausW(c) {
   poly(c, [[cx - 0.15, cy - 0.55, z], [cx + 0.15, cy - 0.55, z], [cx + 0.15, cy + 0.55, z], [cx - 0.15, cy + 0.55, z]], '#e5483f', null);
   poly(c, [[cx - 0.55, cy - 0.15, z], [cx + 0.55, cy - 0.15, z], [cx + 0.55, cy + 0.15, z], [cx - 0.55, cy + 0.15, z]], '#e5483f', null);
 }
-function akwW(c, t) {
-  poly(c, [[ALOT.x + 0.2, ALOT.y - 0.6, 0], [ALOT.x + ALOT.w - 0.3, ALOT.y - 0.6, 0], [ALOT.x + ALOT.w - 0.3, ALOT.y + ALOT.d + 0.1, 0], [ALOT.x + 0.2, ALOT.y + ALOT.d + 0.1, 0]], '#c4c9d1', OUT);
-  // Kühlturm (hinten)
-  const tp = P(ALOT.x + 1.1, ALOT.y - 0.2, 0), k = CAM.k, hb = 0.62 * k, hw = 0.4 * k, ht = 0.46 * k, H = 2.5 * k;
-  c.save(); c.translate(tp[0], tp[1]);
-  c.beginPath(); c.moveTo(-hb, 0); c.quadraticCurveTo(-hw * 0.7, -H * 0.62, -ht, -H); c.lineTo(ht, -H); c.quadraticCurveTo(hw * 0.7, -H * 0.62, hb, 0); c.ellipse(0, 0, hb, hb * 0.36, 0, 0, Math.PI); c.closePath();
-  const g = c.createLinearGradient(-hb, 0, hb, 0); g.addColorStop(0, '#f1f3f7'); g.addColorStop(0.6, '#d7dce4'); g.addColorStop(1, '#b9c1ce'); c.fillStyle = g; c.fill(); c.lineWidth = Math.max(1.5, k * 0.03); c.strokeStyle = OUT; c.stroke();
-  c.save(); c.clip(); c.fillStyle = '#e5483f'; c.fillRect(-hb, -H, hb * 2, 0.2 * k); c.fillStyle = '#fff'; c.fillRect(-hb, -H + 0.2 * k, hb * 2, 0.1 * k); c.fillStyle = '#e5483f'; c.fillRect(-hb, -H + 0.3 * k, hb * 2, 0.1 * k); c.restore();
-  c.beginPath(); c.ellipse(0, -H, ht, ht * 0.36, 0, 0, Math.PI * 2); c.fillStyle = '#5d6475'; c.fill(); c.stroke();
-  for (let i = 0; i < 6; i++) { const u = (t * 0.3 + i / 6) % 1; c.globalAlpha = 0.85 * (1 - u); c.beginPath(); c.arc(Math.sin(u * 5 + i) * 0.12 * k + u * 0.5 * k, -H - u * 2.2 * k, (0.25 + u * 0.5) * k, 0, Math.PI * 2); c.fillStyle = '#fff'; c.fill(); }
+function akwW(c, t) { // 1:1 wie im Video (Folge 9)
+  const NV = '#232845', YL = '#FDD33A', lerp2 = (a, b, u) => a + (b - a) * u;
+  const cp = P(ALOT.x + ALOT.w / 2, ALOT.y + ALOT.d / 2, 0), s = CAM.k / 46;
+  const pl = (pts, fill, stroke = NV, lw = 3) => { c.beginPath(); pts.forEach((p, i) => i ? c.lineTo(p[0], p[1]) : c.moveTo(p[0], p[1])); c.closePath(); if (fill) { c.fillStyle = fill; c.fill(); } if (stroke) { c.lineWidth = lw; c.lineJoin = 'round'; c.strokeStyle = stroke; c.stroke(); } };
+  const iso = (x, y, a, b) => ({ F: [x, y], R: [x + a, y - a * .5], L: [x - b, y - b * .5], K: [x + a - b, y - a * .5 - b * .5] });
+  const bx = (x, y, a, b, h, cl, cr, ct, lw) => { const Q = iso(x, y, a, b), up = p => [p[0], p[1] - h]; pl([Q.L, Q.F, up(Q.F), up(Q.L)], cl, NV, lw); pl([Q.F, Q.R, up(Q.R), up(Q.F)], cr, NV, lw); pl([up(Q.L), up(Q.F), up(Q.R), up(Q.K)], ct, NV, lw); return Q; };
+  const onL = (Q, h, u, v) => [lerp2(Q.F[0], Q.L[0], u), lerp2(Q.F[1], Q.L[1], u) - v * h], onR = (Q, h, u, v) => [lerp2(Q.F[0], Q.R[0], u), lerp2(Q.F[1], Q.R[1], u) - v * h];
+  const rr2 = (x, y, w, h, r) => { c.beginPath(); c.moveTo(x + r, y); c.arcTo(x + w, y, x + w, y + h, r); c.arcTo(x + w, y + h, x, y + h, r); c.arcTo(x, y + h, x, y, r); c.arcTo(x, y, x + w, y, r); c.closePath(); };
+  c.save(); c.translate(cp[0], cp[1]); c.scale(s, s); c.translate(-25, 50.5);
+  const x = 0, y = 0;
+  pl([[x + 10, y + 22], [x + 170, y - 58], [x + 40, y - 123], [x - 120, y - 43]], '#C4C9D1', NV, 2.5);
+  pl([[x + 10, y + 22], [x + 170, y - 58], [x + 170, y - 50], [x + 10, y + 30]], '#9EA5B1', NV, 2);
+  pl([[x + 10, y + 22], [x - 120, y - 43], [x - 120, y - 35], [x + 10, y + 30]], '#AEB4BF', NV, 2);
+  // Kühlturm
+  c.save(); c.translate(x + 92, y - 62);
+  { const hb = 46, hw = 30, ht = 36, H = 150;
+    c.beginPath(); c.ellipse(0, 0, hb + 6, (hb + 6) * 0.4, 0, 0, 7); c.fillStyle = 'rgba(20,50,20,.25)'; c.fill();
+    c.beginPath(); c.moveTo(-hb, 0); c.quadraticCurveTo(-hw * 0.7, -H * 0.62, -ht, -H); c.lineTo(ht, -H); c.quadraticCurveTo(hw * 0.7, -H * 0.62, hb, 0); c.ellipse(0, 0, hb, hb * 0.36, 0, 0, Math.PI); c.closePath();
+    const g = c.createLinearGradient(-hb, 0, hb, 0); g.addColorStop(0, '#F1F3F7'); g.addColorStop(0.6, '#D7DCE4'); g.addColorStop(1, '#B9C1CE'); c.fillStyle = g; c.fill(); c.lineWidth = 3; c.strokeStyle = NV; c.stroke();
+    c.save(); c.clip(); c.fillStyle = '#E5483F'; c.fillRect(-60, -H, 120, 16); c.fillStyle = '#fff'; c.fillRect(-60, -H + 16, 120, 8); c.fillStyle = '#E5483F'; c.fillRect(-60, -H + 24, 120, 8); c.restore();
+    c.beginPath(); c.ellipse(0, -H, ht, ht * 0.36, 0, 0, 7); c.fillStyle = '#5d6475'; c.fill(); c.lineWidth = 3; c.strokeStyle = NV; c.stroke();
+    for (let i = 0; i < 7; i++) { const u = ((t * 0.35 + i / 7) % 1); c.globalAlpha = 0.85 * (1 - u); c.beginPath(); c.arc(Math.sin(u * 5 + i) * 10 + u * 40, -H - u * 170, 18 + u * 38, 0, 7); c.fillStyle = '#fff'; c.fill(); }
+    c.globalAlpha = 1; }
   c.restore();
-  // Reaktorhalle (vorne)
-  const x = ALOT.x + 0.5, y = ALOT.y + 0.7, w = 1.9, d = 1.2;
-  box(c, x, y, 0, w, d, 1.0, '#eef1f5');
-  for (let i = 0; i < 8; i++) { const a0 = x + i * w / 8, a1 = a0 + w / 8; poly(c, [[a0, y + d, 0], [a1, y + d, 0], [a1, y + d, 0.16], [a0, y + d, 0.16]], i % 2 ? '#232845' : '#ffd23d', OUT); }
-  const dp = P(x + w / 2, y + d / 2, 1.0); c.save(); c.translate(dp[0], dp[1]); c.beginPath(); c.moveTo(-0.55 * k, 0); c.bezierCurveTo(-0.55 * k, -0.75 * k, 0.55 * k, -0.75 * k, 0.55 * k, 0); c.ellipse(0, 0, 0.55 * k, 0.2 * k, 0, 0, Math.PI); c.closePath();
-  const dg = c.createLinearGradient(-0.55 * k, 0, 0.55 * k, 0); dg.addColorStop(0, '#f7f8fa'); dg.addColorStop(1, '#b8c0cc'); c.fillStyle = dg; c.fill(); c.lineWidth = Math.max(1.5, k * 0.03); c.strokeStyle = OUT; c.stroke(); c.restore();
-  faceText(c, x + w / 2, y + d, 0.6, 'ATOMKRAFTWERK ☢️', k * 0.17, '#2e8b2e');
+  // Reaktorhalle
+  const a = 70, b = 96, h = 64;
+  const Q = bx(x, y, a, b, h, '#EEF1F5', '#CBD2DC', '#9AA4B5', 2.8);
+  const top = [x + (a - b) / 2, y - (a + b) / 4 - h];
+  c.beginPath(); c.moveTo(top[0] - 34, top[1] + 4); c.bezierCurveTo(top[0] - 34, top[1] - 40, top[0] + 34, top[1] - 40, top[0] + 34, top[1] + 4); c.ellipse(top[0], top[1] + 4, 34, 13, 0, 0, Math.PI); c.closePath();
+  const dg = c.createLinearGradient(top[0] - 34, 0, top[0] + 34, 0); dg.addColorStop(0, '#F7F8FA'); dg.addColorStop(1, '#B8C0CC'); c.fillStyle = dg; c.fill(); c.lineWidth = 2.8; c.strokeStyle = NV; c.stroke();
+  for (let i = 0; i < 3; i++) pl([onR(Q, h, 0.15 + i * 0.26, 0.55), onR(Q, h, 0.31 + i * 0.26, 0.55), onR(Q, h, 0.31 + i * 0.26, 0.8), onR(Q, h, 0.15 + i * 0.26, 0.8)], '#A9DDF2', NV, 1.6);
+  for (let i = 0; i < 8; i++) pl([onL(Q, h, i / 8, 0), onL(Q, h, (i + 1) / 8, 0), onL(Q, h, (i + 1) / 8, 0.12), onL(Q, h, i / 8, 0.12)], i % 2 ? NV : YL, null);
+  for (let i = 0; i < 10; i++) pl([onR(Q, h, i / 10, 0), onR(Q, h, (i + 1) / 10, 0), onR(Q, h, (i + 1) / 10, 0.12), onR(Q, h, i / 10, 0.12)], i % 2 ? NV : YL, null);
+  const sp = onL(Q, h, 0.5, 0.55); c.save(); c.translate(sp[0], sp[1]); c.transform(1, 0.5, 0, 1, 0, 0);
+  rr2(-24, -24, 48, 48, 8); c.fillStyle = YL; c.fill(); c.lineWidth = 2.4; c.strokeStyle = NV; c.stroke();
+  c.font = "32px 'Noto Color Emoji','Apple Color Emoji',sans-serif"; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillStyle = NV; c.fillText('☢️', 0, 2); c.restore();
+  const gl = 0.25 + 0.15 * Math.sin(t * 5); const g2 = c.createRadialGradient(x, y - 40, 10, x, y - 40, 160); g2.addColorStop(0, `rgba(140,255,90,${gl})`); g2.addColorStop(1, 'rgba(140,255,90,0)'); c.fillStyle = g2; c.fillRect(x - 170, y - 200, 340, 300);
+  c.save(); c.translate(top[0] - 4, top[1] - 58); rr2(-92, -18, 184, 34, 8); c.fillStyle = '#2e8b2e'; c.fill(); c.lineWidth = 2.6; c.strokeStyle = NV; c.stroke();
+  c.font = "900 19px 'Inter',system-ui,sans-serif,'Noto Color Emoji','Apple Color Emoji'"; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillStyle = '#fff'; c.fillText('ATOMKRAFTWERK ☢️', 0, 0); c.restore();
+  c.restore();
 }
 function schluesselW(c, t) {
   const x = SLOT.x + 0.2, y = SLOT.y + 0.2, w = 1.5, d = 1.3, z = 0;
@@ -867,7 +889,7 @@ function drawCity(t) {
   lotGround(c, DLOT, t, 1); lotGround(c, FLOT, t, 1); lotGround(c, PLOT, t, 1); if (CONFIG.followers < 637) lotGround(c, ALOT, t, 1);
   const items = [];
   const has = id => { const b = CONFIG.buildings.find(q => q.id === id); return b && (!b.at || CONFIG.followers >= b.at); };
-  TREES.forEach(tr => { if ([MARKET, BBI, DLOT, FLOT, PLOT, KLOT, SLOT, ...HLOTS].some(b => inFoot(tr.x, tr.y, b)) || (has('akw') && inFoot(tr.x, tr.y, { x: ALOT.x - 0.3, y: ALOT.y - 1.6, w: ALOT.w + 0.6, d: ALOT.d + 1.9 }, 0.9)) || inFoot(tr.x, tr.y, ALOT)) return; const p = P(tr.x, tr.y, 0); if (p[0] < -200 || p[0] > W + 200 || p[1] < -200 || p[1] > H + 400) return;
+  TREES.forEach(tr => { if ([MARKET, BBI, DLOT, FLOT, PLOT, KLOT, SLOT, ...HLOTS].some(b => inFoot(tr.x, tr.y, b)) || (has('akw') && inFoot(tr.x, tr.y, { x: ALOT.x - 1.6, y: ALOT.y - 2.6, w: ALOT.w + 3.4, d: ALOT.d + 3.6 }, 0.9)) || inFoot(tr.x, tr.y, ALOT)) return; const p = P(tr.x, tr.y, 0); if (p[0] < -200 || p[0] > W + 200 || p[1] < -200 || p[1] > H + 400) return;
     items.push({ k: tr.x + tr.y, f: () => tree(c, tr, Math.sin(t * 1.6 + tr.x) * CAM.k * 0.03) }); });
   items.push({ k: 11.2, f: () => { shadow(c, 4.2, 2.2, 3.6, 2.4, 0.22); rathaus(c, 0, 1, t); } });
   items.push({ k: 14.1, f: () => brunnen(c, 0, 1, t) });
