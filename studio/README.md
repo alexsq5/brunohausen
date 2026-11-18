@@ -57,3 +57,11 @@ Kein Token und keine Passwörter in dieses Repo!
 - `studio/sound/`: `music.mp3` (fröhliche Aufbau-Musik, ohne Gesang, 90 s, ElevenLabs Music), `ambience.mp3` (Stadtplatz: Vögel, Leute, Brunnen) und Geräusche: `pop`, `whoosh`, `coin`, `kaching`, `build`, `stamp`, `shimmer`, `boom`, `cheer`, `typing` (alle auf -3 dB Spitze normalisiert)
 - `python3 studio/sound/mix.py vo.mp3 events.json out.m4a [dauer]` mischt Stimme + Musik (duckt automatisch unter der Stimme) + Atmo + Geräusche, Lautheit -14 LUFS für Instagram
 - `events.json` = Liste `{t, s, db}` aus den Zeitpunkten der Folge (Beispiel: `folge8/events8.json`): pop bei Einblendungen, coin pro neuem Einwohner, kaching bei Geld, build beim Bauen, stamp bei Stempeln, shimmer/boom bei Enthüllungen, whoosh bei Szenenwechseln, cheer am Ende
+
+## Plan ab ca. Folge 15 (NICHT vorher in Videos erwähnen!)
+Erst mit dem neuen Look („Bruno kommt aus dem Urlaub zurück“, neue Stadt mit Bäckerei, Supermarkt, 3 MFH):
+- Bank: jeder Einwohner hat ein Konto in „Bruno-Taler“, Startkapital 250 Taler, auf der Website einsehbar (Namen suchen).
+- Tageslohn: mit Job 20 Taler/Tag, ohne Job 5 Taler Stadtgeld; täglich um 13:00 automatisch hochrechnen.
+- Haus bauen: 1.000 Taler. Grundstücke werden unter Kommentaren („Ich will das Grundstück“) verlost; reicht das Geld nicht, bleibt es reserviert.
+- Später evtl. Shop (limitierte Grundstücke, eigenes Geschäft, Stadtrat-Abo). Taler nie in echtes Geld tauschbar, kein Glücksspiel.
+Bis dahin: Folgen 10–14 normal im alten Stil, keine Bank/Taler erwähnen.
