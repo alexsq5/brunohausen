@@ -78,3 +78,4 @@ Bis dahin: Folgen 10–14 normal im alten Stil, keine Bank/Taler erwähnen.
 ### Wege (ab Folge 11)
 Alex will Wege zu allen Gebäuden. Video: `/home/claude/w9/plateD11.jpg` (= plateD9 + Wege, gebacken mit `studio/folge11/paths11.py`) – render10.html lädt schon plateD11. Neue Gebäude in Folge 11+ ebenfalls per Weg an Platz/Wege anschließen (Punkte in paths11.py ergänzen, neu backen). Website: `lane(...)`-Wege in index.html (SIDE).
 - Website „Der Plan“: CONFIG.goals immer über der aktuellen Followerzahl halten (bereits erreichte Ziele werden ausgeblendet).
+- Alex (19.11.): Ziel 750 Follower = Gefängnis (Wunsch von Justus). In Folgen/Website so ankündigen, nicht vorher bauen.
