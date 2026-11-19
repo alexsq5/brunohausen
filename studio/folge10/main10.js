@@ -15,25 +15,49 @@ function bottomPill(t,a=1){if(a<=0)return;ctx.save();ctx.globalAlpha=a;
  ctx.fillText(txt,x+w/2,y+h/2+2);ctx.restore();}
 // ---------- Casino ----------
 function casino(x,y,t){
- ctx.fillStyle='rgba(20,40,20,.25)';ctx.beginPath();ctx.ellipse(x-10,y-50,150,60,-0.45,0,7);ctx.fill();
- const a=120,b=130,h=112;
- const P=box(x,y,a,b,h,'#7A1E3A','#5A1229','#C9A227',3);
- // Goldkante
- poly([onL(P,h,0,0.86),onL(P,h,1,0.86),onL(P,h,1,1),onL(P,h,0,1)],'#E8C547',NAVY,2);
- poly([onR(P,h,0,0.86),onR(P,h,1,0.86),onR(P,h,1,1),onR(P,h,0,1)],'#D4AF37',NAVY,2);
- // Tür links
- poly([onL(P,h,0.38,0),onL(P,h,0.62,0),onL(P,h,0.62,0.5),onL(P,h,0.38,0.5)],'#FFD86B',NAVY,2.5);
- // Fenster rechts mit Glühbirnen
- for(let i=0;i<3;i++)quadR(P,h,0.12+i*0.29,0.32+i*0.29,0.32,0.66,'#FFE7A1',1.8);
- for(let i=0;i<10;i++){const on=Math.floor(t*6+i)%2;const p=onL(P,h,i/9,0.78);ctx.beginPath();ctx.arc(p[0],p[1],4.5,0,7);ctx.fillStyle=on?'#FFF59D':'#B8860B';ctx.fill();}
- for(let i=0;i<10;i++){const on=Math.floor(t*6+i+1)%2;const p=onR(P,h,i/9,0.78);ctx.beginPath();ctx.arc(p[0],p[1],4.5,0,7);ctx.fillStyle=on?'#FFF59D':'#B8860B';ctx.fill();}
- // Neon-Schild
- const top=[x+(a-b)/2,y-(a+b)/4-h];const gl=0.6+0.4*Math.abs(Math.sin(t*4));
- ctx.save();ctx.translate(top[0],top[1]-40);ctx.shadowColor=`rgba(255,60,160,${gl})`;ctx.shadowBlur=24;
- rr(-110,-30,220,60,14);ctx.fillStyle='#1b1030';ctx.fill();ctx.lineWidth=4;ctx.strokeStyle=`rgba(255,90,190,${0.6+0.4*gl})`;ctx.stroke();ctx.shadowBlur=0;
- ctx.font=`900 30px ${F}, ${EMO}`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle='#FFE45C';ctx.fillText('🎰 CASINO',0,2);ctx.restore();
- // Würfel
- ctx.save();ctx.translate(x+70,y-8);ctx.rotate(0.3+Math.sin(t*2)*0.05);rr(-14,-14,28,28,5);ctx.fillStyle='#fff';ctx.fill();ctx.lineWidth=2.5;ctx.strokeStyle=NAVY;ctx.stroke();ctx.fillStyle=NAVY;for(const [dx,dy] of[[-6,-6],[6,6],[0,0]]){ctx.beginPath();ctx.arc(dx,dy,2.6,0,7);ctx.fill();}ctx.restore();
+ ctx.fillStyle='rgba(20,40,20,.28)';ctx.beginPath();ctx.ellipse(x-10,y-50,165,66,-0.45,0,7);ctx.fill();
+ const a=125,b=135,h=118;
+ // roter Teppich
+ const Lf=[x-b*0.5,y-b*0.25];poly([[Lf[0]-14,Lf[1]+7],[Lf[0]+14,Lf[1]-7],[Lf[0]-26,Lf[1]+40],[Lf[0]-54,Lf[1]+54]],'#C4122F',NAVY,2);
+ const P=box(x,y,a,b,h,'#1E1433','#140C24','#2A1C46',3);
+ // goldene Säulen
+ for(const u of[0.08,0.92]){poly([onL(P,h,u-0.03,0),onL(P,h,u+0.03,0),onL(P,h,u+0.03,0.85),onL(P,h,u-0.03,0.85)],'#E8C547',NAVY,1.6);}
+ for(const u of[0.08,0.92]){poly([onR(P,h,u-0.03,0),onR(P,h,u+0.03,0),onR(P,h,u+0.03,0.85),onR(P,h,u-0.03,0.85)],'#D4AF37',NAVY,1.6);}
+ // goldenes Band oben
+ poly([onL(P,h,0,0.85),onL(P,h,1,0.85),onL(P,h,1,1),onL(P,h,0,1)],'#E8C547',NAVY,2);
+ poly([onR(P,h,0,0.85),onR(P,h,1,0.85),onR(P,h,1,1),onR(P,h,0,1)],'#C9A227',NAVY,2);
+ // Eingang mit Goldrahmen
+ poly([onL(P,h,0.36,0),onL(P,h,0.64,0),onL(P,h,0.64,0.55),onL(P,h,0.36,0.55)],'#E8C547',NAVY,2.5);
+ poly([onL(P,h,0.40,0),onL(P,h,0.60,0),onL(P,h,0.60,0.48),onL(P,h,0.40,0.48)],'#FFE08A',NAVY,1.8);
+ // Karten-Symbole links
+ ctx.font=`900 26px ${F}, ${EMO}`;ctx.textAlign='center';ctx.textBaseline='middle';
+ [['♠',0.2,'#fff'],['♥',0.8,'#FF4D6D']].forEach(([c,u,col])=>{const p=onL(P,h,u,0.42);ctx.save();ctx.translate(p[0],p[1]);ctx.transform(1,0.5,0,1,0,0);ctx.fillStyle=col;ctx.fillText(c,0,0);ctx.restore();});
+ // rechte Seite: große Leuchtschrift + Fenster
+ for(let i=0;i<3;i++)quadR(P,h,0.15+i*0.25,0.33+i*0.25,0.18,0.42,'#7B3FE4',1.6);
+ {const p=onR(P,h,0.5,0.64);ctx.save();ctx.translate(p[0],p[1]);ctx.transform(1,-0.5,0,1,0,0);const gl=0.6+0.4*Math.abs(Math.sin(t*5));
+  ctx.shadowColor=`rgba(255,60,170,${gl})`;ctx.shadowBlur=18;ctx.font=`900 30px ${F}`;ctx.fillStyle='#FF5CC8';ctx.fillText('♦ CASINO ♦',0,0);ctx.restore();}
+ // Lichterkette ringsum (Marquee)
+ const bulb=(p,k)=>{const on=Math.floor(t*8+k)%3!==0;ctx.beginPath();ctx.arc(p[0],p[1],4.2,0,7);ctx.fillStyle=on?'#FFF59D':'#8a6d1a';ctx.fill();if(on){ctx.beginPath();ctx.arc(p[0],p[1],8,0,7);ctx.fillStyle='rgba(255,240,140,.25)';ctx.fill();}};
+ for(let i=0;i<=12;i++){bulb(onL(P,h,i/12,0.92),i);bulb(onR(P,h,i/12,0.92),i+13);}
+ for(let i=0;i<=6;i++){bulb(onL(P,h,0.36,i/6*0.55),i+30);bulb(onL(P,h,0.64,i/6*0.55),i+40);}
+ // Dach: großer Spielautomat
+ const top=[x+(a-b)/2,y-(a+b)/4-h];
+ ctx.save();ctx.translate(top[0],top[1]+6);
+ rr(-62,-112,124,112,14);ctx.fillStyle='#E5483F';ctx.fill();ctx.lineWidth=4;ctx.strokeStyle=NAVY;ctx.stroke();
+ rr(-50,-100,100,26,8);ctx.fillStyle='#FFD23D';ctx.fill();ctx.lineWidth=3;ctx.stroke();
+ ctx.font=`900 18px ${F}`;ctx.fillStyle=NAVY;ctx.fillText('JACKPOT',0,-86);
+ rr(-50,-66,100,44,8);ctx.fillStyle='#fff';ctx.fill();ctx.stroke();
+ const sym=['🍒','7️⃣','💰','⭐','🍋'];for(let i=0;i<3;i++){const k=Math.floor(t*6+i*1.7)%sym.length;ctx.font=`26px ${EMO}`;ctx.fillText(sym[k],-32+i*32,-43);ctx.strokeStyle=NAVY;ctx.lineWidth=2;if(i<2){ctx.beginPath();ctx.moveTo(-16+i*32,-64);ctx.lineTo(-16+i*32,-24);ctx.stroke();}}
+ // Hebel
+ ctx.strokeStyle=NAVY;ctx.lineWidth=5;const lv=Math.sin(t*3)*0.3;ctx.beginPath();ctx.moveTo(62,-60);ctx.lineTo(80,-60);ctx.lineTo(80+Math.sin(lv)*6,-100);ctx.stroke();ctx.beginPath();ctx.arc(80+Math.sin(lv)*6,-104,9,0,7);ctx.fillStyle='#E5483F';ctx.fill();ctx.lineWidth=3;ctx.stroke();
+ // Neon-Schild oben drauf
+ const gl=0.6+0.4*Math.abs(Math.sin(t*4));ctx.shadowColor=`rgba(255,60,160,${gl})`;ctx.shadowBlur=26;
+ rr(-120,-176,240,54,14);ctx.fillStyle='#120a24';ctx.fill();ctx.lineWidth=4;ctx.strokeStyle=`rgba(255,90,190,${0.6+0.4*gl})`;ctx.stroke();ctx.shadowBlur=0;
+ ctx.font=`900 32px ${F}, ${EMO}`;ctx.fillStyle='#FFE45C';ctx.fillText('🎰 CASINO 🎰',0,-148);
+ ctx.restore();
+ // Würfel + Chips vor dem Eingang
+ ctx.save();ctx.translate(x+70,y-6);ctx.rotate(0.3+Math.sin(t*2)*0.05);rr(-14,-14,28,28,5);ctx.fillStyle='#fff';ctx.fill();ctx.lineWidth=2.5;ctx.strokeStyle=NAVY;ctx.stroke();ctx.fillStyle='#E5483F';for(const [dx,dy] of[[-6,-6],[6,6],[0,0]]){ctx.beginPath();ctx.arc(dx,dy,2.6,0,7);ctx.fill();}ctx.restore();
+ for(let i=0;i<3;i++){ctx.beginPath();ctx.ellipse(x+100,y-26-i*6,12,5,0,0,7);ctx.fillStyle=['#E5483F','#2F5FD0','#2FA84F'][i];ctx.fill();ctx.lineWidth=2;ctx.strokeStyle=NAVY;ctx.stroke();}
 }
 // ---------- Bauernhof ----------
 function cow(x,y,s,t,ph){ctx.save();ctx.translate(x,y+Math.sin(t*3+ph)*1.5);ctx.scale(s,s);
