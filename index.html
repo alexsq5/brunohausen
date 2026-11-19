@@ -346,8 +346,16 @@ function grassDetail(c, t) {
 const PATH = []; // tiles
 for (let y = 4; y < N; y++) PATH.push([5.5, y + 0.5, 0]);          // main road from front to plaza
 for (let x = 2; x < 10; x++) if (x !== 5) PATH.push([x + 0.5, 7.5, 1]); // cross road
+// Wege zu den Gebäuden (Krankenhaus, Feuerwehr, Schlüsselladen, Polizei, Mehrfamilienhäuser)
+const SIDE = new Set();
+function lane(x0, y0, x1, y1) { const dx = Math.sign(x1 - x0), dy = Math.sign(y1 - y0); let x = x0, y = y0;
+  for (let i = 0; i < 80; i++) { const k = x + ',' + y; if (!SIDE.has(k)) { SIDE.add(k); PATH.push([x + 0.5, y + 0.5, 2]); } if (x === x1 && y === y1) break; x += dx * (x !== x1); y += dy * (y !== y1); } }
+lane(-2, 7, 1, 7);  lane(-2, 3, -2, 7); lane(-2, 3, 3, 3);   // Krankenhaus + Feuerwehr
+lane(-3, 11, 4, 11);                                         // Schlüsselladen
+lane(10, 7, 11, 7); lane(11, -2, 11, 7); lane(8, 3, 11, 3);  // Polizei
+lane(4, -2, 11, -2);                                         // Mehrfamilienhäuser
 let PATH_P = 0;
-function onPath(x, y) { return PATH_P > 0.05 && ((Math.abs(x - 6) < 0.8 && y > 4) || (Math.abs(y - 8) < 0.8 && x > 2 && x < 10) || Math.hypot(x - 6, y - 8) < 1.8); }
+function onPath(x, y) { return PATH_P > 0.05 && ((Math.abs(x - 6) < 0.8 && y > 4) || (Math.abs(y - 8) < 0.8 && x > 2 && x < 10) || Math.hypot(x - 6, y - 8) < 1.8 || SIDE.has(Math.floor(x) + ',' + Math.floor(y))); }
 function drawPaths(c, p) {
   if (p <= 0) return;
   const cnt = Math.floor(PATH.length * p + 0.999);
@@ -892,7 +900,7 @@ function drawCity(t) {
   lotGround(c, DLOT, t, 1); lotGround(c, FLOT, t, 1); lotGround(c, PLOT, t, 1); if (CONFIG.followers < 637) lotGround(c, ALOT, t, 1);
   const items = [];
   const has = id => { const b = CONFIG.buildings.find(q => q.id === id); return b && (!b.at || CONFIG.followers >= b.at); };
-  TREES.forEach(tr => { if ([MARKET, BBI, DLOT, FLOT, PLOT, KLOT, SLOT, ...HLOTS].some(b => inFoot(tr.x, tr.y, b)) || (has('akw') && inFoot(tr.x, tr.y, { x: ALOT.x - 1.6, y: ALOT.y - 2.6, w: ALOT.w + 3.4, d: ALOT.d + 3.6 }, 0.9)) || inFoot(tr.x, tr.y, ALOT)) return; const p = P(tr.x, tr.y, 0); if (p[0] < -200 || p[0] > W + 200 || p[1] < -200 || p[1] > H + 400) return;
+  TREES.forEach(tr => { if (SIDE.has(Math.floor(tr.x) + ',' + Math.floor(tr.y)) || [MARKET, BBI, DLOT, FLOT, PLOT, KLOT, SLOT, ...HLOTS].some(b => inFoot(tr.x, tr.y, b)) || (has('akw') && inFoot(tr.x, tr.y, { x: ALOT.x - 1.6, y: ALOT.y - 2.6, w: ALOT.w + 3.4, d: ALOT.d + 3.6 }, 0.9)) || inFoot(tr.x, tr.y, ALOT)) return; const p = P(tr.x, tr.y, 0); if (p[0] < -200 || p[0] > W + 200 || p[1] < -200 || p[1] > H + 400) return;
     items.push({ k: tr.x + tr.y, f: () => tree(c, tr, Math.sin(t * 1.6 + tr.x) * CAM.k * 0.03) }); });
   items.push({ k: 11.2, f: () => { shadow(c, 4.2, 2.2, 3.6, 2.4, 0.22); rathaus(c, 0, 1, t); } });
   items.push({ k: 14.1, f: () => brunnen(c, 0, 1, t) });

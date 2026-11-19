@@ -74,3 +74,6 @@ Erst mit dem neuen Look („Bruno kommt aus dem Urlaub zurück“, neue Stadt mi
 - Später evtl. Shop (limitierte Grundstücke, eigenes Geschäft, Stadtrat-Abo). Taler nie in echtes Geld tauschbar, kein Glücksspiel.
 Bis dahin: Folgen 10–14 normal im alten Stil, keine Bank/Taler erwähnen.
 - Website ab Folge 15: komplett neues Design im Video-Look (hochwertiges, animiertes Stadtbild wie im neuen Video). Nicht frei bedienbar – man sucht seinen Namen, dann fährt die Kamera zu seinem Haus und zeigt Konto/Job/Guthaben. Die alte Website bis dahin nicht mehr groß ausbauen.
+
+### Wege (ab Folge 11)
+Alex will Wege zu allen Gebäuden. Video: `/home/claude/w9/plateD11.jpg` (= plateD9 + Wege, gebacken mit `studio/folge11/paths11.py`) – render10.html lädt schon plateD11. Neue Gebäude in Folge 11+ ebenfalls per Weg an Platz/Wege anschließen (Punkte in paths11.py ergänzen, neu backen). Website: `lane(...)`-Wege in index.html (SIDE).
