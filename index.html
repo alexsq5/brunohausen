@@ -354,6 +354,8 @@ lane(-2, 7, 1, 7);  lane(-2, 3, -2, 7); lane(-2, 3, 3, 3);   // Krankenhaus + Fe
 lane(-3, 11, 4, 11);                                         // Schlüsselladen
 lane(10, 7, 11, 7); lane(11, -2, 11, 7); lane(8, 3, 11, 3);  // Polizei
 lane(4, -2, 11, -2);                                         // Mehrfamilienhäuser
+lane(11, 4, 15, 4);                                          // Casino
+lane(-8, 6, -2, 6);                                          // Bauernhof
 let PATH_P = 0;
 function onPath(x, y) { return PATH_P > 0.05 && ((Math.abs(x - 6) < 0.8 && y > 4) || (Math.abs(y - 8) < 0.8 && x > 2 && x < 10) || Math.hypot(x - 6, y - 8) < 1.8 || SIDE.has(Math.floor(x) + ',' + Math.floor(y))); }
 function drawPaths(c, p) {
@@ -721,6 +723,8 @@ const DLOT = { x: 1.0, y: 8.7, w: 2.6, d: 2.3 }, FLOT = { x: 0.7, y: 0.6, w: 3.0
 const RAT = { x: 4.2, y: 2.2, w: 3.6, d: 2.4 };
 const KLOT = { x: -2.6, y: 0.9, w: 2.4, d: 2.2 };
 const SLOT = { x: -2.5, y: 8.7, w: 1.9, d: 1.7 };
+const CLOT = { x: 12.6, y: 0.4, w: 2.8, d: 3.0 }; // Casino (Folge 10)
+const HOFL = { x: -9.4, y: 1.0, w: 5.4, d: 4.6 }; // Bauernhof (Folge 10)
 const ALOT = { x: -7.3, y: -12.2, w: 3.0, d: 2.0 }; // Atomkraftwerk-Bauplatz am Fluss
 const HLOTS = [{ x: 4.6, y: -3.7, w: 1.5, d: 1.4 }, { x: 6.6, y: -3.7, w: 1.5, d: 1.4 }, { x: 8.6, y: -3.7, w: 1.5, d: 1.4 }];
 const inFoot = (x, y, b, m = 0.6) => x > b.x - m && x < b.x + b.w + m && y > b.y - m && y < b.y + b.d + m;
@@ -893,6 +897,9 @@ function mehrfamilienhaus(c, L, i) {
   box(c, x - 0.05, y - 0.05, h, w + 0.1, d + 0.1, 0.14, '#c9564b');
   faceText(c, x + w / 2, y + d, h - 0.17, 'HAUS ' + (i + 1), CAM.k * 0.2, '#1d2440');
 }
+// Casino & Bauernhof: 1:1 aus dem Video (Folge 10) als Bild
+const SPR = {}; ['casino', 'hof'].forEach(n => { const im = new Image(); im.src = 'img_' + n + '.png'; SPR[n] = im; });
+function sprite(c, im, L, ax, ay) { if (!im.complete || !im.naturalWidth) return; const p = P(L.x + L.w, L.y + L.d, 0), s = CAM.k / 46; c.drawImage(im, p[0] - ax * s, p[1] - ay * s, im.naturalWidth * s, im.naturalHeight * s); }
 function drawCity(t) {
   CAM = { x: view.x + Math.sin(t * 0.07) * 0.25, y: view.y, k: view.k };
   octx.setTransform(1, 0, 0, 1, 0, 0); octx.clearRect(0, 0, W, H); const c = octx;
@@ -900,7 +907,7 @@ function drawCity(t) {
   lotGround(c, DLOT, t, 1); lotGround(c, FLOT, t, 1); lotGround(c, PLOT, t, 1); if (CONFIG.followers < 637) lotGround(c, ALOT, t, 1);
   const items = [];
   const has = id => { const b = CONFIG.buildings.find(q => q.id === id); return b && (!b.at || CONFIG.followers >= b.at); };
-  TREES.forEach(tr => { if (SIDE.has(Math.floor(tr.x) + ',' + Math.floor(tr.y)) || [MARKET, BBI, DLOT, FLOT, PLOT, KLOT, SLOT, ...HLOTS].some(b => inFoot(tr.x, tr.y, b)) || (has('akw') && inFoot(tr.x, tr.y, { x: ALOT.x - 1.6, y: ALOT.y - 2.6, w: ALOT.w + 3.4, d: ALOT.d + 3.6 }, 0.9)) || inFoot(tr.x, tr.y, ALOT)) return; const p = P(tr.x, tr.y, 0); if (p[0] < -200 || p[0] > W + 200 || p[1] < -200 || p[1] > H + 400) return;
+  TREES.forEach(tr => { if (SIDE.has(Math.floor(tr.x) + ',' + Math.floor(tr.y)) || [MARKET, BBI, DLOT, FLOT, PLOT, KLOT, SLOT, CLOT, HOFL, ...HLOTS].some(b => inFoot(tr.x, tr.y, b)) || (has('akw') && inFoot(tr.x, tr.y, { x: ALOT.x - 1.6, y: ALOT.y - 2.6, w: ALOT.w + 3.4, d: ALOT.d + 3.6 }, 0.9)) || inFoot(tr.x, tr.y, ALOT)) return; const p = P(tr.x, tr.y, 0); if (p[0] < -200 || p[0] > W + 200 || p[1] < -200 || p[1] > H + 400) return;
     items.push({ k: tr.x + tr.y, f: () => tree(c, tr, Math.sin(t * 1.6 + tr.x) * CAM.k * 0.03) }); });
   items.push({ k: 11.2, f: () => { shadow(c, 4.2, 2.2, 3.6, 2.4, 0.22); rathaus(c, 0, 1, t); } });
   items.push({ k: 14.1, f: () => brunnen(c, 0, 1, t) });
@@ -916,6 +923,8 @@ function drawCity(t) {
   else items.push({ k: PLOT.x + 1.5 + PLOT.y + 2.6, f: () => board(c, PLOT.x + 1.5, PLOT.y + 2.6, ['POLIZEI', 'Wunsch: Nikpe', miss > 0 ? 'fehlen ' + miss + ' Follower' : 'ab 571 Follower'], '#1d4ed8', t, -1) });
   if (has('kh')) items.push({ k: KLOT.x + KLOT.w / 2 + KLOT.y + KLOT.d / 2, f: () => { shadow(c, KLOT.x, KLOT.y, KLOT.w, KLOT.d, 0.22); krankenhausW(c); } });
   if (has('schluessel')) items.push({ k: SLOT.x + SLOT.w / 2 + SLOT.y + SLOT.d / 2, f: () => { shadow(c, SLOT.x + 0.2, SLOT.y + 0.2, 1.5, 1.3, 0.22); schluesselW(c, t); } });
+  if (has('casino')) items.push({ k: CLOT.x + CLOT.w / 2 + CLOT.y + CLOT.d / 2, f: () => sprite(c, SPR.casino, CLOT, 162, 386) });
+  if (has('hof')) items.push({ k: HOFL.x + HOFL.w / 2 + HOFL.y + HOFL.d / 2, f: () => sprite(c, SPR.hof, HOFL, 172, 175) });
   if (has('mfh')) HLOTS.forEach((L, i) => items.push({ k: L.x + L.w / 2 + L.y + L.d / 2, f: () => { shadow(c, L.x, L.y, L.w, L.d, 0.22); mehrfamilienhaus(c, L, i); } }));
   if (has('akw')) items.push({ k: ALOT.x + ALOT.w / 2 + ALOT.y + ALOT.d / 2, f: () => { shadow(c, ALOT.x + 0.4, ALOT.y + 0.6, 2.1, 1.4, 0.22); akwW(c, t); } });
   else items.push({ k: ALOT.x + ALOT.w / 2 + ALOT.y + ALOT.d + 0.3, f: () => board(c, ALOT.x + ALOT.w / 2, ALOT.y + ALOT.d + 0.3, ['ATOMKRAFTWERK ☢️', 'Bauplatz am Fluss', 'fehlen nur noch 500 €'], '#2e8b2e', t, -1) });
