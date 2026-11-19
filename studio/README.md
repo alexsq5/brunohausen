@@ -1,10 +1,10 @@
 # Brunohausen – Stadtbuch & Video-Baukasten
 
-Stand: 17.11.2026, nach Folge 9 (fertig, noch nicht gepostet)
+Stand: 19.11.2026, nach Folge 10 (gepostet)
 
 ## Stand der Stadt
-- 694 Follower · 157 Einwohner · 29.000 € Stadtkasse
-- Gebaut: Rathaus, Dönerbude, BBI, Polizei, 3 Mehrfamilienhäuser, Finanzamt, Krankenhaus, Platz mit Wegen und Spielplatz, Schlüsselladen (Ekram), Atomkraftwerk am Fluss (Folge 9, oberhalb vom Fluss, altes Schild ist weg)
+- 704 Follower · 163 Einwohner · 14.000 € Stadtkasse
+- Gebaut: Rathaus, Dönerbude, BBI, Polizei, 3 Mehrfamilienhäuser, Finanzamt, Krankenhaus, Platz mit Wegen und Spielplatz, Schlüsselladen (Ekram), Atomkraftwerk am Fluss (Folge 9), Casino (Folge 10, rechts neben Feuerwehr/über Polizei, CASP=[840,878]), Bauernhof Sebastian mit Kühen (Folge 10, FARMP=[300,640])
 - Rätsel: Der Schlüssel passt zur Tür hinten am AKW. Dahinter lagen die geklauten 500 € (zurück in der Kasse) und eine Schlafmütze. Folge 10: Bruno ist schlafgewandelt (Rückblende auf Folge 6 im Schlafanzug) – Bruno flüstert am Ende von Folge 9 „Hoffentlich findet das keiner raus…“
 - Neuer Stil ab Folge 9: Bruno hat Charakter (geldgeil, schummelt, redet mit den Zuschauern), kindgerechter Humor, alle 3–5 s passiert etwas, kein „seht ihr in Folge X“. Jede Folge bekommt ein eigenes neues Cover.
 - Kraftwerksmeister gesucht: Felix und Kilian wollen ins AKW
@@ -24,6 +24,7 @@ Stand: 17.11.2026, nach Folge 9 (fertig, noch nicht gepostet)
 ## Folgen
 | Folge | Follower | Einwohner | Kasse | Inhalt |
 |---|---|---|---|---|
+| 10 | 704 | 163 | 14.000 € | Bruno gesteht: Schlafmütze ist seine, er ist schlafgewandelt (Geld geklaut? offen; wie kam der Dieb-Schlüssel an die Tür? offen). +10 Follower (+5.000), Abstimmung Casino 7/Hotel 2/Gym 2 → Casino (−15.000), Chefs Gastelgott+Marius+Tim. Bauernhof für Sebastian (−5.000). Neu: Einar, Silant, Tilo, Basti, Johannes, Marius. Johannes Feuerwehr-Kommandant, Timo Feuerwehr, Lionell Fahrzeugwart, Felix Kraftwerksmeister, Kilian+Marcel Helfer. Wünsche: Schule, Gefängnis. Ende: Bruno schließt sich nachts ein. |
 | 9 | 694 | 157 | 29.000 € | AKW gebaut (−20.000), +58 Follower (+29.000), geklaute 500 € hinter der AKW-Tür gefunden (+500) + Schlafmütze, 13 ziehen ein (Janosch, Justin, Lionell, Lisa, Gastelgott, Marty, Timo, Pinguin, Theresa, Ben, Kilian, Celine, Jonas), Felix will Kraftwerksmeister, Umfrage Hotel/Gym/Casino |
 | 8 | 636 | 144 | 19.500 € | Gleichstand 2:2, Bruno entscheidet: Schlüsselladen (−5.000), 21 neue, Schlüssel trägt AKW-Zeichen, Leon + Lukas W. Feuerwehr, neue Einzieh-Regel |
 | 7 | 615 | 123 | 14.000 € | Krankenhaus (−10.000), AKW freigeschaltet, Dome = Nr. 600, Xavi BBI-Ermittler, Lesander Pflegefachkraft, Ekram will Schlüsselladen, Platz + Spielplatz |
@@ -36,17 +37,12 @@ Felix – will Kraftwerksmeister werden · Gastelgott – neu, will Casino · Ja
 
 Alle weiteren Namen stehen in `index.html` (CONFIG.named).
 
-## Für Folge 10
-- ENTWURF Sprechertext: `studio/folgen/folge10/script_entwurf.txt` (Stand 19.11. 7:20) – um 13:00 nur Zahlen/neue Namen aktualisieren, Rest so lassen
-- Von Alex festgelegt: Casino gewinnt; Casino-Chefs sind Gastelgott, Marius UND Tim (nicht Gastelgott allein)
-- Von Alex: Sebastian (wünscht sich seit Langem einen Milchviehhof) bekommt in Folge 10 seinen Bauernhof mit Milchkühen (−5.000 €), Sebastian = Landwirt
-- Lionell = Insta firefighter20062010 → wird Fahrzeugwart bei der Feuerwehr (Folge 10)
-- Leonard (leonard.krasniqi03, will Club-Besitzer) zieht erst in Folge 11 ein (so in der Kommentarantwort versprochen); wer ab 19.11. 11:00 neu „Ich zieh ein“ schreibt → ebenfalls Folge 11
-- Bruno gesteht: Schlafmütze ist seine, er ist schlafgewandelt; ob er das Geld geklaut hat bleibt offen
-- Was liegt hinter der AKW-Tür? (im Folgenplan: Spur zum Dieb, Auflösung Folge 12)
-- Ergebnis der Umfrage Hotel/Gym/Casino zählen
-- Kraftwerksmeister wählen (Felix + weitere Bewerber, nur wer noch keinen Job hat)
-- Seit Folge 9 gilt: Follower bringen 500 €, aber Einwohner + Name + Wohnung nur mit Kommentar „Ich zieh ein + Name“
+## Für Folge 11
+- Leonard (leonard.krasniqi03) zieht ein, will Club-Besitzer (in Kommentar versprochen: ab Folge 11)
+- Alle „Ich zieh ein“ ab 19.11. 11:00 → Folge 11
+- Wünsche offen: Schule (resi_moidl), Gefängnis (Justus), Fußballverein (7aho78), Marty Autohaus, Club (Leonard), Tischlerei (Timo), Zivi-Polizist (theo_13.a), Biogasanlage, Rettungswache (Davit)
+- Rätsel: Wer ist der echte Dieb? Wie kam der Schlüssel an die AKW-Tür? (Auflösung ca. Folge 12)
+- Studio: `folge10/` (main10.js nutzt town10.js + lay10.js, build wie in Folge 10: render10.html = Basis + main9 gestrippt + town10 + main10)
 
 ## Video-Baukasten (`studio/`)
 - `folge9/` – Folge 9 (`main9.js`, `build9.py`: baut aus folge7-Dateien + main8.js + main9.js; `events9.py` erzeugt die Geräusch-Zeitpunkte aus words.json; `cover9.js`; `clear9.py` macht `plateD9.jpg`: Hintergrund mit freier Wiese am Fluss fürs AKW, ab Folge 9 diesen Hintergrund nehmen)
