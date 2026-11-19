@@ -63,6 +63,7 @@ Kein Token und keine Passwörter in dieses Repo!
 ## Übergang neuer Look (festgelegt 19.11.)
 - Folge 15 (alter Stil) „Alle müssen raus!“: AKW-Panne, Fluss leuchtet grün (kindgerecht, keiner verletzt, glühende Fische), alle müssen umziehen, Bruno packt Koffer und sucht neues Zuhause.
 - Danach neuer Look: „Brunohausen · Staffel 2 · Folge 1: NEUANFANG“ (Test: Baukasten studio/kit, Szenenplan wie /home/claude/ep/ep15.html). Ende: Bruno hat nur 3 Taler → Frage an Zuschauer „Wo ist Brunos Geld? Schreibt eure Theorie in die Kommentare!“
+- Staffel 2 Folge 2: Auflösung Brunos Geld (Idee: er hat im Urlaub alles für Souvenirs/Eis ausgegeben, schämt sich) + JEDER bekommt Rang und Job aus Staffel 1 zurück (Feuerwehr, BBI, Casino-Chefs, Kraftwerk-Team → neue Jobs falls nötig). Richtige Rater aus den Kommentaren mit Namen nennen.
 - Bruno im neuen Look: groß im Vordergrund, guckt von links/rechts/unten rein, keine Füße. Tiere laufen/hüpfen/winken, nie nur rumstehen.
 
 ## Plan ab ca. Folge 15 (NICHT vorher in Videos erwähnen!)
