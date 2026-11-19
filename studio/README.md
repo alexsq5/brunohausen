@@ -60,6 +60,11 @@ Kein Token und keine Passwörter in dieses Repo!
 - `python3 studio/sound/mix.py vo.mp3 events.json out.m4a [dauer]` mischt Stimme + Musik (duckt automatisch unter der Stimme) + Atmo + Geräusche, Lautheit -14 LUFS für Instagram
 - `events.json` = Liste `{t, s, db}` aus den Zeitpunkten der Folge (Beispiel: `folge8/events8.json`): pop bei Einblendungen, coin pro neuem Einwohner, kaching bei Geld, build beim Bauen, stamp bei Stempeln, shimmer/boom bei Enthüllungen, whoosh bei Szenenwechseln, cheer am Ende
 
+## Übergang neuer Look (festgelegt 19.11.)
+- Folge 15 (alter Stil) „Alle müssen raus!“: AKW-Panne, Fluss leuchtet grün (kindgerecht, keiner verletzt, glühende Fische), alle müssen umziehen, Bruno packt Koffer und sucht neues Zuhause.
+- Danach neuer Look: „Brunohausen · Staffel 2 · Folge 1: NEUANFANG“ (Test: Baukasten studio/kit, Szenenplan wie /home/claude/ep/ep15.html). Ende: Bruno hat nur 3 Taler → Frage an Zuschauer „Wo ist Brunos Geld? Schreibt eure Theorie in die Kommentare!“
+- Bruno im neuen Look: groß im Vordergrund, guckt von links/rechts/unten rein, keine Füße. Tiere laufen/hüpfen/winken, nie nur rumstehen.
+
 ## Plan ab ca. Folge 15 (NICHT vorher in Videos erwähnen!)
 Erst mit dem neuen Look („Bruno kommt aus dem Urlaub zurück“, neue Stadt mit Bäckerei, Supermarkt, 3 MFH):
 - Bank: jeder Einwohner hat ein Konto in „Bruno-Taler“, Startkapital 250 Taler, auf der Website einsehbar (Namen suchen).
