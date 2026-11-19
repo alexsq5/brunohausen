@@ -40,6 +40,7 @@ Alle weiteren Namen stehen in `index.html` (CONFIG.named).
 - ENTWURF Sprechertext: `studio/folgen/folge10/script_entwurf.txt` (Stand 19.11. 7:20) – um 13:00 nur Zahlen/neue Namen aktualisieren, Rest so lassen
 - Von Alex festgelegt: Casino gewinnt; Casino-Chefs sind Gastelgott, Marius UND Tim (nicht Gastelgott allein)
 - Von Alex: Sebastian (wünscht sich seit Langem einen Milchviehhof) bekommt in Folge 10 seinen Bauernhof mit Milchkühen (−5.000 €), Sebastian = Landwirt
+- Lionell = Insta firefighter20062010 → wird Fahrzeugwart bei der Feuerwehr (Folge 10)
 - Bruno gesteht: Schlafmütze ist seine, er ist schlafgewandelt; ob er das Geld geklaut hat bleibt offen
 - Was liegt hinter der AKW-Tür? (im Folgenplan: Spur zum Dieb, Auflösung Folge 12)
 - Ergebnis der Umfrage Hotel/Gym/Casino zählen
