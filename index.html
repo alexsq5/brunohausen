@@ -204,7 +204,7 @@ const CONFIG = {
     { id: "hof", em: "🐄", name: "Bauernhof", cost: 5000, note: "Wunsch von Sebastian · mit Milchkühen · gebaut in Folge 10" },
     { id: "polizei", em: "🚓", name: "Polizei", cost: 5000, note: "Wunsch von Nikpe · gebaut in Folge 5 · Chef gesucht", at: 571 },
   ],
-  goals: [[700, "Neues Gebäude", "🏗️"]],
+  goals: [[750, "Neues Gebäude", "🏗️"], [800, "Großes Gebäude", "🏙️"], [1000, "1.000 Follower – Mega-Fest", "🎉"]],
   episodes: [
     [1, "Diese Insel ist leer. Noch.", "Bruno wird Bürgermeister. 50.000 € Startkapital, Rathaus, Straßen und Brunnen gebaut. Es bleiben 2.000 € und ein Einwohner."],
     [2, "Brunohausen lebt!", "30 Einwohner. Theo und Nikpe bekommen ihren Bruno-Markt, Justus das BBI, und er ist Chef."],
@@ -981,7 +981,7 @@ const fmt2 = n => n.toLocaleString('de-DE');
 const $ = id => document.getElementById(id), el = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
 $('hCash').textContent = fmt2(CONFIG.cash) + ' €'; $('hPop').textContent = CONFIG.residents; $('hFol').textContent = CONFIG.followers;
 if (CONFIG.instagram) { $('cta').href = CONFIG.instagram; $('cta').target = '_blank'; $('cta').rel = 'noopener'; }
-const stops = [[CONFIG.followers, 'jetzt', '📍'], ...CONFIG.goals]; const nextI = stops.findIndex((s, i) => i > 0 && s[0] > CONFIG.followers);
+const stops = [[CONFIG.followers, 'jetzt', '📍'], ...CONFIG.goals.filter(g => g[0] > CONFIG.followers)]; const nextI = stops.findIndex((s, i) => i > 0 && s[0] > CONFIG.followers);
 stops.forEach(([v, l, em], i) => { const s = el('div', 'stop' + (i === 0 ? ' now' : i === nextI ? ' next' : '')); s.append(el('span', 'n', String(v)), el('span', 'dot', em), el('span', 'l', l)); $('stops').append(s); });
 $('railFill').style.width = (nextI > 0 ? (nextI - 1 + 0.5) / (stops.length - 1) * 100 : 0) + '%';
 if (nextI > 0) { const miss = stops[nextI][0] - CONFIG.followers; $('togo').innerHTML = ''; $('togo').append('Noch ', el('b', null, miss + ' Follower'), ' bis ' + stops[nextI][1] + ' ' + stops[nextI][2]); }
