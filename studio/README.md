@@ -41,6 +41,7 @@ Alle weiteren Namen stehen in `index.html` (CONFIG.named).
 - Von Alex festgelegt: Casino gewinnt; Casino-Chefs sind Gastelgott, Marius UND Tim (nicht Gastelgott allein)
 - Von Alex: Sebastian (wünscht sich seit Langem einen Milchviehhof) bekommt in Folge 10 seinen Bauernhof mit Milchkühen (−5.000 €), Sebastian = Landwirt
 - Lionell = Insta firefighter20062010 → wird Fahrzeugwart bei der Feuerwehr (Folge 10)
+- Leonard (leonard.krasniqi03, will Club-Besitzer) zieht erst in Folge 11 ein (so in der Kommentarantwort versprochen); wer ab 19.11. 11:00 neu „Ich zieh ein“ schreibt → ebenfalls Folge 11
 - Bruno gesteht: Schlafmütze ist seine, er ist schlafgewandelt; ob er das Geld geklaut hat bleibt offen
 - Was liegt hinter der AKW-Tür? (im Folgenplan: Spur zum Dieb, Auflösung Folge 12)
 - Ergebnis der Umfrage Hotel/Gym/Casino zählen
