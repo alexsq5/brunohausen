@@ -99,3 +99,9 @@ Alex will Wege zu allen Gebäuden. Video: `/home/claude/w9/plateD11.jpg` (= plat
 - Jede Figur (Tier, Bruno, Einwohner) steht **auf begehbarem Boden** (Pflaster, Weg, Platz, Boden im Raum) – NIE auf Gras, Blumenbeeten, Steinkanten, Dächern, Häuserwänden oder in der Luft.
 - Position in Bildkoordinaten des Hintergrunds festlegen (u,v) und mit der Kamerafahrt mitbewegen (`gp()`/`gwalk()` in `ep/leak.html`), Größe nach Entfernung (weiter hinten = kleiner).
 - Laufwege nur über Boden führen (nicht durch Beete). Vor dem Rendern Standbilder prüfen.
+
+### Ab Folge 11: Insta-Namen statt Vornamen (Alex, 20.11.)
+- Neue Einwohner werden **im Bild mit @Insta-Namen** gezeigt (Namensschilder, Einzugs-Liste, Website-Suche). Die **Stimme sagt weiter den Vornamen** (z. B. „Leonard“), weil @leonard.krasniqi03 vorgelesen komisch klingt.
+- Insta-Name kommt aus dem Kommentar (username). Lange Namen auf dem Schild ggf. kürzen (…).
+- Alte Einwohner: wo der Insta-Name aus Kommentaren bekannt ist → ergänzen; sonst Vorname lassen.
+- Website: Suche findet Vorname UND @Insta-Name. Wer nicht mit Insta-Namen erscheinen will → entfernen (Datenschutz Punkt 5 deckt „öffentlicher Nutzername“ schon ab).
