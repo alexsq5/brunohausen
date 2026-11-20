@@ -122,5 +122,5 @@ Alex will Wege zu allen Gebäuden. Video: `/home/claude/w9/plateD11.jpg` (= plat
 
 ### BESTÄTIGT von Alex (20.11., 16:38)
 - Folge 12 am Sa 21.11. 13 Uhr (Finale, Cliffhanger ohne „Staffel 2 ab …“-Hinweis).
-- **Staffel 2 Folge 1 „Neuanfang“ am So 22.11. 13 Uhr** – Alex hat das bestätigt. Keine Pause-Tag, kein Countdown.
+- **Staffel 2 Folge 1 „Neuanfang“ am So 22.11. um 11:00 Uhr** (Alex, 20.11. 16:43) – keine Storys, kein Countdown. Cover-Vorlage: studio/staffel2/cover_s2.html.
 - Leak-Teaser nur nach Alex' OK.
