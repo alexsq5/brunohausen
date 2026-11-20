@@ -105,3 +105,4 @@ Alex will Wege zu allen Gebäuden. Video: `/home/claude/w9/plateD11.jpg` (= plat
 - Insta-Name kommt aus dem Kommentar (username). Lange Namen auf dem Schild ggf. kürzen (…).
 - Alte Einwohner: wo der Insta-Name aus Kommentaren bekannt ist → ergänzen; sonst Vorname lassen.
 - Website: Suche findet Vorname UND @Insta-Name. Wer nicht mit Insta-Namen erscheinen will → entfernen (Datenschutz Punkt 5 deckt „öffentlicher Nutzername“ schon ab).
+- **Tim** (Casino-Chef) = **einziger Dinosaurier** der Stadt (`kit/figuren/ew_dino_tim.png`, lila Samtweste, Goldfliege) – nur Tim bekommt den Dino.
