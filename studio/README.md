@@ -119,3 +119,8 @@ Alex will Wege zu allen Gebäuden. Video: `/home/claude/w9/plateD11.jpg` (= plat
 - **Leak-Teaser** (`/home/claude/leak/brunohausen_staffel2_leak_mit_stimme.mp4`): frühestens am Abend nach Folge 12 posten (Vorschlag 21.11. ca. 18–19 Uhr als Reel).
 - Danach Alex archiviert die alten Reels (in der App).
 - **Folge 13 = Staffel 2 Folge 1 „Neuanfang“** (22.11., 13 Uhr), neue Qualität. Vorher: Staffel-2-Website live (Konto/Taler), Stimme (~1150 Credits).
+
+### BESTÄTIGT von Alex (20.11., 16:38)
+- Folge 12 am Sa 21.11. 13 Uhr (Finale, Cliffhanger ohne „Staffel 2 ab …“-Hinweis).
+- **Staffel 2 Folge 1 „Neuanfang“ am So 22.11. 13 Uhr** – Alex hat das bestätigt. Keine Pause-Tag, kein Countdown.
+- Leak-Teaser nur nach Alex' OK.
