@@ -94,3 +94,8 @@ Alex will Wege zu allen Gebäuden. Video: `/home/claude/w9/plateD11.jpg` (= plat
 - Suche „Bruno“ → Bruno selbst (Bürgermeister, Rathaus oberster Stock, Konto 3 Taler – sein Geld ist weg, passt zu S2F2).
 - Alle Figuren blinzeln (Augenpositionen in EYES im Prototyp, Lider in Fellfarbe).
 - PC-Hintergründe 16:9 (2K): `studio/kit/hg_quer/*.jpg` – PC-Ansicht nutzt diese, Handy weiter die 9:16-Bilder.
+
+### WICHTIG – Figuren immer realistisch platzieren (Alex, 20.11., ausdrücklich)
+- Jede Figur (Tier, Bruno, Einwohner) steht **auf begehbarem Boden** (Pflaster, Weg, Platz, Boden im Raum) – NIE auf Gras, Blumenbeeten, Steinkanten, Dächern, Häuserwänden oder in der Luft.
+- Position in Bildkoordinaten des Hintergrunds festlegen (u,v) und mit der Kamerafahrt mitbewegen (`gp()`/`gwalk()` in `ep/leak.html`), Größe nach Entfernung (weiter hinten = kleiner).
+- Laufwege nur über Boden führen (nicht durch Beete). Vor dem Rendern Standbilder prüfen.
