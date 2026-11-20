@@ -41,6 +41,7 @@ Alle weiteren Namen stehen in `index.html` (CONFIG.named).
 - Leonard (leonard.krasniqi03) zieht ein, will Club-Besitzer (in Kommentar versprochen: ab Folge 11)
 - Alle „Ich zieh ein“ ab 19.11. 11:00 → Folge 11
 - Saphira zieht ein (Alex hat sie am 19.11. direkt gemeldet, kein Kommentar nötig) – wünscht sich ein Gym (nur als Wunsch nennen, noch nicht bauen)
+- Sebastian (Bauernhof) wünscht sich einen roten Traktor und 60 Milchkühe → in Folge 11 einbauen: roter Traktor fährt auf dem Hof, Herde sichtbar größer (ca. 12–15 Kühe im Bild + Schild „60 🐄“ / Rest im Stall). Danach Website-Hof-Bild (img_hof.png) neu aus dem Video rendern.
 - Wünsche offen: Schule (resi_moidl), Gefängnis (Justus), Fußballverein (7aho78), Marty Autohaus, Club (Leonard), Tischlerei (Timo), Zivi-Polizist (theo_13.a), Biogasanlage, Rettungswache (Davit)
 - Rätsel: Wer ist der echte Dieb? Wie kam der Schlüssel an die AKW-Tür? (Auflösung ca. Folge 12)
 - Studio: `folge10/` (main10.js nutzt town10.js + lay10.js, build wie in Folge 10: render10.html = Basis + main9 gestrippt + town10 + main10)
