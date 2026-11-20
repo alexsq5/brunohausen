@@ -25,6 +25,7 @@ Stand: 19.11.2026, nach Folge 10 (gepostet)
 | Folge | Follower | Einwohner | Kasse | Inhalt |
 |---|---|---|---|---|
 | 10 | 704 | 163 | 14.000 € | Bruno gesteht: Schlafmütze ist seine, er ist schlafgewandelt (Geld geklaut? offen; wie kam der Dieb-Schlüssel an die Tür? offen). +10 Follower (+5.000), Abstimmung Casino 7/Hotel 2/Gym 2 → Casino (−15.000), Chefs Gastelgott+Marius+Tim. Bauernhof für Sebastian (−5.000). Neu: Einar, Silant, Tilo, Basti, Johannes, Marius. Johannes Feuerwehr-Kommandant, Timo Feuerwehr, Lionell Fahrzeugwart, Felix Kraftwerksmeister, Kilian+Marcel Helfer. Wünsche: Schule, Gefängnis. Ende: Bruno schließt sich nachts ein. |
+| 11 | 707 | 166 | 15.500 € | Spuren an der offenen AKW-Tür, 3 Verdächtige (1 Fuchs, 2 Waschbär, 3 Elster) – Zuschauer tippen, Auflösung Folge 12: Elster. +3 Follower (+1.500). Neu: Leonard (@leonard.krasniqi03, Club Leo eröffnet, kein Geld aus der Kasse), Saphira (Gym-Wunsch), Leonita (@lalonita, Straßenpenner, 1 €/Tag, wohnt auf der Parkbank). Sebastian: roter Traktor + 60 Kühe (selbst bezahlt). Noch 43 bis Gefängnis. Insta-Namen ab jetzt auf Schildern. |
 | 9 | 694 | 157 | 29.000 € | AKW gebaut (−20.000), +58 Follower (+29.000), geklaute 500 € hinter der AKW-Tür gefunden (+500) + Schlafmütze, 13 ziehen ein (Janosch, Justin, Lionell, Lisa, Gastelgott, Marty, Timo, Pinguin, Theresa, Ben, Kilian, Celine, Jonas), Felix will Kraftwerksmeister, Umfrage Hotel/Gym/Casino |
 | 8 | 636 | 144 | 19.500 € | Gleichstand 2:2, Bruno entscheidet: Schlüsselladen (−5.000), 21 neue, Schlüssel trägt AKW-Zeichen, Leon + Lukas W. Feuerwehr, neue Einzieh-Regel |
 | 7 | 615 | 123 | 14.000 € | Krankenhaus (−10.000), AKW freigeschaltet, Dome = Nr. 600, Xavi BBI-Ermittler, Lesander Pflegefachkraft, Ekram will Schlüsselladen, Platz + Spielplatz |
@@ -37,7 +38,11 @@ Felix – will Kraftwerksmeister werden · Gastelgott – neu, will Casino · Ja
 
 Alle weiteren Namen stehen in `index.html` (CONFIG.named).
 
-## Für Folge 11
+## Für Folge 12 (Staffel-1-Finale, siehe NEUER ZEITPLAN)
+- Auflösung: die Elster war’s (Schlüssel an die AKW-Tür gebracht, glänzt). Richtige Tipper (Kommentare „3“ unter Folge 11) namentlich nennen (Insta-Namen).
+- Danach AKW-Leck, Fluss grün, alle müssen raus, Bruno packt den Koffer.
+
+## Für Folge 11 (erledigt)
 - Leonard (leonard.krasniqi03) zieht ein, will Club-Besitzer (in Kommentar versprochen: ab Folge 11)
 - Alle „Ich zieh ein“ ab 19.11. 11:00 → Folge 11
 - Saphira zieht ein (Alex hat sie am 19.11. direkt gemeldet, kein Kommentar nötig) – wünscht sich ein Gym (nur als Wunsch nennen, noch nicht bauen)

@@ -1,0 +1,21 @@
+const {chromium}=require('playwright');const fs=require('fs');
+(async()=>{const words=JSON.parse(fs.readFileSync('/home/claude/w11/words.json','utf8'));const res4=JSON.parse(fs.readFileSync('res4.json','utf8'));
+const b=await chromium.launch({args:['--allow-file-access-from-files']});const pg=await b.newPage({viewport:{width:1080,height:1920}});
+pg.on('pageerror',e=>console.log('ERR',e.message));
+await pg.goto('file://'+process.cwd()+'/render11.html');await pg.evaluate(w=>window.init(w[0],w[1]),[words,res4]);
+await pg.evaluate(()=>{
+ const t=T.party+1.0;
+ captions=()=>{};hud=()=>{};bottomPill=()=>{};yelPill=()=>{};tag=()=>{};bubble=()=>{};stamp=()=>{};cam=()=>[CLUBP[0]+160,CLUBP[1]-230,1.5];frame(t);
+ ctx.fillStyle='rgba(10,16,48,.55)';ctx.fillRect(0,0,1080,1920);
+ let g=ctx.createLinearGradient(0,0,0,520);g.addColorStop(0,'rgba(10,15,40,.6)');g.addColorStop(1,'rgba(10,15,40,0)');ctx.fillStyle=g;ctx.fillRect(0,0,1080,520);
+ ctx.save();ctx.font=`900 118px ${F}`;const lab='FOLGE 11';const lw=ctx.measureText(lab).width+130;
+ rr(540-lw/2,200,lw,170,85);ctx.fillStyle=YEL;ctx.fill();ctx.lineWidth=16;ctx.strokeStyle=NAVY;ctx.stroke();
+ ctx.fillStyle=NAVY;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(lab,540,292);ctx.restore();
+ strokeText('BRUNOHAUSEN',540,455,132,'#fff',NAVY,30);
+ strokeText('WER WAR’S? 🐾',540,600,84,YEL,NAVY,20);
+ [['1','🦊'],['2','🦝'],['3','🐦‍⬛']].forEach(([n,e],i)=>{const x=220+i*320,y=860;ctx.save();ctx.translate(x,y);ctx.beginPath();ctx.arc(0,0,125,0,7);ctx.fillStyle='#fff';ctx.fill();ctx.lineWidth=10;ctx.strokeStyle=NAVY;ctx.stroke();
+  ctx.font=`125px ${EMO}`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(e,0,8);ctx.beginPath();ctx.arc(88,-88,46,0,7);ctx.fillStyle=YEL;ctx.fill();ctx.lineWidth=6;ctx.stroke();ctx.font=`900 58px ${F}`;ctx.fillStyle=NAVY;ctx.fillText(n,88,-84);ctx.restore();});
+ strokeText('…und Club Leo öffnet! 🎉',540,1110,60,'#fff',NAVY,18);
+ bigBruno(540,1950,0.85,true,0,false);
+});
+await pg.screenshot({path:'/home/claude/w11/cover_folge11.png'});await b.close();})();
