@@ -142,7 +142,7 @@ footer a { color: var(--navy); }
     <a class="cta" id="cta" href="#mitmachen">So ziehst du ein 🏠</a>
   </div>
   <div class="find" id="find">
-    <form id="findForm" autocomplete="off" role="search"><input id="findIn" type="text" placeholder="Deinen Namen suchen…" aria-label="Einwohner suchen" aria-autocomplete="list" aria-controls="findList"><button type="submit">Suchen</button></form>
+    <form id="findForm" autocomplete="off" role="search"><input id="findIn" type="text" placeholder="Name oder @Insta-Name…" aria-label="Einwohner suchen" aria-autocomplete="list" aria-controls="findList"><button type="submit">Suchen</button></form>
     <ul id="findList" role="listbox"></ul>
     <div class="msg" id="findMsg"></div>
   </div>
@@ -187,9 +187,10 @@ const CONFIG = {
   instagram: "",            // z. B. "https://www.instagram.com/brunohausen" – leer = Button springt zu "So ziehst du ein"
   updated: "19.11.2026",
   followers: 704, residents: 163, cash: 14000,
+  insta: {"0": "einar_stormgud", "1": "silant_konariff", "2": "t1l0.bln", "3": "http.basti.112", "4": "jo.hannes7460", "8": "lena_nelka", "10": "theo_13.a", "12": "willi3212025", "19": "mario_16__", "22": "louiz_on_bike", "23": "felix.s602", "33": "watch_dog_man7", "40": "tco_strassengesetz", "44": "kyle1966a", "50": "m4gicgram", "51": "leonj1008", "52": "lesander2006", "53": "eakrm_01", "58": "finnpanning8", "59": "luvki.rly", "62": "rishi.manot", "63": "mirashirakumo22", "65": "miri.hsc", "67": "dome_1502", "68": "xaviii8661", "69": "ente_rockt", "76": "piazoitl", "77": "sebastian_kauschinger", "86": "m3rlin_worldsim", "88": "owen101918.1106", "89": "knopflemarcel", "91": "fraya1985", "96": "davit_2107", "97": "lukaswasch", "98": "vapid_bobcat_xl", "99": "justin744033", "100": "firefighter20062010", "103": "marty96066", "104": "timokoster8554", "105": "pinguin1900", "107": "bailey.choco.labbi", "108": "kilian.thiele", "109": "celine_spooky13", "110": "jojo187667"},
   named: [["Einar"], ["Silant"], ["Tilo"], ["Basti"], ["Johannes", "Feuerwehr-Kommandant"], ["Marius", "Casino-Chef"], ["Justus", "Chef vom BBI", "bbi"], ["Kevin", "wohnt einfach hier"], ["Lena"], ["Nikpe"], ["Theo"], ["Joschi"], ["Willi"], ["Orhan"], ["Hennes"], ["Paul"], ["Max"],
     ["Bruno"], ["damjan"], ["Mario", "Chef vom Finanzamt"], ["Claus"], ["Lennard"], ["Louiz"], ["Felix", "Kraftwerksmeister im AKW"], ["Lyam"], ["Jonas"], ["Lio"], ["Daniel"], ["Alexander"], ["Fati"], ["Lukas"], ["Elli"], ["Willi"],
-    ["watchdogman"], ["Jay"], ["Jannis"], ["Alice"], ["Jona"], ["Matti"], ["Silver"], ["TCO"], ["Jan"], ["Sophie"], ["Luan"], ["Kyle"], ["Robert"], ["Florian"], ["Goldfisch", "ein echter Goldfisch"], ["Tim", "Casino-Chef"], ["Julian"], ["Magigcram"], ["Leon", "Feuerwehrmann"], ["Lesander", "Pflegefachkraft im Krankenhaus"], ["Ekram", "Chef vom Schlüsselladen"], ["Levke"], ["Ole"], ["Emilio"], ["Duncan"], ["Finn"], ["Luvki"], ["Jonas"], ["Einer"], ["Rishi"], ["Mira"], ["Alex"], ["Miriam"], ["Philipp"], ["Dome", "Follower Nr. 600 🏅"], ["Xavi", "Ermittler beim BBI"], ["Ente"], ["Justus"], ["Stivi"], ["Halm"], ["Max"], ["Andre"], ["Felix"], ["Pia"], ["Sebastian", "Landwirt · Bauernhof mit Milchkühen"], ["was_geht_es_dir__an"], ["Fynn"], ["Jessy"], ["Luca"], ["Liam"], ["Nico"], ["Alexander"], ["3ilas"], ["Merlin"], ["Lukas"], ["Owen"], ["Marcel", "Helfer im Atomkraftwerk"], ["Emma"], ["Fraya"], ["Florian"], ["Laura"], ["Louis"], ["Damian"], ["Davit"], ["Lukas W.", "Feuerwehrmann"], ["Janosch"], ["Justin"], ["Lionell", "Fahrzeugwart bei der Feuerwehr"], ["Lisa"], ["Gastelgott", "Casino-Chef"], ["Marty", "will ein Autohaus"], ["Timo", "Feuerwehrmann"], ["Pinguin"], ["Theresa"], ["Ben"], ["Kilian", "Helfer im Atomkraftwerk"], ["Celine"], ["Jonas", "will Garten- und Landschaftsbau"]],
+    ["watchdogman"], ["Jay"], ["Jannis"], ["Alice"], ["Jona"], ["Matti"], ["Silver"], ["TCO"], ["Jan"], ["Sophie"], ["Luan"], ["Kyle"], ["Robert"], ["Florian"], ["Goldfisch", "ein echter Goldfisch"], ["Tim", "Casino-Chef"], ["Julian"], ["Magigcram"], ["Leon", "Feuerwehrmann"], ["Lesander", "Pflegefachkraft im Krankenhaus"], ["Ekram", "Chef vom Schlüsselladen"], ["Levke"], ["Ole"], ["Emilio"], ["Duncan"], ["Finn"], ["Luvki"], ["Jonas"], ["Einer"], ["Rishi"], ["Mira"], ["Alex"], ["Miriam"], ["Philipp"], ["Dome", "Follower Nr. 600 🏅"], ["Xavi", "Ermittler beim BBI"], ["Ente"], ["Justus"], ["Stivi"], ["Halm"], ["Max"], ["Andre"], ["Felix"], ["Pia"], ["Sebastian", "Landwirt · Bauernhof mit Milchkühen", "hof"], ["was_geht_es_dir__an"], ["Fynn"], ["Jessy"], ["Luca"], ["Liam"], ["Nico"], ["Alexander"], ["3ilas"], ["Merlin"], ["Lukas"], ["Owen"], ["Marcel", "Helfer im Atomkraftwerk"], ["Emma"], ["Fraya"], ["Florian"], ["Laura"], ["Louis"], ["Damian"], ["Davit"], ["Lukas W.", "Feuerwehrmann"], ["Janosch"], ["Justin"], ["Lionell", "Fahrzeugwart bei der Feuerwehr"], ["Lisa"], ["Gastelgott", "Casino-Chef"], ["Marty", "will ein Autohaus"], ["Timo", "Feuerwehrmann"], ["Pinguin"], ["Theresa"], ["Ben"], ["Kilian", "Helfer im Atomkraftwerk"], ["Celine"], ["Jonas", "will Garten- und Landschaftsbau"]],
   buildings: [
     { id: "rathaus", em: "🏛️", name: "Rathaus", cost: 32000, note: "Seit Folge 1" },
     { id: "brunnen", em: "⛲", name: "Brunnen", cost: 9000, note: "Seit Folge 1" },
@@ -373,7 +374,7 @@ lane(-2, 7, 1, 7);  lane(-2, 3, -2, 7); lane(-2, 3, 3, 3);   // Krankenhaus + Fe
 lane(-3, 11, 4, 11);                                         // Schlüsselladen
 lane(10, 7, 11, 7); lane(11, -2, 11, 7); lane(8, 3, 11, 3);  // Polizei
 lane(4, -2, 11, -2);                                         // Mehrfamilienhäuser
-lane(11, 4, 15, 4);                                          // Casino
+lane(11, 3, 17, 3);                                          // Casino
 lane(-8, 6, -2, 6);                                          // Bauernhof
 let PATH_P = 0;
 function onPath(x, y) { return PATH_P > 0.05 && ((Math.abs(x - 6) < 0.8 && y > 4) || (Math.abs(y - 8) < 0.8 && x > 2 && x < 10) || Math.hypot(x - 6, y - 8) < 1.8 || SIDE.has(Math.floor(x) + ',' + Math.floor(y))); }
@@ -742,7 +743,7 @@ const DLOT = { x: 1.0, y: 8.7, w: 2.6, d: 2.3 }, FLOT = { x: 0.7, y: 0.6, w: 3.0
 const RAT = { x: 4.2, y: 2.2, w: 3.6, d: 2.4 };
 const KLOT = { x: -2.6, y: 0.9, w: 2.4, d: 2.2 };
 const SLOT = { x: -2.5, y: 8.7, w: 1.9, d: 1.7 };
-const CLOT = { x: 12.6, y: 0.4, w: 2.8, d: 3.0 }; // Casino (Folge 10)
+const CLOT = { x: 15.2, y: -1.2, w: 2.8, d: 3.0 }; // Casino (Folge 10)
 const HOFL = { x: -9.4, y: 1.0, w: 5.4, d: 4.6 }; // Bauernhof (Folge 10)
 const ALOT = { x: -7.3, y: -12.2, w: 3.0, d: 2.0 }; // Atomkraftwerk-Bauplatz am Fluss
 const HLOTS = [{ x: 4.6, y: -3.7, w: 1.5, d: 1.4 }, { x: 6.6, y: -3.7, w: 1.5, d: 1.4 }, { x: 8.6, y: -3.7, w: 1.5, d: 1.4 }];
@@ -753,16 +754,16 @@ const FOCUS = { rathaus: [6, 3.4], brunnen: [6, 8], wege: [6, 9.5], markt: [2.5,
 const rr = rnd(91), COLS = ['#ff7a59', '#4d9be6', '#b06ad6', '#3fbf8f', '#f2b134', '#e85d8a', '#5ac8c8', '#8a6cff', '#ff9f1c', '#2ec4b6', '#e71d36', '#7b2cbf'];
 const WALK = [];
 // Besitzer stehen vor ihrem Gebäude und laufen nur ein kleines Stück hin und her
-const HOMES = { bbi: [BBI.x + BBI.w - 0.55, BBI.y + BBI.d + 0.95], doener: [DLOT.x + 1.3, DLOT.y + DLOT.d + 0.6], markt: [MARKET.x + MARKET.w / 2, MARKET.y + MARKET.d + 0.75] };
+const HOMES = { bbi: [BBI.x + BBI.w - 0.55, BBI.y + BBI.d + 0.95], doener: [DLOT.x + 1.3, DLOT.y + DLOT.d + 0.6], markt: [MARKET.x + MARKET.w / 2, MARKET.y + MARKET.d + 0.75], hof: [HOFL.x + HOFL.w * 0.7, HOFL.y + HOFL.d + 0.6], casino: [CLOT.x + 0.8, CLOT.y + CLOT.d + 0.6] };
 for (let k = 0; k < 20000 && WALK.length < Math.max(CONFIG.named.length, Math.min(CONFIG.residents, 80)); k++) { const x = 0.6 + rr() * 11, y = 1.8 + rr() * 10.6;
   if (!free(x, y) || WALK.some(o => Math.hypot(o.x - x, o.y - y) < 0.7)) continue;
   const i = WALK.length, nm = CONFIG.named[i] || [], own = nm[2] && HOMES[nm[2]];
-  WALK.push({ x: own ? own[0] : x, y: own ? own[1] : y, tx: null, ty: null, wait: rr() * 4, col: COLS[i % COLS.length], s: 0.9 + rr() * 0.2, name: nm[0] || null, role: nm[1] || null, home: own || null }); }
+  WALK.push({ x: own ? own[0] : x, y: own ? own[1] : y, tx: null, ty: null, wait: rr() * 4, col: COLS[i % COLS.length], s: 0.9 + rr() * 0.2, name: nm[0] || null, ig: CONFIG.insta[i] || null, role: nm[1] || null, home: own || null }); }
 // Wohnungen: jeder Follower hat eine eigene Wohnungsnummer in einem der Mehrfamilienhäuser
 const MFH_BUILT = CONFIG.buildings.some(b => b.id === 'mfh');
 const NOFLAT = { Kevin: 'wohnt einfach hier', Goldfisch: 'wohnt im Goldfischglas' };
 WALK.forEach((w, i) => { if (!w.name || NOFLAT[w.name]) return; w.flat = { haus: i % 3, nr: i + 1 }; });
-function flatText(w) { if (!w.name) return ''; if (NOFLAT[w.name]) return '🏕️ ' + NOFLAT[w.name]; if (!w.flat || !MFH_BUILT) return ''; return '🏢 Haus ' + (w.flat.haus + 1) + ' · Wohnung ' + w.flat.nr; }
+function flatText(w) { if (!w.name || w.home) return ''; if (NOFLAT[w.name]) return '🏕️ ' + NOFLAT[w.name]; if (!w.flat || !MFH_BUILT) return ''; return '🏢 Haus ' + (w.flat.haus + 1) + ' · Wohnung ' + w.flat.nr; }
 function flatDoor(w) { const L = HLOTS[w.flat.haus], k = (w.flat.nr % 5) - 2; return [L.x + L.w * 0.5 + k * 0.22, L.y + L.d + 0.55 + (k & 1) * 0.12]; }
 function stepWalk(w, dt) {
   if (w === SEL && w.atDoor) return;
@@ -961,9 +962,9 @@ function drawCity(t) {
   post(t);
   // name tags
   const fs = Math.max(9, Math.min(22, CAM.k * 0.17));
-  [...WALK.filter(o => o !== SEL), ...(SEL ? [SEL] : [])].forEach((w, wi) => { if (!w.name) return; ctx.globalAlpha = SEL && w !== SEL ? 0.35 : 1; const p = P(w.x, w.y, 1.15); ctx.font = `900 ${fs}px ${FONT}`; const tw = ctx.measureText(w.name).width + fs;
+  [...WALK.filter(o => o !== SEL), ...(SEL ? [SEL] : [])].forEach((w, wi) => { if (!w.name) return; ctx.globalAlpha = SEL && w !== SEL ? 0.35 : 1; const p = P(w.x, w.y, 1.15); ctx.font = `900 ${fs}px ${FONT}`; const lbl = w.ig ? '@' + w.ig : w.name; const tw = ctx.measureText(lbl).width + fs;
     rrect(ctx, p[0] - tw / 2, p[1] - fs * 1.6, tw, fs * 1.5, fs * 0.75); ctx.fillStyle = w.name === 'Justus' ? '#1d2440' : '#ffffff'; ctx.fill(); ctx.lineWidth = Math.max(2, fs * 0.14); ctx.strokeStyle = '#1d2440'; ctx.stroke();
-    ctx.fillStyle = w.name === 'Justus' ? '#ffd23d' : '#1d2440'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(w.name, p[0], p[1] - fs * 0.83); });
+    ctx.fillStyle = w.name === 'Justus' ? '#ffd23d' : '#1d2440'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(lbl, p[0], p[1] - fs * 0.83); });
   ctx.globalAlpha = 1;
   if (SEL) { const job = SEL.role || 'Dorfbewohner', q = P(SEL.x, SEL.y, 1.15), jf = fs * 1.05; ctx.font = `900 ${jf}px ${FONT}`; const jw = ctx.measureText(job).width + jf * 1.2, jy = q[1] - fs * 1.6 - jf * 1.9;
     rrect(ctx, q[0] - jw / 2, jy, jw, jf * 1.6, jf * 0.8); ctx.fillStyle = '#ffd23d'; ctx.fill(); ctx.lineWidth = Math.max(2, jf * 0.14); ctx.strokeStyle = '#1d2440'; ctx.stroke();
@@ -992,7 +993,7 @@ CONFIG.buildings.forEach(b => { const planned = b.at && CONFIG.followers < b.at;
     el('span', 'cost' + (planned ? '' : ' neg'), (planned ? '' : '−') + fmt2(b.cost) + ' €'));
   d.onclick = () => focusOn(b.id); $('blds').append(d); });
 $('popTitle').textContent = 'Einwohner: ' + CONFIG.residents;
-CONFIG.named.forEach(([n], i) => { const b = el('button', 'chip pick', n); b.type = 'button'; b.onclick = () => findPerson(WALK[i]); $('chips').append(b); });
+CONFIG.named.forEach(([n], i) => { const b = el('button', 'chip pick', CONFIG.insta[i] ? '@' + CONFIG.insta[i] : n); b.type = 'button'; b.onclick = () => findPerson(WALK[i]); $('chips').append(b); });
 const more = CONFIG.residents - CONFIG.named.length; if (more > 0) $('chips').append(el('span', 'chip more', '+ ' + more + ' weitere'));
 CONFIG.episodes.slice().reverse().forEach(([n, h, p]) => { const e = el('article', 'card ep'); const no = el('div', 'no'); no.append('FOLGE', el('b', null, String(n)));
   const tx = el('div'); tx.style.minWidth = '0'; tx.append(el('h3', null, h), el('p', null, p)); e.append(no, tx); $('eps').append(e); });
@@ -1005,9 +1006,10 @@ const norm = s => s.toLocaleLowerCase('de-DE').normalize('NFD').replace(/[\u0300
 const fIn = $('findIn'), fList = $('findList'), fMsg = $('findMsg'); let sugg = [], hi = 0;
 function suggest() { const q = norm(fIn.value.trim()); fList.innerHTML = ''; fMsg.textContent = ''; sugg = []; hi = 0; if (!q) return;
   const all = WALK.map((w, i) => [w, i]).filter(([w]) => w.name);
-  const a = all.filter(([w]) => norm(w.name).startsWith(q)), b = all.filter(([w]) => !norm(w.name).startsWith(q) && norm(w.name).includes(q));
+  const qq = q.replace(/^@/, ''), key = w => [norm(w.name), w.ig ? norm(w.ig) : ''];
+  const a = all.filter(([w]) => key(w).some(k => k && k.startsWith(qq))), b = all.filter(([w]) => !key(w).some(k => k && k.startsWith(qq)) && key(w).some(k => k && k.includes(qq)));
   sugg = [...a, ...b].slice(0, 6).map(([w]) => w);
-  sugg.forEach((w, i) => { const li = el('li', i === hi ? 'on' : '', w.name); li.setAttribute('role', 'option'); li.onmousedown = e => { e.preventDefault(); findPerson(w); }; fList.append(li); }); }
+  sugg.forEach((w, i) => { const li = el('li', i === hi ? 'on' : '', w.name + (w.ig ? ' · @' + w.ig : '')); li.setAttribute('role', 'option'); li.onmousedown = e => { e.preventDefault(); findPerson(w); }; fList.append(li); }); }
 function mark() { [...fList.children].forEach((li, i) => li.classList.toggle('on', i === hi)); }
 function release() { if (SEL && SEL.prev) { SEL.x = SEL.prev[0]; SEL.y = SEL.prev[1]; SEL.prev = null; } if (SEL) SEL.atDoor = false; }
 function findPerson(w) { if (!w) return; release(); SEL = w;
