@@ -20,6 +20,8 @@
 #slot .spin{width:100%;padding:14px;border-radius:999px;border:4px solid #1d2440;background:#ffd23d;color:#1d2440;font:900 22px var(--font);cursor:pointer;box-shadow:0 5px 0 #1d2440}
 #slot .spin:active{transform:translateY(3px);box-shadow:0 2px 0 #1d2440}
 #slot .spin:disabled{opacity:.6}
+#slot .nm{width:100%;margin:0 0 10px;padding:12px 16px;border-radius:999px;border:3px solid #1d2440;font:800 17px var(--font);text-align:center;color:#1d2440}
+#slot .nm:disabled{opacity:.7}
 #slot .note{margin:10px 0 0;font-size:11px;opacity:.65;font-weight:700}
 </style>
 <style>
@@ -1025,8 +1027,9 @@ $('findForm').addEventListener('submit', e => { e.preventDefault(); if (!fIn.val
 <h3>🎡 BRUNO-GLÜCKSRAD</h3><p class="sub">Dreh am Rad – Bruno sagt dir, was heute los ist!</p>
 <div class="wheelwrap"><div class="ptr"></div><div class="wheel"></div><div class="hub">🐻</div></div>
 <div class="msg">Na los, dreh mal! 😄</div>
+<input class="nm" type="text" maxlength="24" placeholder="Dein Name" aria-label="Dein Name" autocomplete="off">
 <button class="spin" type="button">DREHEN</button>
-<p class="note">Nur zum Spaß – ohne Geld, ohne Einsatz, ohne Gewinn.</p>
+<p class="note">1× pro Tag drehen · nur zum Spaß – ohne Geld, ohne Einsatz, ohne Gewinn.</p>
 </div></div>
 <script>
 (()=>{const F=[['🍦','Bruno spendiert dir ein Eis … in Gedanken. 🍦'],['🏅','Du bist für 5 Minuten Ehrenbürger von Brunohausen!'],['🐄','Sebastians Kühe winken dir zu. Muuuh!'],['🚒','Die Feuerwehr macht für dich die Sirene an. Tatüüü!'],['🎈','Ein Ballon mit deinem Namen fliegt über die Stadt.'],['🍕','Heute gibt es Döner UND Pizza. Bruno zahlt nicht.'],['😴','Bruno macht ein Nickerchen. Psst!'],['🌈','Heute wird ein richtig guter Tag!']];
@@ -1034,12 +1037,21 @@ const COL=['#ffd23d','#7cc85a','#4ab3f4','#e8453c','#b77cf0','#ff9f43','#2ec4b6'
 const box=document.getElementById('slot'),wh=box.querySelector('.wheel'),msg=box.querySelector('.msg'),btn=box.querySelector('.spin'),n=F.length,seg=360/n;
 wh.style.background='conic-gradient('+COL.map((c,i)=>c+' '+(i*seg)+'deg '+((i+1)*seg)+'deg').join(',')+')';
 F.forEach(([e],i)=>{const d=document.createElement('span');d.textContent=e;d.style.transform=`rotate(${i*seg+seg/2}deg) translateY(-104px) rotate(${-(i*seg+seg/2)}deg)`;wh.append(d);});
-let rot=0,busy=false,last=-1;
-btn.onclick=()=>{if(busy)return;busy=true;btn.disabled=true;msg.textContent='🎡 …';let k;do{k=Math.floor(Math.random()*n);}while(k===last);last=k;
+let rot=0,busy=false;const nm=box.querySelector('.nm'),KEY='bh_rad';
+const today=()=>{const d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();};
+const load=()=>{try{return JSON.parse(localStorage.getItem(KEY)||'null');}catch(e){return null;}};
+const save=v=>{try{localStorage.setItem(KEY,JSON.stringify(v));}catch(e){}};
+const show=()=>{const v=load();if(v&&v.n)nm.value=v.n;
+ if(v&&v.d===today()){const k=v.k;rot=360-(k*seg+seg/2);wh.style.transition='none';wh.style.transform=`rotate(${rot}deg)`;wh.offsetHeight;wh.style.transition='';
+  msg.textContent=(v.n?v.n+': ':'')+F[k][1];btn.disabled=true;btn.textContent='MORGEN WIEDER 🌙';nm.disabled=true;}
+ else{btn.disabled=false;btn.textContent='DREHEN';nm.disabled=false;msg.textContent='Na los, dreh mal! 😄';}};
+btn.onclick=()=>{if(busy)return;const name=nm.value.trim().replace(/[<>]/g,'');if(!name){msg.textContent='Erst deinen Namen eintragen! ✍️';nm.focus();return;}
+ const v=load();if(v&&v.d===today())return show();
+ busy=true;btn.disabled=true;nm.disabled=true;msg.textContent='🎡 …';const k=Math.floor(Math.random()*n);save({d:today(),n:name,k});
  const target=360-(k*seg+seg/2);rot+=360*5+((target-rot%360)+360)%360;wh.style.transform=`rotate(${rot}deg)`;
- setTimeout(()=>{msg.textContent=F[k][1];busy=false;btn.disabled=false;},3300);};
+ setTimeout(()=>{msg.textContent=name+': '+F[k][1];busy=false;btn.textContent='MORGEN WIEDER 🌙';},3300);};
 const close=()=>box.classList.remove('on');box.querySelector('.x').onclick=close;box.onclick=e=>{if(e.target===box)close();};
 document.addEventListener('keydown',e=>{if(e.key==='Escape')close();});
-window.openSlot=()=>{box.classList.add('on');};})();
+window.openSlot=()=>{show();box.classList.add('on');};})();
 </script>
 </body></html>
