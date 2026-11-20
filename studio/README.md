@@ -85,3 +85,7 @@ Alex will Wege zu allen Gebäuden. Video: `/home/claude/w9/plateD11.jpg` (= plat
 ### Nach Folge 11 (Alex hat zugestimmt, 20.11.)
 - Repo `alexsq5/brunohausen` auf **privat** stellen. Vorher Reel-Upload umbauen: Videos/Cover nicht mehr über raw.githubusercontent (geht bei privatem Repo nicht), sondern über die Website ausliefern (z. B. Ordner `m/` auf Vercel, nicht in .vercelignore) und `video_url`/`cover_url` darauf zeigen lassen. Erst testen, dann privat stellen.
 - Website: Casino öffnet das **Bruno-Glücksrad** (Sprüche, kein Gewinn/Jackpot) statt Spielautomat – wegen Jugendschutz (simuliertes Glücksspiel).
+
+### Folge 11 – Entwurf (Alex am 20.11. 07:30 geschickt)
+- Sprechtext: `/home/claude/w11/script11.txt` (ca. 45 s). Rätsel neu: Spuren an AKW-Tür, 3 Verdächtige (1 Fuchs, 2 Waschbär, 3 Elster) – NIE echte Follower verdächtigen. Auflösung Folge 12: **die Elster** (klaut Glänzendes, hat den Schlüssel an die AKW-Tür gebracht) – geheim, nur Alex weiß es.
+- Leonard eröffnet Club (Discolicht, tanzende Einwohner), Saphira zieht ein (Gym-Wunsch), Sebastian: roter Traktor + 60 Kühe, selbst bezahlt (Kasse unverändert). 706 Follower (+2 → +1000 €, Kasse 15.000), 165 Einwohner. Ende: Kommentar-Aufruf 1/2/3. Schnell schneiden, 40–45 s.
