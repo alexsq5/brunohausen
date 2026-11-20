@@ -125,3 +125,5 @@ Alex will Wege zu allen Gebäuden. Video: `/home/claude/w9/plateD11.jpg` (= plat
 - **Staffel 2 Folge 1 „Neuanfang“ am So 22.11. um 11:00 Uhr** (Alex, 20.11. 16:43) – keine Storys, kein Countdown. Cover-Vorlage: studio/staffel2/cover_s2.html.
 - Leak-Teaser nur nach Alex' OK.
 - Staffel-2-Cover: pro Folge 1 eigenes Bruno-Keyart-Bild (ElevenLabs, 9:16 2K, Bruno groß, oben 40 % Himmel frei, ~518 Credits) + `studio/staffel2/cover_s2_key.html?bg=…&rib=…&title=…` (Logo/Band/Titel ab y≈290, damit das 3:4-Profilraster nichts abschneidet). Nur Bruno, keine anderen Figuren (Alex).
+
+- Staffel-2-Cover-Standard (Alex, 20.11.): Stil E (Luckiest Guy, rotes Banner, gelbe 3D-Schrift) = studio/staffel2/cover_s2_key.html?rib=STAFFEL%202%20·%20FOLGE%20N&title=TITEL
