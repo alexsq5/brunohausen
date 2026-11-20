@@ -90,3 +90,6 @@ Alex will Wege zu allen Gebäuden. Video: `/home/claude/w9/plateD11.jpg` (= plat
 - Sprechtext: `/home/claude/w11/script11.txt` (ca. 45 s). Rätsel neu: Spuren an AKW-Tür, 3 Verdächtige (1 Fuchs, 2 Waschbär, 3 Elster) – NIE echte Follower verdächtigen. Auflösung Folge 12: **die Elster** (klaut Glänzendes, hat den Schlüssel an die AKW-Tür gebracht) – geheim, nur Alex weiß es.
 - Leonard eröffnet Club (Discolicht, tanzende Einwohner), Saphira zieht ein (Gym-Wunsch), Sebastian: roter Traktor + 60 Kühe, selbst bezahlt (Kasse unverändert). 706 Follower (+2 → +1000 €, Kasse 15.000), 165 Einwohner. Ende: Kommentar-Aufruf 1/2/3. Schnell schneiden, 40–45 s.
 - Bank-Plan (Staffel 2): Ohne Job → „Arbeitslos · bekommt Brunogeld“ (+5 Taler/Tag von Bruno), Wunsch-Job darunter (Alex, 20.11.).
+- Staffel 2: **Alex S.** = Alex selbst, Gründer & Besitzer von Brunohausen, **einziger Löwe** (Skin `kit/figuren/ew_loewe_alex.png`, Krone + „A“-Hoodie) – NIEMAND sonst bekommt den Löwen. Rang GRÜNDER, goldene Karte, Penthouse über dem Rathaus.
+- Suche „Bruno“ → Bruno selbst (Bürgermeister, Rathaus oberster Stock, Konto 3 Taler – sein Geld ist weg, passt zu S2F2).
+- Alle Figuren blinzeln (Augenpositionen in EYES im Prototyp, Lider in Fellfarbe).
