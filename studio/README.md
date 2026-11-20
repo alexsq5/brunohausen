@@ -106,3 +106,10 @@ Alex will Wege zu allen Gebäuden. Video: `/home/claude/w9/plateD11.jpg` (= plat
 - Alte Einwohner: wo der Insta-Name aus Kommentaren bekannt ist → ergänzen; sonst Vorname lassen.
 - Website: Suche findet Vorname UND @Insta-Name. Wer nicht mit Insta-Namen erscheinen will → entfernen (Datenschutz Punkt 5 deckt „öffentlicher Nutzername“ schon ab).
 - **Tim** (Casino-Chef) = **einziger Dinosaurier** der Stadt (`kit/figuren/ew_dino_tim.png`, lila Samtweste, Goldfliege) – nur Tim bekommt den Dino.
+
+### NEUER ZEITPLAN (Alex, 20.11.) – ersetzt „Folge 15“-Plan
+- **Folge 11** (20.11.) wie geplant (alter Stil).
+- **Folge 12** (21.11.) = Staffel-1-Finale, länger (ca. 60–75 s): Rätsel-Auflösung (Elster), dann AKW-Leck, Fluss leuchtet grün, alle müssen raus, Bruno packt den Koffer → Cliffhanger.
+- **Leak-Teaser** (`/home/claude/leak/brunohausen_staffel2_leak_mit_stimme.mp4`): frühestens am Abend nach Folge 12 posten (Vorschlag 21.11. ca. 18–19 Uhr als Reel).
+- Danach Alex archiviert die alten Reels (in der App).
+- **Folge 13 = Staffel 2 Folge 1 „Neuanfang“** (22.11., 13 Uhr), neue Qualität. Vorher: Staffel-2-Website live (Konto/Taler), Stimme (~1150 Credits).
