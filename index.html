@@ -4,17 +4,18 @@
 <title>Brunohausen</title>
 <meta name="description" content="Brunohausen – eine Stadt, die von ihren Followern gebaut wird. Kommentieren heißt einziehen.">
 <style>@font-face{font-family:Inter;src:url(fonts/inter-500.woff) format('woff');font-weight:500;font-display:swap}@font-face{font-family:Inter;src:url(fonts/inter-700.woff) format('woff');font-weight:700;font-display:swap}@font-face{font-family:Inter;src:url(fonts/inter-800.woff) format('woff');font-weight:800;font-display:swap}@font-face{font-family:Inter;src:url(fonts/inter-900.woff) format('woff');font-weight:900;font-display:swap}
-/* Casino-Spaß-Automat */
+/* Bruno-Glücksrad */
 #slot{position:fixed;inset:0;z-index:999;display:none;align-items:center;justify-content:center;background:rgba(14,10,30,.72);backdrop-filter:blur(3px);padding:16px}
 #slot.on{display:flex}
-#slot .box{position:relative;width:min(380px,100%);background:linear-gradient(#2b1747,#170c2b);border:4px solid #ffd23d;border-radius:26px;padding:22px 18px 18px;box-shadow:0 0 0 4px #1d2440,0 0 40px rgba(255,80,200,.45);color:#fff;text-align:center;font-family:var(--font)}
+#slot .box{position:relative;width:min(380px,100%);background:linear-gradient(#2a3a72,#1d2440);border:4px solid #ffd23d;border-radius:26px;padding:22px 18px 18px;box-shadow:0 0 0 4px #1d2440,0 0 30px rgba(255,210,61,.35);color:#fff;text-align:center;font-family:var(--font)}
 #slot .x{position:absolute;top:10px;right:10px;width:40px;height:40px;border-radius:50%;border:3px solid #1d2440;background:#fff;color:#1d2440;font:900 22px/1 var(--font);cursor:pointer}
-#slot h3{margin:0 34px 4px;font-weight:900;font-size:24px;color:#ffd23d;text-shadow:0 0 12px rgba(255,80,200,.8)}
+#slot h3{margin:0 34px 4px;font-weight:900;font-size:24px;color:#ffd23d;text-shadow:0 3px 0 #1d2440}
 #slot .sub{margin:0 0 14px;font-size:13px;font-weight:700;opacity:.8}
-#slot .reels{display:flex;gap:8px;justify-content:center;background:#e8453c;border:4px solid #1d2440;border-radius:18px;padding:10px}
-#slot .reel{width:84px;height:96px;overflow:hidden;background:#fff;border:3px solid #1d2440;border-radius:12px;position:relative}
-#slot .strip{position:absolute;left:0;right:0;top:0}
-#slot .strip div{height:96px;display:flex;align-items:center;justify-content:center;font-size:52px;font-family:'Apple Color Emoji','Noto Color Emoji',sans-serif}
+#slot .wheelwrap{position:relative;width:260px;height:260px;margin:4px auto 0}
+#slot .wheel{position:absolute;inset:0;border-radius:50%;border:6px solid #1d2440;box-shadow:0 0 0 4px #ffd23d;transition:transform 3.2s cubic-bezier(.12,.75,.2,1)}
+#slot .wheel span{position:absolute;left:50%;top:50%;width:40px;height:40px;margin:-20px 0 0 -20px;display:flex;align-items:center;justify-content:center;font-size:30px;font-family:'Apple Color Emoji','Noto Color Emoji',sans-serif}
+#slot .ptr{position:absolute;left:50%;top:-14px;margin-left:-14px;width:0;height:0;border:14px solid transparent;border-top:26px solid #fff;z-index:2;filter:drop-shadow(0 2px 0 #1d2440)}
+#slot .hub{position:absolute;left:50%;top:50%;width:56px;height:56px;margin:-28px 0 0 -28px;border-radius:50%;background:#fff;border:4px solid #1d2440;display:flex;align-items:center;justify-content:center;font-size:28px;z-index:2}
 #slot .msg{min-height:48px;margin:14px 0 10px;font-weight:900;font-size:18px;display:flex;align-items:center;justify-content:center}
 #slot .spin{width:100%;padding:14px;border-radius:999px;border:4px solid #1d2440;background:#ffd23d;color:#1d2440;font:900 22px var(--font);cursor:pointer;box-shadow:0 5px 0 #1d2440}
 #slot .spin:active{transform:translateY(3px);box-shadow:0 2px 0 #1d2440}
@@ -920,7 +921,7 @@ function mehrfamilienhaus(c, L, i) {
 const SPR = {}; ['casino', 'hof'].forEach(n => { const im = new Image(); im.src = 'img_' + n + '.png'; SPR[n] = im; });
 let CAS_RECT = null;
 function sprite(c, im, L, ax, ay) { if (!im.complete || !im.naturalWidth) return; const p = P(L.x + L.w, L.y + L.d, 0), s = CAM.k / 46, r = [p[0] - ax * s, p[1] - ay * s, im.naturalWidth * s, im.naturalHeight * s]; c.drawImage(im, ...r); if (im === SPR.casino) { CAS_RECT = r;
-  const h = 0.5 + 0.5 * Math.sin(performance.now() / 300), fs = Math.max(11, CAM.k * 0.24); c.save(); c.font = `900 ${fs}px ${FONT}`; const tx = '👆 Tippen & drehen', tw = c.measureText(tx).width + fs * 1.4, cx = r[0] + r[2] * 0.5, cy = r[1] + r[3] + fs * 0.4;
+  const h = 0.5 + 0.5 * Math.sin(performance.now() / 300), fs = Math.max(11, CAM.k * 0.24); c.save(); c.font = `900 ${fs}px ${FONT}`; const tx = '👆 Glücksrad drehen', tw = c.measureText(tx).width + fs * 1.4, cx = r[0] + r[2] * 0.5, cy = r[1] + r[3] + fs * 0.4;
   c.globalAlpha = 0.75 + 0.25 * h; rrect(c, cx - tw / 2, cy, tw, fs * 1.7, fs * 0.85); c.fillStyle = '#ffd23d'; c.fill(); c.lineWidth = Math.max(2, fs * 0.14); c.strokeStyle = '#1d2440'; c.stroke(); c.fillStyle = '#1d2440'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText(tx, cx, cy + fs * 0.88); c.restore(); } }
 function drawCity(t) {
   CAM = { x: view.x + Math.sin(t * 0.07) * 0.25, y: view.y, k: view.k };
@@ -1019,28 +1020,24 @@ $('findForm').addEventListener('submit', e => { e.preventDefault(); if (!fIn.val
   else { fList.innerHTML = ''; fMsg.textContent = 'Nicht gefunden. Kommentier „Ich zieh ein + Name“ unter die neueste Folge, dann ziehst du ein!'; } });
 </script>
 
-<div id="slot" role="dialog" aria-modal="true" aria-label="Bruno-Casino Spaß-Automat"><div class="box">
+<div id="slot" role="dialog" aria-modal="true" aria-label="Bruno-Glücksrad"><div class="box">
 <button class="x" type="button" aria-label="Schließen">✕</button>
-<h3>🎰 BRUNO-CASINO</h3><p class="sub">Dreh aus Spaß – drei Gleiche = Jackpot!</p>
-<div class="reels"><div class="reel"><div class="strip"></div></div><div class="reel"><div class="strip"></div></div><div class="reel"><div class="strip"></div></div></div>
-<div class="msg">Viel Glück! 🍀</div>
+<h3>🎡 BRUNO-GLÜCKSRAD</h3><p class="sub">Dreh am Rad – Bruno sagt dir, was heute los ist!</p>
+<div class="wheelwrap"><div class="ptr"></div><div class="wheel"></div><div class="hub">🐻</div></div>
+<div class="msg">Na los, dreh mal! 😄</div>
 <button class="spin" type="button">DREHEN</button>
 <p class="note">Nur zum Spaß – ohne Geld, ohne Einsatz, ohne Gewinn.</p>
 </div></div>
 <script>
-(()=>{const SY=['🍒','⭐','7️⃣','🔔','🍋','🐻','💰','🎲'],H=96,box=document.getElementById('slot'),strips=[...box.querySelectorAll('.strip')],msg=box.querySelector('.msg'),btn=box.querySelector('.spin');
-let cur=[0,1,2],busy=false;
-const fill=(st,from,to,n)=>{st.innerHTML='';const seq=[from];for(let i=0;i<n;i++)seq.push(Math.floor(Math.random()*SY.length));seq.push(to);seq.forEach(k=>{const d=document.createElement('div');d.textContent=SY[k];st.append(d);});return seq.length;};
-strips.forEach((st,i)=>{fill(st,cur[i],cur[i],0);st.style.transform='translateY(-96px)';});
-const WIN=['JACKPOT! 🎉 Bruno reibt sich die Hände … für die Stadt natürlich!','DREI GLEICHE! 🤩 Bruno ist neidisch.','Jackpot! 💥 Das Casino wackelt!'];
-const TWO=['Fast! 😮 Zwei Gleiche!','Knapp daneben! Nochmal?','Zwei Stück – Bruno pfeift schon. 🎶'];
-const NONE=['Nix. 😅 Bruno lacht sich schlapp.','Leider nichts – nochmal drehen!','Die Walzen mögen dich heute nicht. 🙈','Bruno: „Das Casino gewinnt immer!“ 😎'];
-const pick=a=>a[Math.floor(Math.random()*a.length)];
-btn.onclick=()=>{if(busy)return;busy=true;btn.disabled=true;msg.textContent='🎰 …';
- const res=[0,1,2].map(()=>Math.floor(Math.random()*SY.length));if(Math.random()<0.12){res[1]=res[0];res[2]=res[0];}
- strips.forEach((st,i)=>{const n=fill(st,cur[i],res[i],14+i*6);st.style.transition='none';st.style.transform='translateY(0)';st.offsetHeight;
-  st.style.transition=`transform ${1.1+i*0.45}s cubic-bezier(.15,.7,.25,1.05)`;st.style.transform=`translateY(${-(n-1)*H}px)`;});
- setTimeout(()=>{cur=res;const same=new Set(res).size;msg.textContent=same===1?pick(WIN):same===2?pick(TWO):pick(NONE);busy=false;btn.disabled=false;},1100+2*450+120);};
+(()=>{const F=[['🍦','Bruno spendiert dir ein Eis … in Gedanken. 🍦'],['🏅','Du bist für 5 Minuten Ehrenbürger von Brunohausen!'],['🐄','Sebastians Kühe winken dir zu. Muuuh!'],['🚒','Die Feuerwehr macht für dich die Sirene an. Tatüüü!'],['🎈','Ein Ballon mit deinem Namen fliegt über die Stadt.'],['🍕','Heute gibt es Döner UND Pizza. Bruno zahlt nicht.'],['😴','Bruno macht ein Nickerchen. Psst!'],['🌈','Heute wird ein richtig guter Tag!']];
+const COL=['#ffd23d','#7cc85a','#4ab3f4','#e8453c','#b77cf0','#ff9f43','#2ec4b6','#ff6fb5'];
+const box=document.getElementById('slot'),wh=box.querySelector('.wheel'),msg=box.querySelector('.msg'),btn=box.querySelector('.spin'),n=F.length,seg=360/n;
+wh.style.background='conic-gradient('+COL.map((c,i)=>c+' '+(i*seg)+'deg '+((i+1)*seg)+'deg').join(',')+')';
+F.forEach(([e],i)=>{const d=document.createElement('span');d.textContent=e;d.style.transform=`rotate(${i*seg+seg/2}deg) translateY(-104px) rotate(${-(i*seg+seg/2)}deg)`;wh.append(d);});
+let rot=0,busy=false,last=-1;
+btn.onclick=()=>{if(busy)return;busy=true;btn.disabled=true;msg.textContent='🎡 …';let k;do{k=Math.floor(Math.random()*n);}while(k===last);last=k;
+ const target=360-(k*seg+seg/2);rot+=360*5+((target-rot%360)+360)%360;wh.style.transform=`rotate(${rot}deg)`;
+ setTimeout(()=>{msg.textContent=F[k][1];busy=false;btn.disabled=false;},3300);};
 const close=()=>box.classList.remove('on');box.querySelector('.x').onclick=close;box.onclick=e=>{if(e.target===box)close();};
 document.addEventListener('keydown',e=>{if(e.key==='Escape')close();});
 window.openSlot=()=>{box.classList.add('on');};})();
