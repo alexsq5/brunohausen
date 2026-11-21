@@ -26,6 +26,7 @@ Stand: 19.11.2026, nach Folge 10 (gepostet)
 |---|---|---|---|---|
 | 10 | 704 | 163 | 14.000 € | Bruno gesteht: Schlafmütze ist seine, er ist schlafgewandelt (Geld geklaut? offen; wie kam der Dieb-Schlüssel an die Tür? offen). +10 Follower (+5.000), Abstimmung Casino 7/Hotel 2/Gym 2 → Casino (−15.000), Chefs Gastelgott+Marius+Tim. Bauernhof für Sebastian (−5.000). Neu: Einar, Silant, Tilo, Basti, Johannes, Marius. Johannes Feuerwehr-Kommandant, Timo Feuerwehr, Lionell Fahrzeugwart, Felix Kraftwerksmeister, Kilian+Marcel Helfer. Wünsche: Schule, Gefängnis. Ende: Bruno schließt sich nachts ein. |
 | 11 | 707 | 166 | 15.500 € | Spuren an der offenen AKW-Tür, 3 Verdächtige (1 Fuchs, 2 Waschbär, 3 Elster) – Zuschauer tippen, Auflösung Folge 12: Elster. +3 Follower (+1.500). Neu: Leonard (@leonard.krasniqi03, Club Leo eröffnet, kein Geld aus der Kasse), Saphira (Gym-Wunsch), Leonita (@lalonita, Straßenpenner, 1 €/Tag, wohnt auf der Parkbank). Sebastian: roter Traktor + 60 Kühe (selbst bezahlt). Noch 43 bis Gefängnis. Insta-Namen ab jetzt auf Schildern. |
+| 12 | 713 | 167 | 18.500 € | STAFFEL-1-FINALE (21.11. ~10:10): Auflösung Elster, richtig getippt @nikg3d. +6 Follower (+3.000). Jamie (@jamiecondlin) zieht ein. AKW undicht, Fluss leuchtet grün, alle müssen raus, Bruno packt Koffer – „Wo gehen wir jetzt hin?“. Reel 18057626234810936. |
 | 9 | 694 | 157 | 29.000 € | AKW gebaut (−20.000), +58 Follower (+29.000), geklaute 500 € hinter der AKW-Tür gefunden (+500) + Schlafmütze, 13 ziehen ein (Janosch, Justin, Lionell, Lisa, Gastelgott, Marty, Timo, Pinguin, Theresa, Ben, Kilian, Celine, Jonas), Felix will Kraftwerksmeister, Umfrage Hotel/Gym/Casino |
 | 8 | 636 | 144 | 19.500 € | Gleichstand 2:2, Bruno entscheidet: Schlüsselladen (−5.000), 21 neue, Schlüssel trägt AKW-Zeichen, Leon + Lukas W. Feuerwehr, neue Einzieh-Regel |
 | 7 | 615 | 123 | 14.000 € | Krankenhaus (−10.000), AKW freigeschaltet, Dome = Nr. 600, Xavi BBI-Ermittler, Lesander Pflegefachkraft, Ekram will Schlüsselladen, Platz + Spielplatz |
@@ -127,3 +128,6 @@ Alex will Wege zu allen Gebäuden. Video: `/home/claude/w9/plateD11.jpg` (= plat
 - Staffel-2-Cover: pro Folge 1 eigenes Bruno-Keyart-Bild (ElevenLabs, 9:16 2K, Bruno groß, oben 40 % Himmel frei, ~518 Credits) + `studio/staffel2/cover_s2_key.html?bg=…&rib=…&title=…` (Logo/Band/Titel ab y≈290, damit das 3:4-Profilraster nichts abschneidet). Nur Bruno, keine anderen Figuren (Alex).
 
 - Staffel-2-Cover-Standard (Alex, 20.11.): Stil E (Luckiest Guy, rotes Banner, gelbe 3D-Schrift) = studio/staffel2/cover_s2_key.html?rib=STAFFEL%202%20·%20FOLGE%20N&title=TITEL
+
+
+- Staffel 2 Folge 1 „Neuanfang“: Alex will sie am 21.11. um 18:00 (statt So 11:00). Wünsche neu: Sebastian Heimmolkerei.

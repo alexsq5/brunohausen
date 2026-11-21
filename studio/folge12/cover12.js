@@ -1,0 +1,20 @@
+const {chromium}=require('playwright');const fs=require('fs');
+(async()=>{const words=JSON.parse(fs.readFileSync('/home/claude/w12/words.json','utf8'));const res4=JSON.parse(fs.readFileSync('res4.json','utf8'));
+const b=await chromium.launch({args:['--allow-file-access-from-files']});const pg=await b.newPage({viewport:{width:1080,height:1920}});
+pg.on('pageerror',e=>console.log('ERR',e.message));
+await pg.goto('file://'+process.cwd()+'/render12.html');await pg.evaluate(w=>window.init(w[0],w[1]),[words,res4]);
+await pg.evaluate(()=>{
+ const t=T.gruen+0.8;
+ captions=()=>{};hud=()=>{};bottomPill=()=>{};yelPill=()=>{};tag=()=>{};bubble=()=>{};stamp=()=>{};runners=()=>{};alarm=()=>{};cam=()=>[AKWP[0]-120,AKWP[1]+260,1.25];frame(t);
+ ctx.fillStyle='rgba(10,30,20,.45)';ctx.fillRect(0,0,1080,1920);
+ let g=ctx.createLinearGradient(0,0,0,520);g.addColorStop(0,'rgba(10,15,40,.6)');g.addColorStop(1,'rgba(10,15,40,0)');ctx.fillStyle=g;ctx.fillRect(0,0,1080,520);
+ ctx.save();ctx.font=`900 118px ${F}`;const lab='FOLGE 12';const lw=ctx.measureText(lab).width+130;
+ rr(540-lw/2,200,lw,170,85);ctx.fillStyle=YEL;ctx.fill();ctx.lineWidth=16;ctx.strokeStyle=NAVY;ctx.stroke();
+ ctx.fillStyle=NAVY;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(lab,540,292);ctx.restore();
+ strokeText('BRUNOHAUSEN',540,455,132,'#fff',NAVY,30);
+ strokeText('DAS FINALE ☢️',540,600,96,'#8CFF5A',NAVY,22);
+ strokeText('Wer war der Dieb? 🐦‍⬛',540,1100,62,'#fff',NAVY,18);
+ ctx.save();ctx.translate(800,1560);ctx.rotate(0.08);ctx.font=`260px ${EMO}`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('🧳',0,0);ctx.restore();
+ bigBruno(420,1950,0.85,true,0,false);
+});
+await pg.screenshot({path:'/home/claude/w12/cover_folge12.png'});await b.close();})();
