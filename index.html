@@ -79,6 +79,8 @@ details{background:#fff;border:2px solid #efdfc0;border-radius:16px;padding:12px
 .toast{left:50%!important}
 }
 @media (max-height:740px){.chead{padding:10px 14px 8px}.card h2{font-size:25px}.card .sub{font-size:12px;margin-top:4px}.cbody{padding:10px}.row{margin-bottom:8px}.tile{padding:7px 10px}.tile b{font-size:21px}.job{padding:7px 10px;margin-bottom:8px;font-size:14px}.job i{width:32px;height:32px;font-size:19px}.back{padding:10px}}
+.share{grid-column:1/-1;width:100%;border:0;border-radius:16px;padding:12px;margin-bottom:8px;font:400 18px Lilita,sans-serif;letter-spacing:.04em;cursor:pointer;color:#3a2600;background:linear-gradient(180deg,#ffe27a,#f2b82e);box-shadow:inset 0 2px 0 rgba(255,255,255,.5),0 4px 0 #b9831a}
+.lb{display:grid;gap:8px}.lbr{display:flex;align-items:center;gap:12px;background:#fff;border:2px solid #efdfc0;border-radius:16px;padding:10px 14px;box-shadow:0 3px 0 #e6d2ab}.lbr b{width:34px;text-align:center;font:400 22px Lilita,sans-serif;color:#1b2148}.lbr span{flex:1;font-weight:700;color:#1b2148;cursor:pointer}.lbr i{font-style:normal;font-weight:700;color:#a0701a}.lbr.p1{background:linear-gradient(180deg,#fff6cf,#ffe58a);border-color:#f2c230}.lbnote{margin-top:10px;font-size:14px;color:#6b5a4e}
 </style><script defer src="/_vercel/insights/script.js"></script></head><body><div id="hero"><canvas id="c"></canvas>
 <div class="hud"><div class="stat"><i>🏠</i><div><small>EINWOHNER</small><b>167</b></div></div><div class="stat"><i>🪙</i><div><small>IM UMLAUF</small><b id="sum">40.750 T</b></div></div><div class="stat"><i>❤️</i><div><small>FOLLOWER</small><b>713</b></div></div></div>
 <div class="logo" id="logo"><h1>BRUNOHAUSEN</h1><div class="ribbon">STAFFEL 2 · NEUANFANG</div></div>
@@ -86,7 +88,7 @@ details{background:#fff;border:2px solid #efdfc0;border-radius:16px;padding:12px
 <div class="box"><label class="field"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a07a55" stroke-width="3" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg><input id="q" placeholder="Name oder @Insta…" autocomplete="off" list="dl"></label><button id="go">SUCHEN</button></div><datalist id="dl"></datalist><div class="sugg" id="sugg"></div></div></div>
 <div class="card" id="card"><div class="chead"><h2><span id="cName"></span><span class="rang" id="cRang"></span></h2><div class="cig" id="cIg"></div><div class="sub" id="cHome"></div></div><div class="cbody">
 <div class="row"><div class="tile gold"><small>🪙 KONTO</small><b id="cBal">250 T</b></div><div class="tile"><small>📈 PRO TAG</small><b id="cDay">+20 T</b></div></div>
-<div class="job"><i id="cIco">💼</i><div><span id="cJob"></span><small id="cSub">aus Staffel 1 übernommen</small></div></div><button class="back" id="back">← ZURÜCK ZUR STADT</button></div></div>
+<div class="job"><i id="cIco">💼</i><div><span id="cJob"></span><small id="cSub">aus Staffel 1 übernommen</small></div></div><button class="share" id="share">🔗 LINK ZU MEINER FIGUR TEILEN</button><button class="back" id="back">← ZURÜCK ZUR STADT</button></div></div>
 
 <a class="more" id="more" href="#info">▼ Mehr Infos</a>
 <div class="toast" id="toast"></div></div><section id="info"><div class="in"><div class="handle"></div>
@@ -103,6 +105,7 @@ details{background:#fff;border:2px solid #efdfc0;border-radius:16px;padding:12px
 <div class="tl"><i>💼</i><b>+20 / Tag</b><small>mit Job in der Stadt</small></div>
 <div class="tl"><i>🛋️</i><b>+5 / Tag</b><small>Brunogeld, wenn du (noch) keinen Job hast</small></div>
 <div class="tl"><i>🏡</i><b>1.000 Taler</b><small>kostet ein eigenes Haus</small></div>
+<div class="tl"><i>🎭</i><b>200 Taler</b><small>Figur wechseln (z. B. von Katze zu Fuchs) – bald!</small></div>
 </div><p class="note">🎟️ Neue Grundstücke werden unter den Kommentierenden verlost. Wer genug Taler hat, kann darauf bauen.<br>Taler sind Spielgeld: kein echtes Geld, nicht kaufbar und nicht auszahlbar.</p></div>
 
 <div class="sec"><h3>💼 Jobs &amp; Ränge</h3><p>Wünsch dir einen Job in den Kommentaren – Feuerwehr, Casino, Bauernhof, Krankenhaus, Kraftwerk … Bruno verteilt sie in den Folgen.</p><div class="ranks">
@@ -111,7 +114,7 @@ details{background:#fff;border:2px solid #efdfc0;border-radius:16px;padding:12px
 <div class="rk"><span class="n">GRÜNDER</span>der Besitzer von Brunohausen – gibt's nur einmal 👑</div>
 </div></div>
 
-<div class="sec"><h3>🎯 Nächstes Ziel</h3><div class="goal"><b>⛓️ Gefängnis bei 750 Followern</b><div class="bar"><i style="width:95%"></i></div><small>713 von 750 Followern – noch 37!</small></div></div>
+<div class="sec" id="lbsec"><h3>🏆 Kommentar-König <span id="lbMon"></span></h3><div class="lb" id="lb"><div class="lbr"><span>Wird geladen…</span></div></div><p class="lbnote">Wer am Monatsende die meisten Kommentare unter den Brunohausen-Reels hat, bekommt <b>100 Taler geschenkt</b> 🎁 – und Bruno nennt dich in der nächsten Folge! <span id="lbStand"></span></p></div><div class="sec"><h3>🎯 Nächstes Ziel</h3><div class="goal"><b>⛓️ Gefängnis bei 750 Followern</b><div class="bar"><i style="width:95%"></i></div><small>713 von 750 Followern – noch 37!</small></div></div>
 
 <div class="sec"><h3>🏙️ Das gibt's schon</h3><div class="chips2"><span>🏛️ Rathaus</span><span>⛲ Brunnen</span><span>🛒 Bruno-Markt</span><span>🕵️ BBI</span><span>🥙 Döner</span><span>🚒 Feuerwehr</span><span>🚓 Polizei</span><span>🏥 Krankenhaus</span><span>🔑 Schlüsselladen</span><span>🏢 3 Mehrfamilienhäuser</span><span>⚡ Atomkraftwerk</span><span>🎰 Casino</span><span>🐄 Bauernhof</span></div></div>
 
@@ -156,6 +159,14 @@ const $=id=>document.getElementById(id);
 NAMES.forEach(p=>{const o=document.createElement('option');o.value=igOf(p)?'@'+igOf(p):p[0];o.label=p[0];$('dl').append(o);});
 NAMES.filter(x=>x[1]).slice(0,10).concat(NAMES.slice(0,4)).forEach(([n])=>{const b=document.createElement('button');b.textContent=n;b.onclick=()=>find(n);$('sugg').append(b);});
 $('go').onclick=()=>find($('q').value);$('q').onkeydown=e=>{if(e.key==='Enter')find($('q').value)};$('back').onclick=goBack;
+let CUR=null;
+$('share').onclick=async()=>{if(!CUR)return;const url=location.origin+'/?f='+encodeURIComponent(CUR);const txt='Schau dir meine Figur in Brunohausen an! 🏙️';
+ try{if(navigator.share){await navigator.share({title:'Brunohausen',text:txt,url});return;}}catch(e){}
+ try{await navigator.clipboard.writeText(url);toast('Link kopiert! Schick ihn deinen Freunden 🔗');}catch(e){prompt('Link kopieren:',url);}};
+(function(){try{const f=new URLSearchParams(location.search).get('f');if(f)setTimeout(()=>find(f),700);}catch(e){}})();
+fetch('/lb.json?'+Date.now()).then(r=>r.json()).then(d=>{$('lbMon').textContent=d.monat;$('lbStand').textContent='(Stand '+d.stand+')';const L=$('lb');L.innerHTML='';
+ if(!d.top.length){L.innerHTML='<div class="lbr"><span>Noch keine Kommentare – sei der Erste!</span></div>';return;}
+ d.top.forEach((x,i)=>{const r=document.createElement('div');r.className='lbr'+(i===0?' p1':'');r.innerHTML=`<b>${['🥇','🥈','🥉'][i]||i+1}</b><span>@${x.u}</span><i>${x.n} 💬</i>`;r.querySelector('span').onclick=()=>{scrollTo({top:0,behavior:'smooth'});find(x.u);};L.append(r);});}).catch(()=>{$('lbsec').style.display='none';});
 function toast(t){const e=$('toast');e.textContent=t;e.classList.add('on');setTimeout(()=>e.classList.remove('on'),2400);}
 let state={scene:'hg_stadt_oben',t0:0,prev:null,trans:0,who:null};
 function now(){return performance.now()/1000}
@@ -163,7 +174,7 @@ function find(q){q=(q||'').trim();if(!q)return;const ql=q.toLowerCase();const p=
  if(!p){toast('„'+q+'“ wohnt noch nicht hier. Kommentier „Ich zieh ein“!');return;}$('q').blur();
  const r=info(p[0],p[1]);const h=hash(p[0]);state={prev:state.scene,scene:r.scene,t0:now(),who:{name:igOf(p)?'@'+igOf(p):(r.disp||p[0]),r,flat:`Wohnung ${(h>>>3)%4+1}.${(h>>>7)%3+1}`,house:['im gelben Haus','im blauen Haus','im roten Haus'][h%3]}};
  $('search').classList.add('down');$('logo').classList.add('hide');document.querySelector('.side')&&document.querySelector('.side').classList.add('result');
- $('cName').textContent=r.disp||p[0];$('cIg').textContent=igOf(p)?'@'+igOf(p):'';$('cRang').textContent=r.rang;$('cRang').style.display=r.rang?'':'none';$('cHome').textContent=r.home||('🏠 '+state.who.flat+' '+state.who.house);$('card').classList.toggle('owner',!!r.owner);
+ CUR=igOf(p)||p[0];$('cName').textContent=r.disp||p[0];$('cIg').textContent=igOf(p)?'@'+igOf(p):'';$('cRang').textContent=r.rang;$('cRang').style.display=r.rang?'':'none';$('cHome').textContent=r.home||('🏠 '+state.who.flat+' '+state.who.house);$('card').classList.toggle('owner',!!r.owner);
  $('cJob').textContent=r.job;$('cSub').textContent=r.sub||'aus Staffel 1 übernommen';$('cIco').textContent=r.ico;$('cDay').textContent=(r.pay==='∞'?'∞':'+'+r.pay+' T');
  setTimeout(()=>{$('card').classList.add('on');if(typeof r.bal==='string')$('cBal').textContent=r.bal+' Taler';else count($('cBal'),r.bal!=null?r.bal:250);},1900);}
 function count(el,v){const s=now();(function f(){const k=sm((now()-s)/0.9);el.textContent=Math.round(v*k)+' Taler';if(k<1)requestAnimationFrame(f)})();}
