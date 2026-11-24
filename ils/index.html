@@ -59,6 +59,22 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--gold);outline-offse
 #lid{transform-origin:260px 210px;transition:transform .7s cubic-bezier(.3,1.6,.5,1)}
 .open #lid{transform:translate(-30px,-90px) rotate(-14deg)}
 .spark{opacity:0;transition:opacity .4s .3s}.open .spark{opacity:1}
+.search{background:var(--bg);padding:0 max(5vw,16px) 30px}
+.sform{position:relative;max-width:760px;margin:0 auto}
+.slabel{display:block;color:#fff;font:400 22px "Bagel Fat One",sans-serif;margin-bottom:10px;text-align:center}
+.sbox{display:flex;align-items:center;gap:8px;background:#fff;border-radius:18px;padding:6px 6px 6px 16px;box-shadow:0 10px 0 var(--bg2)}
+.sbox svg{width:22px;height:22px;color:#8a6d72;flex:none}
+.sbox input{flex:1;border:0;outline:0;font:600 17px "DM Sans",sans-serif;color:#2a0d12;background:transparent;min-height:48px}
+.sbox input::placeholder{color:#9b8589;font-weight:400}
+.sbox .btn{min-height:46px}
+.sugg{list-style:none;margin:8px 0 0;padding:6px;position:absolute;left:0;right:0;z-index:15;background:#fff;color:#2a0d12;border-radius:16px;box-shadow:0 18px 40px rgba(0,0,0,.25)}
+.sugg li{padding:10px 12px;border-radius:10px;cursor:pointer;display:flex;justify-content:space-between;gap:10px}
+.sugg li[aria-selected=true],.sugg li:hover{background:#f7efe9}
+.sugg small{color:#8a6d72;white-space:nowrap}
+.sugg li.all{font-weight:800;color:#b3122e}
+.amz{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;background:rgba(255,255,255,.12);border:2px dashed rgba(255,255,255,.4);border-radius:18px;padding:14px 18px;margin:0 0 20px;color:#fff}
+.amz a{background:var(--gold);color:#3a1d00;font-weight:800;text-decoration:none;padding:10px 16px;border-radius:12px;min-height:44px;display:inline-flex;align-items:center}
+@media(max-width:600px){.sbox .btn{padding:10px 14px}.slabel{font-size:19px}}
 .quick{background:var(--bg2);color:#fff;padding:22px max(5vw,16px)}
 .quick .qwrap{display:flex;flex-direction:column;gap:12px;align-items:stretch}
 .marq{flex:1;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);width:100%}
@@ -198,11 +214,21 @@ footer a{color:#fff}
  </div>
 </div></section>
 
+<section class="search" id="suche"><div class="wrap">
+ <form id="sform" class="sform" role="search" autocomplete="off">
+  <label for="sq" class="slabel">Oder selbst suchen</label>
+  <div class="sbox"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M16.5 16.5L21 21" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+   <input id="sq" type="search" placeholder="z. B. Fußballfan, Kaffee, Oma unter 20 €" aria-autocomplete="list" aria-controls="sugg">
+   <button class="btn" type="submit">Suchen</button></div>
+  <ul class="sugg" id="sugg" role="listbox" hidden></ul>
+ </form>
+</div></section>
 <section class="quick"><div class="wrap qwrap"><b>Schnellstart – direkt zu den Ideen</b><div class="marq"><div class="track" id="quick"></div></div></div></section>
 
 <section class="band" id="res" hidden><div class="wrap">
  <h2 id="rt">Deine 10 Ideen</h2><p class="sub" id="rs"></p>
  <div class="bar" id="chips"></div>
+ <div class="amz" id="amz" hidden></div>
  <div class="tags" id="tags"></div>
  <div class="more"><button class="btn" id="shuffle" type="button">10 neue Ideen zeigen</button><a class="btn wa" id="share" href="#" target="_blank" rel="noopener">Liste per WhatsApp schicken</a><button class="btn ghost" id="again" type="button">Neu starten</button></div>
  <p class="note">Tipp: Mit dem Herz merkst du dir Ideen. Die Links führen zu passenden Suchergebnissen bei Amazon, dort siehst du aktuelle Preise und Lieferzeiten.</p>
@@ -605,6 +631,45 @@ const closeMz=()=>$('drawer').classList.remove('on');$('closeMz').addEventListen
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMz();});
 $('shuffle').addEventListener('click',()=>{seed++;show();});
 $('again').addEventListener('click',()=>{Object.assign(st,{who:null,age:null,hob:[],any:false,bud:null,sty:null});cur=0;seed=0;seen=new Set();$('res').hidden=true;$('pic').classList.remove('open');render();window.scrollTo({top:0});});
+/* ---- Suche ---- */
+const norm=t=>t.toLowerCase().replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/ß/g,'ss').replace(/[^a-z0-9 ]/g,' ');
+const STOP=new Set('fuer geschenk geschenke geschenkidee geschenkideen idee ideen mein meine meinen meiner die der das den dem ein eine einen einer und oder zum zur mit bis unter ueber euro eur von fuer was wer wie ich du er sie es fan fans liebe lieben mag mage mal so etwas sachen weihnachten geburtstag'.split(' '));
+const SYN={mama:['familie','wellness','fotos'],mutter:['familie','wellness','fotos'],papa:['grillen','heimwerken','autos'],vater:['grillen','heimwerken','autos'],oma:['familie','fotos'],opa:['familie','garten'],kaffee:['kaffee'],espresso:['kaffee'],tee:['tee'],fussball:['fussball','sport'],fussballfan:['fussball'],sport:['sport'],fitness:['sport'],gym:['sport'],laufen:['sport'],joggen:['sport'],gamer:['gaming'],gaming:['gaming'],zocken:['gaming'],playstation:['gaming'],konsole:['gaming'],spiele:['spiele'],puzzle:['spiele'],auto:['autos'],autos:['autos'],autofan:['autos'],garten:['garten'],pflanzen:['garten'],hund:['tiere'],katze:['tiere'],tiere:['tiere'],haustier:['tiere'],lesen:['lesen'],buch:['lesen'],buecher:['lesen'],leser:['lesen'],musik:['musik'],kopfhoerer:['musik'],film:['filme'],filme:['filme'],serien:['filme'],kino:['filme'],kochen:['kochen'],koch:['kochen'],kueche:['kochen'],backen:['backen'],grillen:['grillen'],bbq:['grillen'],reisen:['reisen'],urlaub:['reisen'],camping:['draussen'],wandern:['draussen'],beauty:['beauty'],schminken:['beauty'],makeup:['beauty'],pflege:['beauty','wellness'],wellness:['wellness'],entspannen:['wellness'],entspannung:['wellness'],technik:['technik'],handy:['technik'],gadget:['technik'],gadgets:['technik'],basteln:['kreativ'],malen:['kreativ'],kreativ:['kreativ'],mode:['mode'],schmuck:['mode','schmuck'],heimwerker:['heimwerken'],werkzeug:['heimwerken'],buero:['büro'],kollege:['lustig','büro'],kollegin:['lustig','büro'],wichteln:['lustig'],lustig:['lustig'],freundin:['liebe','schmuck','wellness'],freund:['liebe'],partner:['liebe'],romantisch:['liebe'],schwester:['beauty','wellness'],bruder:['gaming','sport'],foto:['fotos'],fotos:['fotos'],erinnerung:['fotos','familie'],schokolade:['genuss'],suessigkeiten:['genuss'],naschen:['genuss']};
+const AGEW={kind:'k',kinder:'k',baby:'k',teen:'t',teenager:'t',jugendlich:'t',oma:'s',opa:'s',senioren:'s'};
+const IDX=ITEMS.map(it=>({it,t:norm(it.t),d:norm(it.d),q:norm(it.q)}));
+function parse(raw){const n=norm(raw);const toks=n.split(/\s+/).filter(w=>w&&!STOP.has(w));let maxB=null;const m=raw.match(/(\d{1,3})\s*(€|euro|eur)?/i);if(m){const v=+m[1];maxB=v<=15?1:v<=35?2:v<=60?3:4;}
+ const nums=toks.filter(w=>/^\d+$/.test(w));return{fem:toks.some(w=>/^(freundin|mama|mutter|oma|schwester|frau|tochter|kollegin|tante)$/.test(w)),rom:toks.some(w=>/^(romantisch|freundin|freund|partner|partnerin|liebe|jahrestag|valentinstag)$/.test(w)),toks:toks.filter(w=>!/^\d+$/.test(w)),maxB,age:toks.map(w=>AGEW[w]).find(Boolean)||null};}
+function search(raw){const p=parse(raw);if(!p.toks.length&&!p.maxB)return[];
+ const tags=new Set(p.toks.flatMap(w=>SYN[w]||(SYN[w.replace(/s$/,'')]||[])));
+ return IDX.map(x=>{let s=0;for(const w of p.toks){if(w.length<3)continue;const st=w.length>5?w.slice(0,w.length-1):w;if(x.t.includes(st))s+=6;if(x.q.includes(st))s+=3;if(x.d.includes(st))s+=2;}
+  for(const g of tags)if(x.it.h.includes(g))s+=4;
+  if(p.fem&&/Bart|Rasier|Krawatte|Herren/.test(x.it.t))return{it:x.it,s:-99};
+  if(p.rom&&x.it.s.includes('r'))s+=3;
+  if(p.age){if(x.it.a.includes(p.age))s+=1;else s-=8;}
+  if(p.maxB){if(x.it.b>p.maxB)s-=10;else s+=1;}
+  if(!p.toks.length&&p.maxB&&x.it.b<=p.maxB)s+=rnd(x.it.i)*3;
+  return{it:x.it,s};}).filter(x=>x.s>2).sort((a,b)=>b.s-a.s).map(x=>x.it);}
+const amzQ=raw=>{const r=raw.trim();return /geschenk/i.test(r)?r:r+' Geschenk';};
+let sel=-1,sugL=[];
+function showSearch(raw){const L=search(raw).slice(0,12);last=L;
+ $('res').hidden=false;$('pic').classList.add('open');
+ $('rt').textContent=`Ideen für „${raw.trim()}“`;$('rs').textContent=L.length?`${L.length} passende Ideen aus unserer Sammlung`:'Dazu haben wir noch keine eigene Idee, schau direkt bei Amazon.';
+ $('chips').innerHTML='';
+ $('amz').hidden=false;$('amz').innerHTML=`<span>Noch mehr Auswahl zu „${esc(raw.trim())}“</span><a href="${esc(link(amzQ(raw)))}" target="_blank" rel="sponsored noopener">Bei Amazon suchen →</a>`;
+ $('tags').innerHTML=L.length?L.map(card).join(''):'';
+ $('share').href=wa(`Geschenkideen für „${raw.trim()}“:`,L);
+ $('res').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});}
+function drawSugg(){const v=$('sq').value;const ul=$('sugg');if(v.trim().length<2){ul.hidden=true;return;}
+ sugL=search(v).slice(0,6);
+ ul.innerHTML=sugL.map((it,i)=>`<li role="option" data-k="${i}" aria-selected="${i===sel}">${esc(it.t)}<small>${esc(lbl(BUD,it.b))}</small></li>`).join('')+`<li role="option" class="all" data-k="all" aria-selected="${sel===sugL.length}">Alle Ideen zu „${esc(v.trim())}“ zeigen</li>`;ul.hidden=false;}
+$('sq').addEventListener('input',()=>{sel=-1;drawSugg();});
+$('sq').addEventListener('keydown',e=>{if($('sugg').hidden)return;const n=sugL.length+1;if(e.key==='ArrowDown'){sel=(sel+1)%n;drawSugg();e.preventDefault();}else if(e.key==='ArrowUp'){sel=(sel-1+n)%n;drawSugg();e.preventDefault();}else if(e.key==='Escape'){$('sugg').hidden=true;}});
+$('sugg').addEventListener('mousedown',e=>{const li=e.target.closest('li');if(!li)return;e.preventDefault();pickSugg(li.dataset.k);});
+function pickSugg(k){const v=$('sq').value;$('sugg').hidden=true;if(k==='all'||k===undefined){showSearch(v);return;}const it=sugL[+k];showSearch(it.t);}
+$('sform').addEventListener('submit',e=>{e.preventDefault();const v=$('sq').value;if(!v.trim())return;if(sel>=0&&sel<sugL.length){pickSugg(String(sel));}else{$('sugg').hidden=true;showSearch(v);} sel=-1;});
+$('sq').addEventListener('blur',()=>setTimeout(()=>{$('sugg').hidden=true;},150));
+/* bei Quiz-Ergebnissen den Amazon-Kasten ausblenden */
+const _show=show;show=function(){$('amz').hidden=true;_show();};
 render();mz();
 }
 </script>
