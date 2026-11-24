@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>In letzter Sekunde – das passende Geschenk in 30 Sekunden</title>
+<meta name="description" content="Keine Idee, was du schenken sollst? Fünf kurze Fragen und inletztersekunde.de zeigt dir zehn passende Geschenkideen für Mama, Papa, Partner, Freunde, Kinder und zum Wichteln.">
+<meta property="og:title" content="In letzter Sekunde – das passende Geschenk in 30 Sekunden">
+<meta property="og:description" content="Fünf Fragen, zehn passende Geschenkideen. Kostenlos und ohne Anmeldung.">
+<meta name="theme-color" content="#b3122e">
+<style>
+/* VOICE: warm, quick, a little cheeky – a friend who always knows what to give
+   IDEA: wrapped presents and hanging gift tags – every result is a tag with its own little picture
+   PICTURE: big wrapped box that opens when the ideas arrive; each idea card has a drawn object on a coloured panel
+   COLOUR and TYPE: berry red field, pine green, gold ribbon accent; Bagel Fat One + DM Sans (self-hosted)
+   LAYOUT: quiz on top beside the present, quick-starts, results grid with favourite, saved list drawer, how-it-works, footer */
+@font-face{font-family:"Bagel Fat One";src:url(fonts/bagel-fat-one-latin-400-normal.woff2) format("woff2");font-display:swap}
+@font-face{font-family:"Bagel Fat One";src:url(fonts/bagel-fat-one-latin-ext-400-normal.woff2) format("woff2");font-display:swap;unicode-range:U+0100-024F}
+@font-face{font-family:"DM Sans";font-weight:400;src:url(fonts/dm-sans-latin-400-normal.woff2) format("woff2");font-display:swap}
+@font-face{font-family:"DM Sans";font-weight:600;src:url(fonts/dm-sans-latin-600-normal.woff2) format("woff2");font-display:swap}
+@font-face{font-family:"DM Sans";font-weight:800;src:url(fonts/dm-sans-latin-800-normal.woff2) format("woff2");font-display:swap}
+:root{color-scheme:light dark;--bg:light-dark(#b3122e,#3a0711);--bg2:light-dark(#8f0c22,#25040b);--card:light-dark(#fffaf2,#1a1214);--paper:light-dark(#fff,#241a1c);--ink:light-dark(#2a0d12,#f7ebe6);--soft:light-dark(#6b4a4f,#c9aeb0);--pine:light-dark(#0f5c3c,#3fa57a);--gold:#f6b83c;--line:light-dark(#ecdcd2,#3a2a2d)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "DM Sans",system-ui,sans-serif;overflow-x:clip}
+.band{padding:clamp(28px,4vw,64px) max(5vw,16px)}
+.wrap{max-width:1240px;margin:0 auto}
+header.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px max(5vw,16px);color:#fff;max-width:1240px;margin:0 auto}
+.logo{font:400 26px/1 "Bagel Fat One",sans-serif;display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none}
+.logo svg{width:34px;height:34px}
+.hdr{display:flex;align-items:center;gap:10px}
+.count{font-size:14px;font-weight:600;background:rgba(255,255,255,.14);padding:7px 12px;border-radius:999px;white-space:nowrap}
+.mz{font:800 15px "DM Sans",sans-serif;min-height:44px;padding:8px 14px;border-radius:999px;border:2px solid rgba(255,255,255,.5);background:transparent;color:#fff;cursor:pointer;display:flex;align-items:center;gap:6px;white-space:nowrap}
+.mz b{background:var(--gold);color:#3a1d00;border-radius:999px;min-width:22px;height:22px;display:inline-grid;place-items:center;font-size:13px}
+.hero{background:radial-gradient(1200px 500px at 70% 0%,rgba(255,255,255,.14),transparent 60%),var(--bg);color:#fff;padding-top:4px}
+.grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(20px,4vw,56px);align-items:center}
+h1{font:400 clamp(36px,6vw,62px)/1.02 "Bagel Fat One",sans-serif;margin:0 0 12px;text-wrap:balance}
+.lead{font-size:18px;max-width:34em;margin:0 0 22px;color:#ffe9e4}
+.quiz{background:var(--card);color:var(--ink);border-radius:26px;padding:clamp(18px,3vw,30px);box-shadow:0 18px 0 var(--bg2),0 30px 60px rgba(0,0,0,.25)}
+.steps{display:flex;gap:6px;margin-bottom:14px}.steps i{height:6px;flex:1;border-radius:9px;background:var(--line);transition:background .3s}.steps i.on{background:var(--pine)}
+.q{font:400 26px/1.15 "Bagel Fat One",sans-serif;margin:0 0 6px}
+.hint{color:var(--soft);font-size:14px;margin:0 0 14px}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{font:600 16px "DM Sans",sans-serif;min-height:44px;padding:10px 16px;border-radius:999px;border:2px solid var(--line);background:transparent;color:var(--ink);cursor:pointer;transition:transform .12s,background .12s}
+.opt:hover{transform:translateY(-1px);border-color:var(--pine)}
+.opt.any{border-style:dashed;border-color:var(--gold);flex-basis:100%;background:light-dark(#fff6e2,#2c2214)}
+.opt[aria-pressed=true]{background:var(--pine);border-color:var(--pine);color:#fff}
+button:focus-visible,a:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.nav{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:18px;flex-wrap:wrap}
+.btn{font:800 16px "DM Sans",sans-serif;min-height:48px;padding:12px 22px;border-radius:14px;border:0;cursor:pointer;background:var(--gold);color:#3a1d00;box-shadow:0 4px 0 #c47f0f;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+.btn:active{transform:translateY(2px);box-shadow:0 2px 0 #c47f0f}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.ghost{background:transparent;color:var(--soft);box-shadow:none;padding-inline:6px}
+.btn.wa{background:#1faa59;color:#fff;box-shadow:0 4px 0 #13723b}
+.trust{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:22px;font-size:14px;color:#ffe0da}
+.trust span::before{content:"✓ ";color:var(--gold);font-weight:800}
+.pic{position:relative;aspect-ratio:1/1;max-width:520px;width:100%;justify-self:center}
+.pic svg{width:100%;height:100%;display:block;overflow:visible}
+#lid{transform-origin:260px 210px;transition:transform .7s cubic-bezier(.3,1.6,.5,1)}
+.open #lid{transform:translate(-30px,-90px) rotate(-14deg)}
+.spark{opacity:0;transition:opacity .4s .3s}.open .spark{opacity:1}
+.quick{background:var(--bg2);color:#fff;padding:22px max(5vw,16px)}
+.quick .qwrap{display:flex;flex-direction:column;gap:12px;align-items:stretch}
+.marq{flex:1;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);width:100%}
+.track{display:flex;gap:10px;width:max-content;animation:band 38s linear infinite}
+.marq:hover .track,.track:focus-within{animation-play-state:paused}
+@keyframes band{to{transform:translateX(calc(-50% - 5px))}}
+@media(prefers-reduced-motion:reduce){.marq{overflow-x:auto}}
+.quick b{flex:none;font:400 20px "Bagel Fat One",sans-serif;white-space:nowrap;text-align:center}
+.qs{flex:none;font:600 15px "DM Sans",sans-serif;min-height:44px;padding:9px 16px;border-radius:999px;border:2px solid rgba(255,255,255,.35);background:rgba(255,255,255,.08);color:#fff;cursor:pointer;white-space:nowrap}
+.qs:hover{background:rgba(255,255,255,.2)}
+#res{background:var(--bg);color:#fff}
+#res .sub{color:#ffe0da}#res .chip{background:rgba(255,255,255,.16);color:#fff}#res .note{color:#ffd9d2}
+#res .btn.ghost{color:#fff}#res .tag{border-color:transparent;color:var(--ink)}
+#res h2,.how h2{font:400 clamp(30px,4vw,44px)/1.05 "Bagel Fat One",sans-serif;margin:0 0 6px;color:var(--bg)}
+#res h2{color:#fff}
+.sub{color:var(--soft);margin:0 0 16px}
+.bar{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 22px}
+.chip{font-size:14px;padding:6px 12px;border-radius:999px;background:light-dark(#f3e7df,#33262a)}
+.tags{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
+.tag{position:relative;background:var(--paper);border:2px solid var(--line);border-radius:22px;overflow:hidden;display:flex;flex-direction:column;transition:transform .15s,box-shadow .15s;animation:pop .4s backwards}
+.tag:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(80,10,20,.14)}
+@keyframes pop{from{opacity:0;transform:translateY(14px) scale(.97)}}
+.art{position:relative;height:150px;display:grid;place-items:center;background:var(--c1)}
+.art::after{content:"";position:absolute;inset:auto 0 0 0;height:40%;background:linear-gradient(transparent,rgba(0,0,0,.08))}
+.art>svg{width:118px;height:118px;filter:drop-shadow(0 10px 10px rgba(0,0,0,.18));transition:transform .3s}
+.tag:hover .art>svg{transform:rotate(-4deg) scale(1.06)}
+.art .bud{position:absolute;left:12px;top:12px;z-index:1;font-size:13px;font-weight:800;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,.88);color:#2a0d12}
+.heart{position:absolute;right:10px;top:10px;z-index:1;width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.9);cursor:pointer;display:grid;place-items:center}
+.heart svg{width:22px;height:22px;filter:none}
+.heart[aria-pressed=true] path{fill:#e0244a;stroke:#e0244a}
+.body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:6px;flex:1}
+.tag h3{margin:0;font-size:19px;line-height:1.2}
+.tag p{margin:0;color:var(--soft);font-size:15px}
+.buy{margin-top:auto;align-self:stretch;justify-content:center;display:flex;align-items:center;gap:8px;min-height:46px;padding:10px 16px;border-radius:14px;background:var(--bg);color:#fff;font-weight:800;text-decoration:none}
+.buy:hover{filter:brightness(1.12)}
+.tag.fav{border-color:var(--gold);box-shadow:0 0 0 4px rgba(246,184,60,.25)}
+.ribbon{position:absolute;left:0;bottom:12px;z-index:2;background:var(--gold);color:#3a1d00;font:400 15px "Bagel Fat One",sans-serif;padding:6px 14px 6px 12px;border-radius:0 999px 999px 0}
+.top2{display:flex;align-items:center;gap:8px;padding:14px 14px 0 18px}
+.top2 .no{font:400 15px "Bagel Fat One",sans-serif;color:var(--pine);white-space:nowrap}
+.top2 .bud{margin-left:auto;white-space:nowrap;font-size:13px;font-weight:800;padding:4px 10px;border-radius:999px;background:light-dark(#f3e7df,#33262a)}
+.top2 .heart{position:static;background:light-dark(#f7efe9,#33262a)}
+.tag.fav .top2 .no{background:var(--gold);color:#3a1d00;padding:4px 12px;border-radius:999px}
+.tag.fav{background:light-dark(#fffaf0,#2a2016)}
+.more{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:26px}
+.note{font-size:13px;color:var(--soft);margin-top:16px}
+.how{background:var(--bg);border-top:2px solid rgba(255,255,255,.15)}
+.how h2{color:#fff!important}
+.how li{border-color:transparent}
+.how li{background:light-dark(#fff,#241a1c)}
+.how ol{list-style:none;padding:0;margin:18px 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;counter-reset:s}
+.how li{background:var(--paper);border:2px solid var(--line);border-radius:20px;padding:20px;counter-increment:s}
+.how li::before{content:counter(s);display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--pine);color:#fff;font:400 20px "Bagel Fat One",sans-serif;margin-bottom:10px}
+.how h3{margin:0 0 4px;font-size:18px}.how p{margin:0;color:var(--soft)}
+footer{background:var(--bg2);color:#f3d9d4;font-size:14px}
+footer a{color:#fff}
+.flinks{display:flex;gap:18px;flex-wrap:wrap;margin-top:10px}
+.drawer{position:fixed;inset:0;z-index:20;display:none}
+.drawer.on{display:block}
+.drawer .shade{position:absolute;inset:0;background:rgba(20,0,5,.5)}
+.drawer .panel{position:absolute;right:0;top:0;bottom:0;width:min(420px,100%);background:var(--card);color:var(--ink);padding:22px;overflow-y:auto;display:flex;flex-direction:column;gap:12px;animation:slide .25s}
+@keyframes slide{from{transform:translateX(40px);opacity:0}}
+.panel h2{font:400 28px "Bagel Fat One",sans-serif;margin:0;color:var(--bg)}
+.mzi{display:flex;gap:12px;align-items:center;background:var(--paper);border:2px solid var(--line);border-radius:16px;padding:10px}
+.mzi .mini{width:54px;height:54px;border-radius:12px;display:grid;place-items:center;flex:none}
+.mzi .mini svg{width:42px;height:42px}
+.mzi div{flex:1}.mzi b{display:block;line-height:1.2}.mzi a{font-size:14px;color:var(--bg);font-weight:800}
+.x{border:0;background:transparent;color:var(--soft);font-size:15px;cursor:pointer;min-height:44px;min-width:44px}
+.empty{padding:26px;border:2px dashed var(--line);border-radius:20px;text-align:center;color:var(--soft)}
+@media(max-width:860px){.grid{grid-template-columns:minmax(0,1fr)}.pic{max-width:240px;order:-1;margin:-6px auto -10px}.how ol{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:600px){.count{display:none}.logo{font-size:19px;gap:7px}.logo svg{width:28px;height:28px}.mz{padding:6px 10px;font-size:14px}.mzt{display:none}.lead{font-size:16px}.q{font-size:22px}.pic{max-width:190px}.art{height:130px}.art>svg{width:100px;height:100px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<defs>
+<symbol id="i-heiss" viewBox="0 0 120 120"><path d="M48 10c-6 8 6 12 0 20M62 8c-6 9 6 13 0 22M76 10c-6 8 6 12 0 20" stroke="#fff" stroke-width="5" stroke-linecap="round" fill="none" opacity=".85"/><path d="M26 40h66l-6 56a10 10 0 0 1-10 9H42a10 10 0 0 1-10-9z" fill="#fff"/><path d="M26 40h66l-1 10H27z" fill="#e9dcd2"/><path d="M90 52h8a13 13 0 0 1 0 26h-11" stroke="#fff" stroke-width="9" fill="none"/><ellipse cx="59" cy="42" rx="31" ry="6" fill="#6b3a1e"/><path d="M38 70h42" stroke="#f6b83c" stroke-width="8" stroke-linecap="round"/></symbol>
+<symbol id="i-kueche" viewBox="0 0 120 120"><ellipse cx="60" cy="40" rx="42" ry="9" fill="#d9d9d9"/><rect x="50" y="22" width="20" height="12" rx="6" fill="#333"/><path d="M18 46h84v36a18 18 0 0 1-18 18H36a18 18 0 0 1-18-18z" fill="#fff"/><path d="M18 46h84v8H18z" fill="#e9e1da"/><path d="M8 56h12M100 56h12" stroke="#333" stroke-width="8" stroke-linecap="round"/><path d="M36 74h48" stroke="#e5483f" stroke-width="8" stroke-linecap="round"/></symbol>
+<symbol id="i-genuss" viewBox="0 0 120 120"><path d="M30 60l-20-14v28zM90 60l20-14v28z" fill="#ffd27a"/><ellipse cx="60" cy="60" rx="34" ry="26" fill="#fff"/><path d="M40 44c10 10 10 22 0 32M60 36c10 12 10 36 0 48M80 44c-10 10-10 22 0 32" stroke="#e5483f" stroke-width="7" fill="none"/></symbol>
+<symbol id="i-sport" viewBox="0 0 120 120"><rect x="44" y="54" width="32" height="12" rx="4" fill="#ddd"/><rect x="18" y="32" width="16" height="56" rx="6" fill="#fff"/><rect x="34" y="40" width="12" height="40" rx="5" fill="#e9e1da"/><rect x="86" y="32" width="16" height="56" rx="6" fill="#fff"/><rect x="74" y="40" width="12" height="40" rx="5" fill="#e9e1da"/></symbol>
+<symbol id="i-ball" viewBox="0 0 120 120"><circle cx="60" cy="60" r="44" fill="#fff"/><path d="M60 40l17 12-6 20H49l-6-20z" fill="#222"/><path d="M60 40V18M77 52l20-8M71 72l12 18M49 72L37 90M43 52l-20-8" stroke="#222" stroke-width="5"/></symbol>
+<symbol id="i-gaming" viewBox="0 0 120 120"><path d="M30 38h60c14 0 22 14 24 30 2 18-12 26-20 14l-8-10H34l-8 10c-8 12-22 4-20-14 2-16 10-30 24-30z" fill="#fff"/><path d="M34 50v18M25 59h18" stroke="#333" stroke-width="7" stroke-linecap="round"/><circle cx="82" cy="52" r="6" fill="#e5483f"/><circle cx="94" cy="62" r="6" fill="#2b5fd9"/><circle cx="70" cy="62" r="6" fill="#f6b83c"/><circle cx="82" cy="72" r="6" fill="#1faa59"/></symbol>
+<symbol id="i-spiele" viewBox="0 0 120 120"><rect x="14" y="30" width="50" height="50" rx="10" fill="#fff" transform="rotate(-12 39 55)"/><rect x="58" y="44" width="48" height="48" rx="10" fill="#fff" transform="rotate(10 82 68)"/><g fill="#e5483f"><circle cx="28" cy="47" r="5"/><circle cx="40" cy="55" r="5"/><circle cx="52" cy="63" r="5"/></g><g fill="#333"><circle cx="72" cy="58" r="5"/><circle cx="92" cy="62" r="5"/><circle cx="70" cy="76" r="5"/><circle cx="90" cy="80" r="5"/></g></symbol>
+<symbol id="i-musik" viewBox="0 0 120 120"><path d="M22 70a38 38 0 0 1 76 0" stroke="#fff" stroke-width="10" fill="none"/><rect x="12" y="62" width="24" height="38" rx="10" fill="#fff"/><rect x="84" y="62" width="24" height="38" rx="10" fill="#fff"/><rect x="20" y="70" width="10" height="22" rx="4" fill="#333"/><rect x="90" y="70" width="10" height="22" rx="4" fill="#333"/></symbol>
+<symbol id="i-film" viewBox="0 0 120 120"><g fill="#fff"><circle cx="40" cy="36" r="14"/><circle cx="60" cy="28" r="15"/><circle cx="80" cy="36" r="14"/><circle cx="50" cy="44" r="12"/><circle cx="70" cy="44" r="12"/></g><path d="M28 46h64l-8 60H36z" fill="#fff"/><path d="M40 46l4 60M60 46v60M80 46l-4 60" stroke="#e5483f" stroke-width="8"/></symbol>
+<symbol id="i-lesen" viewBox="0 0 120 120"><path d="M60 34c-14-10-32-10-46-6v62c14-4 32-4 46 6z" fill="#fff"/><path d="M60 34c14-10 32-10 46-6v62c-14-4-32-4-46 6z" fill="#f3ece6"/><path d="M24 44c8-2 18-2 26 2M24 56c8-2 18-2 26 2M24 68c8-2 18-2 26 2M70 46c8-4 18-4 26-2M70 58c8-4 18-4 26-2" stroke="#c9b9ad" stroke-width="4" stroke-linecap="round"/><path d="M84 28v26l6-5 6 5V28" fill="#e5483f"/></symbol>
+<symbol id="i-technik" viewBox="0 0 120 120"><rect x="34" y="12" width="52" height="96" rx="12" fill="#fff"/><rect x="40" y="22" width="40" height="72" rx="5" fill="#2b2b3a"/><path d="M64 34L50 60h12l-6 22 16-30H60z" fill="#f6b83c"/><circle cx="60" cy="101" r="3.5" fill="#ccc"/></symbol>
+<symbol id="i-auto" viewBox="0 0 120 120"><path d="M14 74l8-22c3-8 8-12 16-12h44c8 0 13 4 16 12l8 22v14a6 6 0 0 1-6 6H20a6 6 0 0 1-6-6z" fill="#fff"/><path d="M30 54l5-10h50l5 10z" fill="#9fd0ff"/><circle cx="36" cy="94" r="12" fill="#333"/><circle cx="84" cy="94" r="12" fill="#333"/><circle cx="36" cy="94" r="5" fill="#ccc"/><circle cx="84" cy="94" r="5" fill="#ccc"/><rect x="18" y="68" width="14" height="7" rx="3" fill="#f6b83c"/><rect x="88" y="68" width="14" height="7" rx="3" fill="#f6b83c"/></symbol>
+<symbol id="i-werkzeug" viewBox="0 0 120 120"><path d="M78 16a22 22 0 0 0-22 30L18 84a10 10 0 0 0 14 14l38-38a22 22 0 0 0 30-22l-14 14-12-4-4-12z" fill="#fff"/><circle cx="25" cy="91" r="4" fill="#ccc"/></symbol>
+<symbol id="i-garten" viewBox="0 0 120 120"><path d="M60 64C60 40 74 26 96 24c0 22-14 36-36 40z" fill="#7fd18a"/><path d="M60 70C58 50 44 38 24 38c0 20 14 32 36 32z" fill="#5bbd6a"/><path d="M60 92V56" stroke="#3c8a48" stroke-width="5"/><path d="M34 78h52l-6 30H40z" fill="#fff"/><rect x="30" y="72" width="60" height="12" rx="4" fill="#f3ece6"/></symbol>
+<symbol id="i-tiere" viewBox="0 0 120 120"><ellipse cx="60" cy="76" rx="24" ry="20" fill="#fff"/><ellipse cx="32" cy="50" rx="10" ry="13" fill="#fff"/><ellipse cx="50" cy="34" rx="10" ry="13" fill="#fff"/><ellipse cx="70" cy="34" rx="10" ry="13" fill="#fff"/><ellipse cx="88" cy="50" rx="10" ry="13" fill="#fff"/></symbol>
+<symbol id="i-draussen" viewBox="0 0 120 120"><path d="M60 18L14 98h92z" fill="#fff"/><path d="M60 18L46 98h28z" fill="#e9e1da"/><path d="M60 60L50 98h20z" fill="#333"/><path d="M60 18l-6-10M60 18l6-10" stroke="#fff" stroke-width="4"/></symbol>
+<symbol id="i-reisen" viewBox="0 0 120 120"><rect x="44" y="14" width="32" height="16" rx="6" fill="none" stroke="#fff" stroke-width="7"/><rect x="22" y="28" width="76" height="72" rx="12" fill="#fff"/><path d="M42 28v72M78 28v72" stroke="#e9e1da" stroke-width="7"/><circle cx="36" cy="104" r="6" fill="#333"/><circle cx="84" cy="104" r="6" fill="#333"/><circle cx="60" cy="58" r="10" fill="#f6b83c"/></symbol>
+<symbol id="i-foto" viewBox="0 0 120 120"><path d="M40 30l8-12h24l8 12h18a10 10 0 0 1 10 10v48a10 10 0 0 1-10 10H22a10 10 0 0 1-10-10V40a10 10 0 0 1 10-10z" fill="#fff"/><circle cx="60" cy="62" r="22" fill="#333"/><circle cx="60" cy="62" r="13" fill="#5a7de0"/><circle cx="54" cy="56" r="4" fill="#fff"/><circle cx="92" cy="42" r="4" fill="#e5483f"/></symbol>
+<symbol id="i-liebe" viewBox="0 0 120 120"><path d="M60 100S14 72 14 44a22 22 0 0 1 46-10 22 22 0 0 1 46 10c0 28-46 56-46 56z" fill="#fff"/><path d="M36 40a10 10 0 0 1 12-6" stroke="#ffd0da" stroke-width="6" stroke-linecap="round" fill="none"/></symbol>
+<symbol id="i-kreativ" viewBox="0 0 120 120"><path d="M60 14C30 14 12 36 12 60s20 44 40 42c10-1 8-12 2-16-6-6 0-14 8-14h16c18 0 30-10 30-26 0-18-20-32-48-32z" fill="#fff"/><circle cx="36" cy="54" r="8" fill="#e5483f"/><circle cx="48" cy="32" r="8" fill="#f6b83c"/><circle cx="74" cy="30" r="8" fill="#1faa59"/><circle cx="92" cy="48" r="8" fill="#2b5fd9"/></symbol>
+<symbol id="i-mode" viewBox="0 0 120 120"><path d="M30 40l16-20h28l16 20-30 64z" fill="#fff"/><path d="M30 40h60M46 20l14 20 14-20M60 40v64" stroke="#d6ecff" stroke-width="5" fill="none"/><path d="M30 40l30 64-14-64z" fill="#e8f4ff"/></symbol>
+<symbol id="i-beauty" viewBox="0 0 120 120"><rect x="44" y="56" width="32" height="50" rx="6" fill="#fff"/><rect x="48" y="44" width="24" height="16" rx="3" fill="#f3d6a0"/><path d="M50 44V22l20-8v30z" fill="#e0244a"/><rect x="44" y="70" width="32" height="6" fill="#f6b83c"/></symbol>
+<symbol id="i-wellness" viewBox="0 0 120 120"><path d="M60 14c10 14 14 22 6 30-6 6-16 2-14-8 1-8 6-12 8-22z" fill="#ffd27a"/><path d="M60 26c4 6 5 10 2 13-3 2-6 0-5-4z" fill="#fff6d8"/><rect x="40" y="48" width="40" height="56" rx="8" fill="#fff"/><path d="M40 60h40" stroke="#f3e2d8" stroke-width="6"/><path d="M60 44v6" stroke="#333" stroke-width="3"/></symbol>
+<symbol id="i-buero" viewBox="0 0 120 120"><rect x="22" y="40" width="76" height="60" rx="10" fill="#fff"/><path d="M46 40V30a6 6 0 0 1 6-6h16a6 6 0 0 1 6 6v10" stroke="#fff" stroke-width="8" fill="none"/><rect x="22" y="60" width="76" height="8" fill="#e9e1da"/><rect x="54" y="56" width="12" height="16" rx="3" fill="#f6b83c"/></symbol>
+<symbol id="i-gift" viewBox="0 0 120 120"><rect x="20" y="50" width="80" height="54" rx="8" fill="#fff"/><rect x="14" y="36" width="92" height="20" rx="6" fill="#f3ece6"/><rect x="52" y="36" width="16" height="68" fill="#f6b83c"/><path d="M60 36c-10-22-38-18-28-4 4 6 18 4 28 4zM60 36c10-22 38-18 28-4-4 6-18 4-28 4z" fill="#f6b83c"/></symbol>
+<symbol id="i-herz" viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z" fill="none" stroke="#2a0d12" stroke-width="2" stroke-linejoin="round"/></symbol>
+</defs></svg>
+
+<header class="top"><a class="logo" href="#"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="5" y="15" width="30" height="21" rx="3" fill="#fff"/><rect x="3" y="10" width="34" height="8" rx="2" fill="#ffe3dc"/><rect x="18" y="10" width="5" height="26" fill="#f6b83c"/><path d="M20 10c-6-8-13-3-8 0zM21 10c6-8 13-3 8 0z" fill="#f6b83c"/><path d="M27 2l-4 7h4l-3 6" stroke="#f6b83c" stroke-width="2" fill="none"/></svg><span>inletztersekunde<span style="color:var(--gold)">.de</span></span></a>
+ <div class="hdr"><span class="count" id="count"></span><button class="mz" id="mzBtn" type="button" aria-label="Merkzettel öffnen"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z" fill="#fff"/></svg><span class="mzt">Merkzettel</span> <b id="mzN">0</b></button></div></header>
+
+<section class="hero band"><div class="wrap grid">
+ <div>
+  <h1>Das passende Geschenk in 30 Sekunden.</h1>
+  <p class="lead">Fünf kurze Fragen, dann bekommst du zehn Ideen, die wirklich zur Person passen. Keine Ahnung, was sie mag? Auch kein Problem.</p>
+  <form class="quiz" id="quiz" autocomplete="off">
+   <div class="steps" id="steps"></div>
+   <p class="q" id="q"></p><p class="hint" id="hint"></p>
+   <div class="opts" id="opts"></div>
+   <div class="nav"><button type="button" class="btn ghost" id="back">← Zurück</button><button type="submit" class="btn" id="next">Weiter</button></div>
+  </form>
+  <div class="trust"><span>Kostenlos</span><span>Ohne Anmeldung</span><span id="nIdeas">Über 290 Ideen</span></div>
+ </div>
+ <div class="pic" id="pic" aria-hidden="true">
+  <svg viewBox="0 0 520 520">
+   <defs><linearGradient id="bx" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1a7a52"/><stop offset="1" stop-color="#0c4a31"/></linearGradient>
+   <linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#239063"/><stop offset="1" stop-color="#136b47"/></linearGradient>
+   <linearGradient id="rb" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffd27a"/><stop offset=".5" stop-color="#f6b83c"/><stop offset="1" stop-color="#d9921b"/></linearGradient></defs>
+   <ellipse cx="260" cy="470" rx="190" ry="26" fill="rgba(0,0,0,.25)"/>
+   <g class="spark" fill="#ffe08a"><path d="M120 120l8 22 22 8-22 8-8 22-8-22-22-8 22-8z"/><path d="M410 90l6 16 16 6-16 6-6 16-6-16-16-6 16-6z"/><path d="M440 230l5 12 12 5-12 5-5 12-5-12-12-5 12-5z"/><circle cx="160" cy="210" r="6"/><circle cx="380" cy="170" r="5"/></g>
+   <rect x="90" y="230" width="340" height="235" rx="18" fill="url(#bx)"/>
+   <rect x="90" y="230" width="340" height="30" fill="rgba(0,0,0,.18)"/>
+   <rect x="232" y="230" width="56" height="235" fill="url(#rb)"/>
+   <path d="M96 300h330M96 380h330" stroke="rgba(255,255,255,.06)" stroke-width="40"/>
+   <g id="lid"><rect x="70" y="180" width="380" height="64" rx="16" fill="url(#lg)"/><rect x="70" y="228" width="380" height="16" fill="rgba(0,0,0,.15)"/><rect x="226" y="180" width="68" height="64" fill="url(#rb)"/>
+    <path d="M260 182c-40-70-130-60-96-6 14 22 60 14 96 6z" fill="#f6b83c"/><path d="M260 182c40-70 130-60 96-6-14 22-60 14-96 6z" fill="#e8a325"/>
+    <path d="M260 182c-30-40-80-44-80-20" stroke="#c47f0f" stroke-width="5" fill="none"/><circle cx="260" cy="182" r="20" fill="#ffcf5a"/>
+    <path d="M250 196l-30 70M270 196l34 66" stroke="#e8a325" stroke-width="16" stroke-linecap="round"/></g>
+   <g transform="rotate(-8 400 330)"><path d="M350 300h90a10 10 0 0 1 10 10v50a10 10 0 0 1-10 10h-90l-24-35z" fill="#fffaf2"/><circle cx="345" cy="335" r="6" fill="#b3122e"/><text x="395" y="342" text-anchor="middle" font-family="Bagel Fat One, sans-serif" font-size="22" fill="#b3122e">Für dich</text></g>
+  </svg>
+ </div>
+</div></section>
+
+<section class="quick"><div class="wrap qwrap"><b>Schnellstart – direkt zu den Ideen</b><div class="marq"><div class="track" id="quick"></div></div></div></section>
+
+<section class="band" id="res" hidden><div class="wrap">
+ <h2 id="rt">Deine 10 Ideen</h2><p class="sub" id="rs"></p>
+ <div class="bar" id="chips"></div>
+ <div class="tags" id="tags"></div>
+ <div class="more"><button class="btn" id="shuffle" type="button">10 neue Ideen zeigen</button><a class="btn wa" id="share" href="#" target="_blank" rel="noopener">Liste per WhatsApp schicken</a><button class="btn ghost" id="again" type="button">Neu starten</button></div>
+ <p class="note">Tipp: Mit dem Herz merkst du dir Ideen. Die Links führen zu passenden Suchergebnissen bei Amazon, dort siehst du aktuelle Preise und Lieferzeiten.</p>
+</div></section>
+
+<section class="band how"><div class="wrap">
+ <h2>So einfach geht's</h2>
+ <ol>
+  <li><h3>Fragen beantworten</h3><p>Für wen, wie alt, was die Person mag und wie viel du ausgeben willst.</p></li>
+  <li><h3>Ideen ansehen</h3><p>Zehn Vorschläge, die wirklich passen. Nicht dabei? Einfach zehn neue holen.</p></li>
+  <li><h3>Merken, teilen, schenken</h3><p>Lieblinge merken, Liste an Freunde schicken und direkt bestellen.</p></li>
+ </ol>
+</div></section>
+
+<footer class="band"><div class="wrap">
+ <p><b>Werbehinweis:</b> Die Links zu Amazon sind Partnerlinks. Kaufst du darüber etwas, bekommt inletztersekunde.de eine kleine Provision. Für dich ändert sich am Preis nichts. Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.</p>
+ <div class="flinks"><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a><span>© <span id="yr"></span> inletztersekunde.de</span></div>
+</div></footer>
+
+<div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="mzT"><div class="shade" id="shade"></div><div class="panel">
+ <div style="display:flex;justify-content:space-between;align-items:center"><h2 id="mzT">Dein Merkzettel</h2><button class="x" id="closeMz" type="button" aria-label="Schließen">✕</button></div>
+ <div id="mzList"></div>
+ <a class="btn wa" id="mzShare" href="#" target="_blank" rel="noopener" style="justify-content:center">Merkzettel per WhatsApp schicken</a>
+</div></div>
+
+<script>
+{
+const TAG='inletzterseku-21';
+const SITE=location.protocol.startsWith('http')&&!/claude\.ai|claudeusercontent/.test(location.host)?location.origin:'https://inletztersekunde.de';
+const RAW=`Barista-Milchaufschäumer|elektrischer Milchaufschäumer|25|2|kaffee,kochen|y,m,o,s|p,g|Cremiger Milchschaum wie im Café, ganz ohne Siebträger.
+Kaffee-Probierset Spezialitäten|Kaffee Probierset Bohnen Geschenk|30|2|kaffee|y,m,o,s|g|Sechs Röstungen aus aller Welt zum Durchprobieren.
+Handfilter-Set mit Glaskanne|Pour Over Kaffee Set Glaskanne|35|3|kaffee|y,m,o|g,p|Für alle, die Kaffee gern zelebrieren.
+Thermobecher, hält 12 Stunden warm|Thermobecher Edelstahl auslaufsicher|20|2|kaffee,reisen,sport|t,y,m,o|p|Auslaufsicher, passt in jeden Autohalter.
+Espresso-Tassen mit doppelter Wand|doppelwandige Espressotassen Glas|18|2|kaffee|y,m,o,s|g|Schwebender Espresso, sieht edel aus.
+Gewürz-Weltreise-Set|Gewürz Set Geschenk Weltreise|28|2|kochen|y,m,o,s|g|20 Gewürze für Gerichte aus aller Welt.
+Gusseisen-Pfanne|Gusseisenpfanne 28 cm|45|3|kochen,grillen|y,m,o|p|Hält ewig und wird mit jedem Mal besser.
+Pasta-Maschine|Nudelmaschine manuell|40|3|kochen|y,m,o|e,g|Frische Pasta am Sonntag, macht zu zweit am meisten Spaß.
+Kochbuch für schnelle Feierabendküche|Kochbuch schnelle Rezepte 30 Minuten|18|2|kochen|y,m|p|Leckere Gerichte in unter 30 Minuten.
+Sushi-Set zum Selbermachen|Sushi Set selber machen Bambusmatte|25|2|kochen|t,y,m|e,l|Mit Bambusmatte und Anleitung, perfekt für einen Abend zu zweit.
+Digitales Grillthermometer|Grillthermometer digital Bluetooth|30|2|grillen,kochen,technik|y,m,o|p|Steak auf den Punkt, Anzeige direkt aufs Handy.
+BBQ-Saucen-Probierset|BBQ Sauce Geschenkset|22|2|grillen|y,m,o|g|Von rauchig bis richtig scharf.
+Grillbesteck im Koffer|Grillbesteck Set Koffer Edelstahl|35|3|grillen|m,o,s|p|Alles, was der Grillmeister braucht, schön verpackt.
+Gin-Tasting-Set Tonics|Tonic Water Probierset|25|2|genuss|y,m,o|g|Verschiedene Tonics zum Mixen und Vergleichen.
+Tee-Adventskalender|Tee Adventskalender|25|2|tee,genuss|t,y,m,o,s|g|24 Sorten für gemütliche Abende.
+Tee-Set mit Glaskanne|Teekanne Glas Stövchen Set|35|3|tee,wellness|m,o,s|g|Kanne mit Stövchen, die Sorten sieht man ziehen.
+Schokoladen-Weltreise|Schokolade Probierset Geschenk|20|2|genuss|*|g|Schokolade aus zehn Ländern, ideal, wenn jemand schon alles hat.
+Personalisierte Gewürzmühle|Gravur Gewürzmühle Holz|30|2|kochen|m,o,s|g,r|Mit Namen oder Datum graviert.
+Kabellose Kopfhörer|Bluetooth Kopfhörer In Ear|40|3|musik,sport,technik|t,y,m|p|Für Bus, Gym und lange Spaziergänge.
+Bluetooth-Box wasserdicht|Bluetooth Lautsprecher wasserdicht|35|3|musik,reisen,sport|t,y,m|p,l|Musik unter der Dusche, am See oder auf Partys.
+Plattenspieler im Koffer|Plattenspieler Koffer Bluetooth|60|3|musik|y,m,o|g,e|Retro-Look, spielt aber auch per Bluetooth.
+Karaoke-Mikrofon mit Lautsprecher|Karaoke Mikrofon Bluetooth Kinder|25|2|musik|k,t|l,e|Partymodus an, Stimme verstellen inklusive.
+Ukulele für Einsteiger|Ukulele Set Anfänger|40|3|musik,kreativ|k,t,y,m|e|Leicht zu lernen, die ersten Songs klappen in einer Woche.
+Spotify- oder Musik-Gutschein|Musik Streaming Geschenkkarte|30|2|musik|t,y|p|Wenn du dir unsicher bist, geht das immer.
+Smartwatch-Fitnessarmband|Fitness Tracker Armband Herzfrequenz|45|3|sport,technik|t,y,m,o|p|Zählt Schritte, Schlaf und Puls.
+Faszienrolle-Set|Faszienrolle Set Massageball|25|2|sport,wellness|y,m,o|p|Gegen Verspannungen nach dem Training.
+Smart-Springseil mit Zähler|Springseil mit Zähler digital|15|1|sport|t,y,m|p,l|Zählt jeden Sprung mit, motiviert richtig.
+Yoga-Matte rutschfest|Yogamatte rutschfest extra dick|30|2|sport,wellness|t,y,m,o|p|Rutschfest und dick genug fürs Knie.
+Trinkflasche mit Zeitmarkierung|Trinkflasche Zeitmarkierung 1 Liter|15|1|sport,wellness|t,y,m|p|Erinnert ans Trinken, sieht gut aus.
+Massagepistole|Massagepistole Muskel|60|3|sport,wellness|y,m,o|p,g|Wie eine Massage nach dem Training, nur jederzeit.
+Fußball-Trainingsset|Fussball Trainingsset Hütchen Leiter|30|2|sport,fussball|k,t,y|p,e|Hütchen, Koordinationsleiter und Ball für draußen.
+Torwarthandschuhe|Torwarthandschuhe Kinder|25|2|fussball|k,t|p|Mit Fingerschutz, für Halle und Rasen.
+Mini-Basketballkorb für die Tür|Mini Basketball Korb Tür|20|2|sport,lustig|k,t,y|l|Fürs Kinderzimmer oder Büro.
+Gaming-Headset|Gaming Headset Mikrofon|40|3|gaming|t,y,m|p|Klarer Sound und Mikro für den Teamchat.
+Controller-Ladestation|Controller Ladestation PS5|25|2|gaming|t,y,m|p|Nie wieder leere Controller.
+RGB-LED-Streifen fürs Zimmer|LED Streifen RGB App|25|2|gaming,technik|k,t,y|l,p|Zimmer per App in jeder Farbe.
+Gaming-Mauspad XXL|Mauspad XXL Gaming|18|1|gaming|t,y|p|Riesig, deckt den ganzen Schreibtisch ab.
+PlayStation- oder Xbox-Guthaben|PSN Guthaben Geschenkkarte|25|2|gaming|t,y|p|Selbst das Lieblingsspiel aussuchen.
+Retro-Spielkonsole|Retro Spielkonsole Klassiker|50|3|gaming|y,m|g,l|Hunderte Klassiker, perfekt für Nostalgiker.
+Gaming-Stuhl-Kissen|Lordosenstütze Gaming Kissen|20|2|gaming|t,y,m|p|Für lange Zocker-Abende ohne Rückenweh.
+Brettspiel für Spieleabende|Brettspiel Erwachsene Bestseller|30|2|spiele|y,m,o|e,l|Bringt jede Runde zum Lachen.
+Partyspiel für Freunde|Partyspiel Freunde Erwachsene|20|2|spiele,lustig|t,y,m|l|Lustig, schnell erklärt, sorgt für Gesprächsstoff.
+Escape-Room-Spiel für zu Hause|Escape Room Spiel|15|1|spiele|t,y,m,o|e|Ein spannender Abend zum Knobeln.
+3D-Puzzle eines Wahrzeichens|3D Puzzle Holz|30|2|kreativ,spiele|t,y,m,o|e|Baut sich auf und sieht danach im Regal super aus.
+1000-Teile-Puzzle|Puzzle 1000 Teile|15|1|spiele|m,o,s|e|Für gemütliche Winterabende.
+Lego-Blumenstrauß|Lego Blumenstrauß|50|3|kreativ|y,m,o|g,r|Verwelkt nie, macht beim Bauen Spaß.
+Lego-Technic-Auto|Lego Technic Auto|50|3|autos,kreativ|t,y,m|e|Für Autofans, die gerne schrauben.
+Kindle-E-Reader|Kindle E-Reader|100|4|lesen,reisen,technik|t,y,m,o|p|Tausende Bücher im Urlaubsgepäck.
+Leselampe zum Anklemmen|Leselampe Klemme Buch|15|1|lesen|*|p|Lesen im Bett, ohne andere zu stören.
+Buch-Bestseller des Jahres|Bestseller Roman 2026|15|1|lesen|y,m,o,s|g|Der Roman, über den gerade alle reden.
+Buchstütze mit Lese-Kissen|Lesekissen Bett|30|2|lesen,wellness|m,o,s|g|Bequem lesen im Bett.
+Notizbuch in Leder|Notizbuch Leder A5|20|2|lesen,kreativ,schreiben|t,y,m,o|g|Für Ideen, Tagebuch oder Pläne.
+Fotobuch-Gutschein|Fotobuch Gutschein|30|2|fotos|*|r,g|Gemeinsame Erinnerungen in einem Buch.
+Sofortbildkamera|Sofortbildkamera instax|70|4|fotos,reisen|t,y,m|e,l|Fotos zum Anfassen, sofort zum Verschenken.
+Sofortbild-Filme|Instax Mini Film|20|2|fotos|t,y|p|Nachschub für die Sofortbildkamera.
+Digitaler Bilderrahmen|digitaler Bilderrahmen WLAN|70|4|fotos,familie|m,o,s|r,g|Die Familie schickt neue Fotos direkt aufs Bild.
+Polaroid-Lichterkette mit Klammern|Lichterkette Fotos Klammern|12|1|fotos,deko|k,t,y|r,l|Für Fotos an der Wand, macht das Zimmer gemütlich.
+Sternenhimmel-Projektor|Sternenhimmel Projektor|30|2|deko,wellness|k,t,y|l,r|Verwandelt das Zimmer in eine Galaxie.
+Sonnenaufgang-Wecker|Lichtwecker Sonnenaufgang|40|3|wellness,technik|t,y,m,o|p|Aufwachen mit Licht statt mit Piepen.
+Duftkerzen-Set|Duftkerzen Set Geschenk|20|2|wellness,deko|t,y,m,o,s|g,r|Gemütlich und duftet gut.
+Wellness-Gutschein|Wellness Gutschein Spa|60|3|wellness|y,m,o,s|e,g|Eine Auszeit im Spa, die man selten selbst bucht.
+Kuschel-Hoodie-Decke|Hoodie Decke Erwachsene|35|3|wellness,lustig|t,y,m|l,g|Decke und Pulli in einem, perfekt fürs Sofa.
+Beheizbare Kuscheldecke|Heizdecke kuschelig|50|3|wellness|m,o,s|p,g|Warm in fünf Minuten, spart Heizkosten.
+Badebomben-Set|Badebomben Set Geschenk|15|1|wellness|t,y,m,o|g|Bunte Badezeit mit Duft.
+Nackenmassagegerät|Nackenmassagegerät Wärme|40|3|wellness|m,o,s|p|Gegen Verspannungen nach langen Tagen.
+Hausschuhe mit Memory-Schaum|Hausschuhe Memory Foam|25|2|wellness|*|p|Fühlt sich an wie Laufen auf Wolken.
+Pflanzen-Anzuchtset|Anzuchtset Kräuter Fensterbank|20|2|garten,kochen|y,m,o,s|e|Frische Kräuter auf der Fensterbank.
+Hochbeet für den Balkon|Hochbeet Balkon|60|3|garten|m,o,s|p|Gemüse und Kräuter ohne Bücken.
+Gartenwerkzeug-Set|Gartenwerkzeug Set Tasche|30|2|garten|m,o,s|p|Alles in einer praktischen Tasche.
+Smarte Pflanzensensoren|Pflanzensensor Feuchtigkeit|25|2|garten,technik|y,m|p|Sagt per Handy, wann gegossen werden muss.
+Vogelhaus mit Kamera|Vogelhaus mit Kamera|80|4|garten,tiere,technik|m,o,s|e,g|Live sehen, wer zu Besuch kommt.
+Insektenhotel|Insektenhotel Holz|20|2|garten,tiere|k,m,o,s|e|Für Wildbienen und Marienkäfer.
+Hundespielzeug-Set|Hundespielzeug Set robust|20|2|tiere|*|l,p|Für den Vierbeiner, der mitgefeiert werden will.
+Katzentunnel und Spielangel|Katzenspielzeug Set Tunnel|18|1|tiere|*|l|Stundenlanger Spielspaß für die Katze.
+GPS-Tracker fürs Haustier|GPS Tracker Hund Katze|40|3|tiere,technik|y,m,o|p|Immer wissen, wo der Liebling steckt.
+Personalisierte Haustier-Tasse|Tasse mit Haustier Foto|15|1|tiere,lustig|*|l,r|Mit dem Foto vom eigenen Haustier.
+Powerbank 20.000 mAh|Powerbank 20000 mAh USB C|30|2|technik,reisen|t,y,m|p|Lädt das Handy mehrmals voll.
+Smart-Home-Steckdosen|WLAN Steckdose Alexa 4er|25|2|technik|y,m|p|Licht und Geräte per App oder Sprache steuern.
+Kabelloses Ladegerät 3 in 1|Ladestation 3 in 1 kabellos|35|3|technik|t,y,m|p|Handy, Uhr und Kopfhörer gleichzeitig laden.
+Bluetooth-Tracker für Schlüssel|Bluetooth Tracker Schlüssel|25|2|technik|t,y,m,o|p|Schlüssel nie wieder suchen.
+Mini-Drohne mit Kamera|Mini Drohne Kamera Anfänger|60|3|technik,fotos|t,y|e,l|Leicht zu fliegen, macht Luftaufnahmen.
+Handyhalterung fürs Auto|Handyhalterung Auto Magnet|15|1|autos,technik|t,y,m,o|p|Navi immer im Blick.
+Dashcam|Dashcam Auto vorne hinten|60|3|autos,technik|y,m,o|p|Für mehr Sicherheit im Straßenverkehr.
+Auto-Pflegeset|Autopflege Set Geschenk|35|3|autos|y,m,o|p|Damit der Wagen glänzt wie neu.
+Akku-Staubsauger fürs Auto|Autostaubsauger kabellos|30|2|autos|y,m,o|p|Krümel weg in zwei Minuten.
+Duftbaum mit eigenem Foto|Auto Duftbaum personalisiert|12|1|autos,lustig|t,y|l|Mit lustigem Foto vom Beschenkten.
+Kfz-Werkzeugkoffer|Werkzeugkoffer Set|50|3|autos,heimwerken|y,m,o|p|Für alle, die gerne selbst schrauben.
+Akkuschrauber-Set|Akkuschrauber Set Bits|50|3|heimwerken|y,m,o|p|Das Werkzeug, das in jede Wohnung gehört.
+Multitool|Multitool Taschenwerkzeug|30|2|heimwerken,draussen|y,m,o|p|Zange, Messer und Schraubendreher in einem.
+Stirnlampe|Stirnlampe LED wiederaufladbar|20|2|draussen,sport|t,y,m,o|p|Für Joggen im Dunkeln und Camping.
+Picknickrucksack|Picknickrucksack 2 Personen|40|3|draussen,reisen|y,m,o|r,e|Komplett ausgestattet für ein Picknick zu zweit.
+Hängematte für unterwegs|Hängematte Camping leicht|30|2|draussen,reisen|t,y,m|e|Passt in jeden Rucksack.
+Reiseorganizer-Set|Packwürfel Set Koffer|20|2|reisen|t,y,m,o|p|Ordnung im Koffer, endlich.
+Kratz-Weltkarte|Rubbel Weltkarte|20|2|reisen|t,y,m,o|e,r|Bereiste Länder freirubbeln.
+Reise-Nackenkissen mit Memory-Schaum|Nackenkissen Reise Memory|25|2|reisen|y,m,o,s|p|Schlafen im Flieger und Zug.
+Erlebnis-Gutschein für zwei|Erlebnisgeschenk für 2 Personen Gutschein|80|4|reisen,erlebnis|y,m,o|e,r|Gemeinsame Zeit statt noch einem Gegenstand.
+Kochkurs-Gutschein|Kochkurs Gutschein|70|4|kochen,erlebnis|y,m,o|e,r|Etwas Neues zusammen lernen.
+Kletterhallen-Gutschein|Bouldern Gutschein|30|2|sport,erlebnis|t,y,m|e|Action für alle, die sich gerne auspowern.
+Kino-Gutschein|Kino Gutschein|25|2|filme,erlebnis|*|e|Der Klassiker für einen schönen Abend.
+Popcorn-Maschine|Popcornmaschine Heißluft|30|2|filme,genuss|k,t,y,m|l,e|Kino-Abend zu Hause wie im Kino.
+Mini-Beamer|Mini Beamer Handy|80|4|filme,technik|t,y,m|e|Filme an die Zimmerdecke projizieren.
+Malen-nach-Zahlen für Erwachsene|Malen nach Zahlen Erwachsene|20|2|kreativ|y,m,o,s|e|Entspannend und am Ende hängt ein Bild an der Wand.
+Aquarell-Set mit Pinseln|Aquarellfarben Set Pinsel|25|2|kreativ|t,y,m,o|e|Zum Ausprobieren und Entdecken.
+Diamond-Painting-Set|Diamond Painting Set|15|1|kreativ|k,t,y,m|e|Glitzert am Ende richtig schön.
+Bastelset Schmuck selber machen|Schmuck selber machen Set|20|2|kreativ,mode|k,t|e|Armbänder und Ketten selbst gestalten.
+Strick-Set für Anfänger|Strickset Anfänger|25|2|kreativ|y,m,o,s|e|Mit Anleitung für den ersten Schal.
+Häkel-Set Amigurumi|Häkelset Anfänger Tiere|20|2|kreativ|t,y,m|e|Kleine Tiere häkeln, total süß.
+Personalisierte Halskette|Halskette mit Namen|30|2|mode,schmuck|t,y,m|r,g|Mit Namen oder Initialen.
+Schmuckkästchen mit Spiegel|Schmuckkästchen|25|2|mode,schmuck|t,y,m,o|p,g|Ordnung für Ketten und Ringe.
+Seidenschal|Seidenschal Damen|30|2|mode|m,o,s|g|Zeitlos schön, passt zu allem.
+Uhr mit Holzarmband|Holzuhr Herren|50|3|mode|y,m|g|Natürlicher Look, mit Gravur möglich.
+Lederportemonnaie mit RFID-Schutz|Geldbörse Leder RFID|30|2|mode|y,m,o|p|Schützt Karten vor dem Auslesen.
+Gute Sonnenbrille|Sonnenbrille polarisiert|30|2|mode,reisen|t,y,m|p,g|Polarisiert, sieht gut aus.
+Lustige Socken-Box|Lustige Socken Geschenkbox|15|1|mode,lustig|*|l|Fünf Paar mit witzigen Motiven.
+Beanie-Mütze|Beanie Mütze Winter|15|1|mode|t,y,m|p|Warm und lässig für den Winter.
+Beauty-Adventskalender|Beauty Adventskalender|50|3|beauty|t,y,m|g|24 Kleinigkeiten für die Pflege.
+Gesichtsmasken-Set|Gesichtsmasken Set Geschenk|15|1|beauty,wellness|t,y,m|g|Ein Wellnessabend zu Hause.
+Lockenstab ohne Hitze|Heatless Curls|12|1|beauty|t,y|p|Locken über Nacht, ohne Hitze.
+Haartrockner mit Diffusor|Haartrockner Ionen Diffusor|45|3|beauty|t,y,m|p|Schneller trocken, weniger Frizz.
+Bartpflege-Set|Bartpflege Set Geschenk|25|2|beauty|y,m,o|g|Öl, Balsam und Kamm für einen gepflegten Bart.
+Rasierhobel-Set|Rasierhobel Set|35|3|beauty|y,m,o|g|Gründliche Rasur wie beim Barbier.
+Parfüm-Probierset|Parfum Probierset|30|2|beauty|t,y,m|g|Den neuen Lieblingsduft entdecken.
+Nagellack-Set|Nagellack Set Geschenk|15|1|beauty|k,t,y|l,g|Bunte Farben für jede Laune.
+Kinder-Detektivset|Detektiv Set Kinder|20|2|spiele|k|e,l|Mit Lupe, Fingerabdruck-Pulver und Geheimschrift.
+Experimentierkasten|Experimentierkasten Kinder|30|2|technik,kreativ|k|e|Echte Experimente für kleine Forscher.
+Walkie-Talkies für Kinder|Walkie Talkie Kinder|25|2|spiele,draussen|k|e,l|Abenteuer im Garten mit Funk.
+Kinder-Kamera|Kinderkamera Digital|35|3|fotos,technik|k|e|Robust und einfach zu bedienen.
+Tonie-Figur|Tonies Figur|17|1|musik,lesen|k|e|Hörspiele zum Anfassen.
+Leuchtglobus|Leuchtglobus Kinder|35|3|reisen,lesen|k,t|e|Die Welt entdecken, auch als Nachtlicht.
+Kinder-Kochbuch mit Utensilien|Kinder Backset Kochbuch|25|2|kochen,backen|k|e|Backen wie die Großen.
+Back-Set mit Ausstechformen|Ausstecher Set Weihnachten|15|1|backen|*|e|Weihnachtsplätzchen in allen Formen.
+Waffeleisen|Waffeleisen Belgisch|35|3|backen,genuss|y,m,o|g|Frische Waffeln am Sonntag.
+Backbuch für Kuchen und Torten|Backbuch Kuchen|20|2|backen|y,m,o,s|e|Die besten Rezepte für jeden Anlass.
+Hörbuch-Abo-Gutschein|Hörbuch Gutschein|30|2|lesen,musik|y,m,o,s|p|Für alle, die beim Autofahren gern zuhören.
+Gedächtnistraining-Spiel|Gedächtnisspiel Senioren|20|2|spiele|s|e|Hält geistig fit, macht in der Gruppe Spaß.
+Großtasten-Telefon mit Fotos|Seniorentelefon Fototasten|40|3|technik,familie|s|p|Die Liebsten mit einem Tastendruck anrufen.
+Personalisiertes Familien-Fotokissen|Kissen mit Foto bedrucken|25|2|familie,fotos|o,s|r,g|Die Enkel immer dabei.
+Familien-Erinnerungsbuch zum Ausfüllen|Erzähl mal Oma Buch|20|2|familie,lesen|o,s|r,g|Oma oder Opa erzählen ihr Leben, ein Schatz für die Familie.
+Wärmende Thermosocken|Thermosocken Wolle|15|1|wellness|o,s|p|Kalte Füße sind ab jetzt Geschichte.
+Pflegeleichte Zimmerpflanze|Zimmerpflanze pflegeleicht Topf|25|2|garten,deko|*|g|Bringt Grün in jede Wohnung.
+Tassen-Set mit Spruch|Tasse lustiger Spruch|12|1|lustig,kaffee|*|l|Ein Spruch, der morgens zum Lachen bringt.
+Tasse „Bester Kollege“|Tasse Kollege lustig|12|1|lustig,kaffee|y,m,o|l|Kleine Geste für den Schreibtisch.
+Schreibtisch-Organizer aus Holz|Schreibtisch Organizer Holz|25|2|büro|y,m|p|Ordnung für Stifte, Handy und Notizen.
+Anti-Stress-Würfel|Fidget Cube|10|1|büro,lustig|t,y,m|l|Für nervöse Finger in Meetings.
+Mini-Schreibtischventilator|USB Ventilator Schreibtisch|15|1|büro,technik|t,y,m|p|Leise und praktisch im Sommer.
+Wichtelgeschenk: Lustiges Kartenspiel|Kartenspiel lustig Wichteln|10|1|spiele,lustig|t,y,m|l|Klein, günstig, sorgt garantiert für Lacher.
+Liebes-Gutscheinheft|Gutscheinheft Paare|12|1|liebe|y,m|r|Zum Einlösen: Massage, Frühstück ans Bett und mehr.
+Sternkarte vom Kennenlerntag|Sternkarte personalisiert|35|3|liebe,deko|y,m,o|r|Der Sternenhimmel von eurem besonderen Tag.
+Paar-Fragenspiel|Fragen Spiel Paare|15|1|liebe,spiele|y,m|r,l|Lernt euch noch besser kennen.
+Personalisierte Weltkarte mit Pins|Weltkarte Pinnwand Kork|40|3|reisen,liebe|y,m|r,e|Markiert, wo ihr schon wart und wohin ihr wollt.
+Fondue-Set|Fondue Set Schokolade|30|2|genuss,kochen|y,m,o|e,r|Gemütlicher Abend zu zweit oder mit Freunden.
+Cocktail-Shaker-Set ohne Alkohol|Cocktail Set Mocktail|30|2|genuss|y,m|e,l|Für Mocktails und Smoothies wie aus der Bar.
+Eismaschine|Eismaschine klein|45|3|genuss,kochen|k,t,y,m|e|Eigenes Eis in 30 Minuten.
+Smoothie-Mixer to go|Mixer to go Smoothie|30|2|sport,kochen|t,y,m|p|Direkt im Becher mixen und mitnehmen.
+Nintendo-Switch-Spiel|Nintendo Switch Spiel|50|3|gaming|k,t,y|e|Für Familienabende vor der Konsole.
+VR-Brillen-Halter mit Ständer|VR Brille Ständer|20|2|gaming,technik|t,y|p|Ordnung für das VR-Headset.
+Elektrische Zahnbürste|elektrische Zahnbürste|50|3|beauty|t,y,m,o|p|Merkt man jeden Morgen.
+Kaffeemühle mit Handkurbel|Kaffeemühle manuell Keramikmahlwerk|35|3|kaffee|y,m,o|g|Frisch gemahlen schmeckt einfach besser.
+Kaffee-Abo für drei Monate|Kaffee Abo Geschenk|60|4|kaffee|y,m,o|g,e|Jeden Monat neue Bohnen an die Haustür.
+Matcha-Set mit Bambusbesen|Matcha Set Bambusbesen Schale|30|2|tee,wellness|t,y,m|g,e|Der grüne Wachmacher, schön zelebriert.
+Teesieb-Figur Faultier|Teesieb lustig Tier|10|1|tee,lustig|t,y,m,o|l|Hängt sich an den Tassenrand, sorgt für Lacher.
+Chai-Gewürz-Set|Chai Tee Gewürz Set|18|2|tee,genuss|y,m,o|g|Wärmt von innen, perfekt für den Winter.
+Heißer-Kakao-Bomben|Kakao Bomben Geschenk|15|1|genuss|k,t,y,m|g,l|In heiße Milch legen, sie platzen auf, Marshmallows kommen raus.
+Pralinen-Box von der Manufaktur|Pralinen Geschenkbox Manufaktur|30|2|genuss|m,o,s|g,r|Kleine Kunstwerke zum Naschen.
+Gummibärchen-Riesenbox|Gummibärchen Großpackung Geschenk|15|1|genuss,lustig|k,t,y|l|Ein Kilo gute Laune.
+Chili-Saucen-Probierset|Chili Sauce Set scharf|25|2|genuss,kochen,grillen|y,m|l,g|Von mild bis „warum hab ich das gemacht“.
+Popcorn-Gewürze-Set|Popcorn Gewürz Set|12|1|filme,genuss|t,y,m|l,g|Kino-Abend mit Karamell, Käse und Paprika.
+Olivenöl-Probierset|Olivenöl Probierset Geschenk|30|2|kochen,genuss|m,o,s|g|Feine Öle aus Italien und Griechenland.
+Personalisiertes Schneidebrett|Schneidebrett Gravur Holz|30|2|kochen,familie|y,m,o,s|r,g|Mit Familienname oder Spruch graviert.
+Heißluftfritteuse kompakt|Heißluftfritteuse klein|60|3|kochen|y,m,o|p|Knusprige Pommes ohne Fett.
+Messer-Set mit Block|Messerblock Set scharf|50|3|kochen|y,m,o|p|Scharfe Messer machen Kochen gleich viel schöner.
+Pizzastein für den Backofen|Pizzastein Backofen|30|2|kochen,backen|y,m,o|e|Knusprig wie beim Italiener.
+Plätzchen-Backmischung im Glas|Backmischung im Glas Geschenk|12|1|backen,genuss|*|g,r|Hübsch verpackt, alles drin außer Butter und Ei.
+Macaron-Backset|Macarons Backset|25|2|backen|t,y,m|e|Für alle, die eine Herausforderung mögen.
+Cupcake-Ständer mit Förmchen|Cupcake Etagere Set|20|2|backen|y,m,o|e,g|Für den nächsten Geburtstag.
+Lauf-Gürteltasche|Laufgürtel Handy|15|1|sport|t,y,m|p|Handy und Schlüssel beim Joggen sicher verstaut.
+Klimmzugstange für den Türrahmen|Klimmzugstange Tür ohne Bohren|30|2|sport|t,y,m|p|Training zu Hause, ohne zu bohren.
+Widerstandsbänder-Set|Fitnessbänder Set|15|1|sport|t,y,m,o|p|Ganzkörpertraining für jede Ecke.
+Sporttasche mit Schuhfach|Sporttasche Schuhfach|30|2|sport,fussball|t,y,m|p|Schuhe getrennt von den sauberen Sachen.
+Protein-Shaker mit Fach|Protein Shaker Pulverfach|12|1|sport|t,y|p|Pulver dabei, Shake fertig in zehn Sekunden.
+Tischtennis-Set|Tischtennis Set Netz Schläger|20|2|sport,spiele|k,t,y,m|e,l|Netz zum Anklemmen, jeder Tisch wird zur Platte.
+Fußball-Trikot vom Lieblingsverein|Fussball Trikot Fanartikel|80|4|fussball|k,t,y,m|g|Das Trikot vom Lieblingsverein.
+Tischkicker für den Tisch|Mini Tischkicker|30|2|fussball,spiele|k,t,y|l,e|Kleines Duell für zwischendurch.
+Fußball-Rebounder|Fussball Rebounder Netz|40|3|fussball|k,t|p,e|Alleine trainieren, der Ball kommt immer zurück.
+Steam-Guthaben|Steam Guthaben Karte|25|2|gaming|t,y,m|p|Für PC-Spieler das Sicherste überhaupt.
+Nintendo-Switch-Tasche|Nintendo Switch Tasche|20|2|gaming,reisen|k,t,y|p|Schützt die Konsole unterwegs.
+Gaming-Nachtlicht mit Symbolen|Playstation Symbole Lampe|25|2|gaming,deko|k,t,y|l|Leuchtet in Gamer-Farben.
+Gaming-Tastatur mit Beleuchtung|Gaming Tastatur RGB|45|3|gaming,technik|t,y|p|Leuchtet, klickt, macht schneller.
+Minecraft-Lampe|Minecraft Lampe|25|2|gaming,deko|k,t|l|Für jedes Minecraft-Kinderzimmer.
+Tabletop-Würfel-Set|DnD Würfel Set Metall|20|2|spiele|t,y,m|g|Edle Würfel für Rollenspieler.
+Schach-Set aus Holz|Schachspiel Holz Klappbrett|35|3|spiele|k,t,y,m,o,s|e,g|Zeitlos, für Groß und Klein.
+Kartenspiel-Klassiker für die Familie|Familienspiel Kartenspiel|12|1|spiele,familie|k,t,y,m,o,s|e|Schnell erklärt, für drei Generationen.
+Quizspiel für schlaue Köpfe|Quizspiel Erwachsene|25|2|spiele|t,y,m,o|e|Wer weiß am meisten?
+Zauberkasten|Zauberkasten Kinder|25|2|spiele,kreativ|k|e,l|Tricks zum Vorführen bei Familienfeiern.
+Rubik's Cube Speedcube|Speedcube 3x3|12|1|spiele|k,t,y|e|Dreht sich superleicht, macht süchtig.
+Gitarren-Plektren mit Gravur|Plektrum Gravur|15|1|musik,lustig|t,y,m|r,l|Mit Namen oder kleinem Spruch.
+Mini-Keyboard für Einsteiger|Keyboard Anfänger 61 Tasten|60|3|musik,kreativ|k,t,y|e|Mit Lernfunktion für die ersten Lieder.
+Schallplatten-Wandhalterung|Schallplatten Wandhalter|15|1|musik,deko|y,m|g|Die Lieblingsplatte als Wandbild.
+Konzert-Ticket-Box|Ticket Geschenkbox Konzert|20|2|musik,erlebnis|t,y,m|e,r|Schöne Verpackung für Tickets zum Lieblingskonzert.
+Netflix- oder Streaming-Guthaben|Streaming Geschenkkarte|25|2|filme|t,y,m|p|Serienabende sind gesichert.
+Filmklassiker-Rubbelposter|Rubbelposter Filme 100|20|2|filme|t,y,m|e,l|100 Kultfilme zum Freirubbeln.
+Kino-Snackbox für zu Hause|Kino Snack Box Geschenk|20|2|filme,genuss|k,t,y,m|g,l|Popcorn, Nachos und Süßes in einer Box.
+Lesezeichen aus Metall mit Gravur|Lesezeichen Metall Gravur|12|1|lesen|t,y,m,o,s|r,g|Kleines Geschenk mit großer Geste.
+Buch-Überraschungspaket|Buch Überraschung blind date|20|2|lesen|t,y,m|e,l|Ein Blind Date mit einem Buch.
+Comic-Sammelband|Comic Sammelband|20|2|lesen,lustig|k,t,y|l|Für alle, die gern lachen beim Lesen.
+Manga-Starter-Set|Manga Band 1 3 Set|25|2|lesen|t,y|e|Die ersten drei Bände einer Bestseller-Reihe.
+Tagebuch mit Fragen für jeden Tag|Tagebuch 5 Jahre Fragen|15|1|lesen,schreiben|t,y,m|g,r|Jeden Tag eine Frage, fünf Jahre lang.
+Füller mit Gravur|Füller Gravur Geschenk|30|2|schreiben,büro|y,m,o|g|Für schöne Notizen und Unterschriften.
+Laptop-Ständer|Laptop Ständer verstellbar|25|2|büro,technik|y,m|p|Besser sitzen, weniger Nackenschmerzen.
+Ergonomische Maus|ergonomische Maus vertikal|30|2|büro,technik|y,m,o|p|Das Handgelenk sagt danke.
+Schreibtischlampe mit Ladefunktion|Schreibtischlampe kabellos laden|35|3|büro,technik|t,y,m|p|Licht und Handy laden in einem.
+Kleines Whiteboard für den Schreibtisch|Whiteboard Schreibtisch Glas|20|2|büro|t,y,m|p|Für To-dos und Notizen.
+Handy-Stativ mit Fernbedienung|Handy Stativ Bluetooth Fernauslöser|20|2|technik,fotos|t,y,m|p|Perfekte Gruppenfotos und TikToks.
+Ringlicht für Handy-Videos|Ringlicht Stativ Handy|25|2|technik,fotos,beauty|t,y|p|Gutes Licht für Videos und Selfies.
+Smarte Glühbirne mit Farben|smarte Glühbirne farbig App|20|2|technik,deko|t,y,m|p,l|Lichtstimmung per App oder Sprache.
+Smartwatch|Smartwatch Damen Herren|90|4|technik,sport|t,y,m|p|Nachrichten, Sport und Schlaf am Handgelenk.
+Noise-Cancelling-Kopfhörer|Noise Cancelling Kopfhörer|90|4|musik,technik,reisen|t,y,m|p,g|Endlich Ruhe in Bus, Bahn und Büro.
+E-Book-Reader-Hülle|Kindle Hülle|15|1|lesen,technik|t,y,m,o|p|Schützt den Reader und sieht schön aus.
+Mini-Thermodrucker fürs Handy|Mini Drucker Handy Sticker|35|3|technik,kreativ,fotos|k,t,y|e,l|Fotos und Sticker direkt vom Handy drucken.
+Starthilfe-Powerbank fürs Auto|Starthilfe Powerbank Auto|60|3|autos,technik|y,m,o|p|Leere Batterie? In zwei Minuten wieder fahrbereit.
+Eiskratzer mit Handschuh|Eiskratzer Handschuh|10|1|autos|y,m,o|p,l|Warme Hände beim Scheibe-Freikratzen.
+Auto-Organizer für den Kofferraum|Kofferraum Organizer|25|2|autos|y,m,o|p|Ordnung statt Chaos im Kofferraum.
+Lenkrad-Tablett|Lenkrad Tisch|15|1|autos,lustig|y,m|l,p|Mittagspause im Auto, ganz entspannt.
+Modellauto zum Sammeln|Modellauto 1 18|35|3|autos|t,y,m,o|g|Der Traumwagen fürs Regal.
+Fahrsicherheitstraining-Gutschein|Fahrsicherheitstraining Gutschein|90|4|autos,erlebnis|y,m|e|Fahrspaß und mehr Sicherheit.
+Laser-Entfernungsmesser|Laser Entfernungsmesser|30|2|heimwerken,technik|y,m,o|p|Messen in Sekunden.
+Werkzeuggürtel|Werkzeuggürtel|20|2|heimwerken|y,m,o|p|Alles griffbereit auf der Leiter.
+Magnetisches Armband für Schrauben|Magnet Armband Schrauben|12|1|heimwerken,lustig|y,m,o|p,l|Hält Schrauben fest, genial einfach.
+Bit-Set im Koffer|Bit Set Koffer|20|2|heimwerken|y,m,o|p|Für jede Schraube das passende Bit.
+Kräutergarten-Set für die Küche|Kräutergarten Set Küche|25|2|garten,kochen|y,m,o,s|e,g|Basilikum, Petersilie und Schnittlauch selbst ziehen.
+Bonsai-Starter-Set|Bonsai Starter Set|25|2|garten|t,y,m|e|Ein eigener kleiner Baum zum Pflegen.
+Gießkanne in Design|Gießkanne Zimmerpflanzen|20|2|garten,deko|y,m,o|g|Schön genug, um stehen zu bleiben.
+Blumenzwiebel-Box|Blumenzwiebeln Set|20|2|garten|m,o,s|e|Im Frühling blüht dann die Überraschung.
+Futterhaus für Vögel|Vogelfutterhaus|25|2|garten,tiere|m,o,s|e|Vögel beobachten vom Küchenfenster.
+Hundebett|Hundebett waschbar|40|3|tiere|*|p|Gemütlicher Schlafplatz für den Vierbeiner.
+Leckerli-Backset für Hunde|Hundekekse backen Set|15|1|tiere,backen|*|l,e|Kekse für den Hund selber backen.
+Katzen-Kratzbaum klein|Kratzbaum klein|40|3|tiere|*|p|Für Katzen, die sonst das Sofa nehmen.
+Tierportrait im Pop-Art-Stil|Haustier Portrait Leinwand|35|3|tiere,deko|*|r,l|Das Haustier als Kunstwerk an der Wand.
+Wanderrucksack|Wanderrucksack 30 Liter|50|3|draussen,reisen|t,y,m,o|p|Leicht, bequem, mit Regenhülle.
+Camping-Laterne|Campinglaterne LED|20|2|draussen|t,y,m|p|Licht im Zelt und auf dem Balkon.
+Isomatte selbstaufblasend|Isomatte selbstaufblasend|35|3|draussen|t,y,m|p|Schläft sich wie zu Hause.
+Taschenmesser|Taschenmesser|25|2|draussen|y,m,o|p|Der Klassiker für jede Tour.
+Fernglas|Fernglas kompakt|40|3|draussen,tiere|m,o,s|e|Vögel, Berge, Stadion, alles nah.
+Reise-Adapter für die Welt|Reiseadapter weltweit USB|20|2|reisen,technik|y,m,o|p|Strom in über 150 Ländern.
+Reisetagebuch|Reisetagebuch|15|1|reisen,schreiben|t,y,m|r,e|Erinnerungen an jede Reise festhalten.
+Kulturbeutel zum Aufhängen|Kulturbeutel aufhängen|20|2|reisen|t,y,m,o|p|Platz für alles, hängt im Hotelbad.
+Gepäckwaage digital|Kofferwaage digital|10|1|reisen|y,m,o|p|Nie wieder Übergepäck am Flughafen.
+Fotokalender für 2027|Fotokalender 2027 selbst gestalten|25|2|fotos,familie|*|r,g|Zwölf Monate mit den schönsten Fotos.
+Foto-Puzzle mit eigenem Bild|Fotopuzzle eigenes Foto|25|2|fotos,spiele|*|r,l|Das eigene Lieblingsfoto als Puzzle.
+Bilderrahmen-Collage|Bilderrahmen Collage|25|2|fotos,deko|y,m,o,s|r|Für mehrere Erinnerungen auf einen Blick.
+Leuchtkasten mit Buchstaben|Leuchtkasten Buchstaben|20|2|deko|t,y,m|l,r|Eigene Botschaften im Kino-Look.
+Mondlampe|Mondlampe 3D|25|2|deko,wellness|k,t,y,m|r|Der Mond fürs Schlafzimmer.
+Lava-Lampe|Lavalampe|30|2|deko|t,y|l|Retro-Klassiker zum Stundenlang-Zuschauen.
+Origami-Set|Origami Set|12|1|kreativ|k,t,y,m|e|Falten, entspannen, staunen.
+Handlettering-Set|Handlettering Set Stifte|20|2|kreativ,schreiben|t,y,m|e|Schöne Schrift lernen für Karten und Notizen.
+Kerzen-Gießset|Kerzen selber machen Set|25|2|kreativ,wellness|t,y,m|e|Eigene Duftkerzen gießen.
+Töpfern-Set ohne Ofen|Modelliermasse lufttrocknend Set|20|2|kreativ|k,t,y,m|e|Schalen und Figuren, die an der Luft hart werden.
+Stickerei-Set für Anfänger|Sticken Set Anfänger|15|1|kreativ|t,y,m|e|Kleine Motive, großer Entspannungsfaktor.
+Mützen-und-Schal-Set|Mütze Schal Set Winter|25|2|mode|*|p|Warm eingepackt durch den Winter.
+Touchscreen-Handschuhe|Touchscreen Handschuhe|15|1|mode,technik|t,y,m,o|p|Handy bedienen, ohne zu frieren.
+Kuschelige Bettsocken|Bettsocken flauschig|12|1|mode,wellness|*|p,r|Für kalte Füße im Winter.
+Armband mit Gravur|Armband Gravur|25|2|mode,schmuck,liebe|t,y,m|r|Mit Namen, Datum oder Koordinaten.
+Schmuck-Organizer für Reisen|Schmuckrolle Reise|15|1|schmuck,reisen|t,y,m|p|Ketten verheddern nie wieder.
+Sneaker-Pflegeset|Sneaker Reinigungsset|20|2|mode|t,y|p|Weiße Sneaker bleiben weiß.
+Krawatte und Einstecktuch|Krawatte Einstecktuch Set|25|2|mode|y,m,o|g|Für Hochzeit, Job und Festtage.
+Gesichtsroller aus Rosenquarz|Gesichtsroller Rosenquarz|15|1|beauty,wellness|t,y,m|g|Ein kleines Wellness-Ritual für morgens.
+Haar-Accessoires-Set|Haarspangen Set|12|1|beauty,mode|k,t,y|l,p|Spangen, Scrunchies und Clips.
+Pflegeset für Herren|Pflegeset Herren Geschenk|25|2|beauty|t,y,m,o|g|Duschgel, Creme und Deo im Set.
+Handcreme-Set|Handcreme Set Geschenk|15|1|beauty,wellness|y,m,o,s|g|Für weiche Hände im kalten Winter.
+Schminkspiegel mit Licht|Schminkspiegel beleuchtet|30|2|beauty|t,y,m|p|Perfektes Licht für jedes Make-up.
+Massage-Gutscheinheft für zu Hause|Gutscheinheft Massage|10|1|liebe,wellness|y,m|r,l|Gutscheine zum Einlösen, ganz persönlich.
+„Öffne wenn“-Briefe|Öffne wenn Briefe|15|1|liebe|t,y,m|r|Briefe für jede Lebenslage, selbst beschrieben.
+Paar-Fotoalbum zum Gestalten|Fotoalbum selbst gestalten Paar|20|2|liebe,fotos|y,m|r|Eure Geschichte zum Durchblättern.
+Kerzen-Dinner-Set|Candle Light Dinner Set|30|2|liebe,genuss|y,m|r|Kerzen, Servietten und Deko für einen besonderen Abend.
+Kuschel-Plüschtier|Kuscheltier groß|25|2|lustig,liebe|k,t,y|r,l|Riesig, flauschig, immer da.
+Furzkissen-Deluxe|Furzkissen|5|1|lustig|k,t|l|Seit Generationen der Lacher Nr. 1.
+Toilettenpapier mit Sudoku|Klopapier Sudoku|10|1|lustig,spiele|t,y,m|l|Endlich Beschäftigung auf dem stillen Örtchen.
+Antistress-Kuh zum Quetschen|Antistress Kuh|8|1|lustig,büro|t,y,m|l|Fürs Büro, wenn der Montag zu lang ist.
+Tasse mit Wärme-Effekt|Tasse Farbwechsel Wärme|15|1|lustig,kaffee|t,y,m|l|Mit heißem Kaffee erscheint ein Motiv.
+Spiel „Wer bin ich?“ mit Stirnbändern|Wer bin ich Spiel Stirnband|15|1|spiele,lustig|k,t,y,m|l,e|Sorgt bei jeder Feier für Lacher.
+Lernglobus mit Stift|Tiptoi Globus|50|3|lesen,reisen|k|e|Der Stift erzählt alles über die Länder.
+Bauklötze aus Holz|Holzbausteine Kinder|25|2|kreativ,spiele|k|e|Klassiker, der jahrelang hält.
+Kinder-Fahrradhelm mit Licht|Kinder Fahrradhelm Licht|30|2|sport,draussen|k|p|Sicher unterwegs, auch im Dunkeln.
+Kinder-Hörspiel-Box|Hörspiel Box Kinder|60|3|musik,lesen|k|e|Hörspiele zum Anfassen, ganz ohne Bildschirm.
+Malbuch-Mega-Set|Malbuch Set Kinder Stifte|15|1|kreativ|k|e|Malbücher und Stifte für viele Regentage.
+Taschenlampe für kleine Abenteurer|Kinder Taschenlampe|12|1|draussen,spiele|k|e,l|Für Höhlenbauten unter der Bettdecke.
+Graffiti-Sprühstifte für Kinder|Airbrush Stifte Kinder|20|2|kreativ|k|e,l|Pusten statt sprühen, ganz ohne Kleckse.
+Fotoalbum für Enkel und Großeltern|Fotoalbum Oma Enkel|20|2|familie,fotos|s|r|Platz für die Erinnerungen der ganzen Familie.
+Lupe mit Licht|Leselupe mit Licht|15|1|lesen|s|p|Kleine Schrift wird wieder lesbar.
+Rätselheft-Sammlung|Rätselbuch Senioren|12|1|spiele,lesen|o,s|e|Kreuzworträtsel und Sudoku für viele Tage.
+Wärmekissen mit Kirschkernen|Kirschkernkissen|15|1|wellness|*|p,g|Warm aus der Mikrowelle, gegen Bauchweh und Nackenschmerzen.
+Großbild-Wanduhr mit Datum|Digitale Kalenderuhr Senioren|40|3|technik,familie|s|p|Wochentag und Uhrzeit gut lesbar.
+Gartenkniebank|Gartenkniebank|35|3|garten|o,s|p|Knien und Sitzen beim Gärtnern, schont die Knie.
+Familienstammbaum zum Ausfüllen|Stammbaum Poster|20|2|familie|o,s|r,e|Die Familiengeschichte auf einen Blick.`;
+const ITEMS=RAW.trim().split('\n').map((l,i)=>{const[t,q,p,b,h,a,s,d]=l.split('|');return{i,t,q,p:+p,b:+b,h:h.split(','),a:a==='*'?['k','t','y','m','o','s']:a.split(','),s:s.split(','),d};});
+const CATS=[['kaffee','heiss','#7a4a2a'],['tee','heiss','#3f8f6a'],['gaming','gaming','#4b3ab5'],['fussball','ball','#1f8a4c'],['sport','sport','#2b5fd9'],['spiele','spiele','#e07a1f'],['musik','musik','#7b2cbf'],['filme','film','#c2185b'],['lesen','lesen','#8d5a3b'],['schreiben','lesen','#8d5a3b'],['büro','buero','#546e7a'],['autos','auto','#d32f2f'],['heimwerken','werkzeug','#455a64'],['technik','technik','#1565c0'],['garten','garten','#2e7d32'],['tiere','tiere','#ef6c00'],['draussen','draussen','#33691e'],['reisen','reisen','#0277bd'],['fotos','foto','#6a1b9a'],['familie','foto','#ad1457'],['liebe','liebe','#d81b60'],['kreativ','kreativ','#f9a825'],['mode','mode','#00838f'],['schmuck','mode','#00838f'],['beauty','beauty','#c2185b'],['wellness','wellness','#8e6cc4'],['backen','kueche','#d84315'],['kochen','kueche','#e64a19'],['grillen','kueche','#5d4037'],['genuss','genuss','#c62828'],['deko','gift','#b3122e'],['lustig','gift','#f57c00']];
+const catOf=it=>{for(const h of it.h){const c=CATS.find(c=>c[0]===h);if(c)return c;}return['','gift','#b3122e'];};
+const WHO=[['mama','Mama'],['papa','Papa'],['partner','Partner/in'],['freund','Freund/in'],['geschwister','Geschwister'],['kind','Kind'],['oma','Oma oder Opa'],['kollege','Kollege/Wichteln']];
+const AGE=[['k','unter 12'],['t','12–17'],['y','18–29'],['m','30–49'],['o','50–69'],['s','70+']];
+const HOB=[['kochen','Kochen'],['backen','Backen'],['kaffee','Kaffee'],['tee','Tee'],['genuss','Naschen & Genuss'],['grillen','Grillen'],['sport','Sport & Fitness'],['fussball','Fußball'],['gaming','Gaming'],['spiele','Spiele & Rätsel'],['musik','Musik'],['filme','Filme & Serien'],['lesen','Lesen'],['technik','Technik'],['autos','Autos'],['heimwerken','Heimwerken'],['garten','Garten & Pflanzen'],['tiere','Haustiere'],['reisen','Reisen'],['draussen','Draußen & Camping'],['fotos','Fotos & Erinnerungen'],['kreativ','Basteln & Kreatives'],['mode','Mode & Schmuck'],['beauty','Beauty & Pflege'],['wellness','Entspannen'],['büro','Büro & Schreibtisch']];
+const BUD=[[1,'bis 15 €'],[2,'15–35 €'],[3,'35–60 €'],[4,'über 60 €']];
+const STY=[['p','Praktisch'],['e','Etwas erleben'],['l','Lustig'],['g','Hat schon alles'],['r','Mit Gefühl']];
+const STEPS=[
+ {k:'who',q:'Für wen suchst du?',h:'Wähle eine Person.',o:WHO},
+ {k:'age',q:'Wie alt ist die Person?',h:'Ungefähr reicht.',o:AGE},
+ {k:'hob',q:'Was mag die Person?',h:'Bis zu drei Sachen, oder einfach „Keine Ahnung“.',o:HOB,m:3,any:true},
+ {k:'bud',q:'Wie viel willst du ausgeben?',h:'Ein paar günstigere Treffer zeigen wir auch.',o:BUD},
+ {k:'sty',q:'Was für ein Geschenk soll es sein?',h:'Optional, du kannst auch direkt los.',o:STY,opt:true}];
+const QUICK=[['Wichteln bis 15 €',{who:'kollege',age:'y',any:true,bud:1,sty:'l'}],['Für Mama',{who:'mama',age:'o',any:true,bud:2,sty:'g'}],['Für Papa',{who:'papa',age:'o',any:true,bud:2,sty:'p'}],['Für den Partner',{who:'partner',age:'y',any:true,bud:3,sty:'r'}],['Für Gamer',{who:'freund',age:'t',hob:['gaming'],bud:2}],['Für Oma & Opa',{who:'oma',age:'s',any:true,bud:2,sty:'r'}],['Für Kinder',{who:'kind',age:'k',any:true,bud:2,sty:'e'}],['Für Kaffee-Fans',{who:'freund',age:'m',hob:['kaffee'],bud:2}],['Für Autofans',{who:'freund',age:'y',hob:['autos'],bud:2}]];
+const st={who:null,age:null,hob:[],any:false,bud:null,sty:null};let cur=0,seed=0,seen=new Set(),last=[];
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const lbl=(arr,v)=>(arr.find(x=>x[0]===v)||[,''])[1];
+const AGEDEF={kind:'k',oma:'s'};
+let saved=[];try{saved=JSON.parse(localStorage.getItem('gb_mz')||'[]').filter(i=>ITEMS[i]);}catch(e){}
+const store=()=>{try{localStorage.setItem('gb_mz',JSON.stringify(saved));}catch(e){}};
+$('nIdeas').textContent=`Über ${Math.floor(ITEMS.length/10)*10} Ideen`;$('yr').textContent=new Date().getFullYear();
+{const now=new Date(),y=now.getMonth()===11&&now.getDate()>24?now.getFullYear()+1:now.getFullYear();const d=Math.ceil((new Date(y,11,24)-now)/864e5);$('count').textContent=d>0?`Noch ${d} Tage bis Heiligabend`:'Heute ist Heiligabend';}
+{const one=h=>QUICK.map(([l],i)=>`<button class="qs" type="button" data-i="${i}"${h?' aria-hidden="true" tabindex="-1"':''}>${esc(l)}</button>`).join('');$('quick').innerHTML=one(false)+one(true);}
+$('quick').addEventListener('click',e=>{const b=e.target.closest('.qs');if(!b)return;const p=QUICK[+b.dataset.i][1];Object.assign(st,{who:null,age:null,hob:[],any:false,bud:null,sty:null},p);seen=new Set();cur=STEPS.length-1;render();show();});
+function render(){const S=STEPS[cur];$('steps').innerHTML=STEPS.map((_,i)=>`<i class="${i<=cur?'on':''}"></i>`).join('');
+ $('q').textContent=S.q;$('hint').textContent=S.h;
+ $('opts').innerHTML=(S.any?`<button type="button" class="opt any" data-v="__any" aria-pressed="${st.any}">Keine Ahnung – stell mir was zusammen</button>`:'')+S.o.map(([v,l])=>{const on=S.m?st[S.k].includes(v):st[S.k]===v;return`<button type="button" class="opt" data-v="${esc(v)}" aria-pressed="${on}">${esc(l)}</button>`}).join('');
+ $('back').style.visibility=cur?'visible':'hidden';$('next').textContent=cur===STEPS.length-1?'Ideen zeigen':'Weiter';
+ const val=st[S.k];$('next').disabled=!S.opt&&(S.m?!(val.length||(S.any&&st.any)):val===null);}
+$('opts').addEventListener('click',e=>{const b=e.target.closest('.opt');if(!b)return;const S=STEPS[cur];
+ if(b.dataset.v==='__any'){st.any=true;st.hob=[];render();setTimeout(()=>{cur++;render();},180);return;}
+ const v=S.k==='bud'?+b.dataset.v:b.dataset.v;
+ if(S.m){st.any=false;const a=st[S.k];const i=a.indexOf(v);if(i>=0)a.splice(i,1);else{if(a.length>=S.m)a.shift();a.push(v);}render();}
+ else{st[S.k]=st[S.k]===v&&S.opt?null:v;if(S.k==='who'&&AGEDEF[v]&&st.age===null)st.age=AGEDEF[v];render();if(!S.opt&&cur<STEPS.length-1)setTimeout(()=>{cur++;render();},180);}});
+$('back').addEventListener('click',()=>{if(cur>0){cur--;render();}});
+$('quiz').addEventListener('submit',e=>{e.preventDefault();if($('next').disabled)return;if(cur<STEPS.length-1){cur++;render();}else{seen=new Set();show();}});
+function rnd(n){const x=Math.sin(n*99.13+seed*7.7)*43758.5;return x-Math.floor(x);}
+function pick(){const love=st.who==='partner',small=st.who==='kollege';
+ const sc=ITEMS.map(it=>{let s=0;if(!it.a.includes(st.age))return{it,s:-99};
+  if(/Kollege/.test(it.t)&&st.who!=='kollege')return{it,s:-99};if(/Bart|Rasier|Krawatte/.test(it.t)&&(st.who==='mama'))return{it,s:-99};
+  for(const h of st.hob)if(it.h.includes(h))s+=4;
+  if(st.any){if(it.s.includes('g'))s+=2;if(it.s.includes('l'))s+=1;if(it.a.length>=5)s+=1.5;if(['wellness','genuss','lustig','fotos','deko'].some(h=>it.h.includes(h)))s+=1.5;s+=rnd(it.i+3)*2;}
+  const db=Math.abs(it.b-st.bud);s+=db===0?2.5:db===1?(it.b<st.bud?1:-1):-4;
+  if(st.sty&&it.s.includes(st.sty))s+=2;
+  if(it.s.includes('r'))s+=love?2:(st.who==='freund'||small||st.who==='geschwister')?-3:0;
+  if(it.h.includes('liebe')&&!love)s-=6;if(small&&it.b>2)s-=3;if(small&&it.s.includes('l'))s+=1;
+  if(['mama','papa','oma'].includes(st.who)&&it.h.includes('familie'))s+=1.5;
+  if(st.who==='kind'&&!it.a.includes('y'))s+=1;
+  return{it,s:s+rnd(it.i)*1.6};}).filter(x=>x.s>-50).sort((a,b)=>b.s-a.s);
+ let pool=sc.filter(x=>!seen.has(x.it.i));if(pool.length<10){seen=new Set();pool=sc;}
+ const out=[],cnt={};for(const x of pool){const k=catOf(x.it)[1],lim=st.any?1:2;if((cnt[k]||0)>=lim)continue;cnt[k]=(cnt[k]||0)+1;out.push(x.it);if(out.length===10)break;}
+ if(out.length<10)for(const x of pool){if(!out.includes(x.it))out.push(x.it);if(out.length===10)break;}
+ out.forEach(it=>seen.add(it.i));return out;}
+const link=q=>'https://www.amazon.de/s?k='+encodeURIComponent(q)+'&tag='+encodeURIComponent(TAG);
+const art=(it,cls='art')=>{const c=catOf(it);return`<svg aria-hidden="true"><use href="#i-${c[1]}"/></svg>`;};
+const wa=(title,list)=>'https://wa.me/?text='+encodeURIComponent(`${title}\n\n${list.map((it,n)=>`${n+1}. ${it.t}`).join('\n')}\n\nGefunden auf inletztersekunde.de: ${SITE}`);
+function card(it,n){const on=saved.includes(it.i),fav=n===0;
+ return`<article class="tag${fav?' fav':''}" style="animation-delay:${n*45}ms"><div class="top2"><span class="no">${fav?'Unser Favorit':'Idee '+(n+1)}</span><span class="bud">${esc(lbl(BUD,it.b))}</span><button class="heart" type="button" data-i="${it.i}" aria-pressed="${on}" aria-label="Merken"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z" fill="none" stroke="#2a0d12" stroke-width="2" stroke-linejoin="round"/></svg></button></div>
+ <div class="body"><h3>${esc(it.t)}</h3><p>${esc(it.d)}</p><a class="buy" href="${esc(link(it.q))}" target="_blank" rel="sponsored noopener">Bei Amazon ansehen →</a></div></article>`;}
+function show(){last=pick();
+ $('res').hidden=false;$('pic').classList.add('open');
+ const who=lbl(WHO,st.who);$('rt').textContent=`Deine 10 Ideen für ${who==='Kollege/Wichteln'?'Wichteln':who}`;
+ $('rs').textContent=`${lbl(AGE,st.age)} Jahre · ${lbl(BUD,st.bud)}`;
+ $('chips').innerHTML=(st.any?'<span class="chip">Bunt gemischt</span>':'')+st.hob.map(h=>`<span class="chip">${esc(lbl(HOB,h))}</span>`).join('')+(st.sty?`<span class="chip">${esc(lbl(STY,st.sty))}</span>`:'');
+ $('tags').innerHTML=last.length?last.map(card).join(''):'<div class="empty">Dazu haben wir noch nichts Passendes. Probier ein anderes Interesse.</div>';
+ $("share").href=wa(`Geschenkideen für ${who==="Kollege/Wichteln"?"Wichteln":who}:`,last);
+ $('res').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});}
+function mz(){$('mzN').textContent=saved.length;const L=saved.map(i=>ITEMS[i]);
+ $('mzList').innerHTML=L.length?L.map(it=>{return`<div class="mzi"><div><b>${esc(it.t)}</b><a href="${esc(link(it.q))}" target="_blank" rel="sponsored noopener">Bei Amazon ansehen →</a></div><button class="x" type="button" data-rm="${it.i}" aria-label="Entfernen">✕</button></div>`}).join(''):'<div class="empty">Noch nichts gemerkt. Tippe bei einer Idee auf das Herz.</div>';
+ $('mzShare').style.display=L.length?'':'none';$('mzShare').href=wa('Meine Geschenkideen:',L);}
+document.addEventListener('click',e=>{const h=e.target.closest('.heart');if(h){const i=+h.dataset.i;const k=saved.indexOf(i);if(k>=0)saved.splice(k,1);else saved.push(i);h.setAttribute('aria-pressed',k<0);store();mz();return;}
+ const r=e.target.closest('[data-rm]');if(r){saved=saved.filter(i=>i!==+r.dataset.rm);store();mz();document.querySelectorAll(`.heart[data-i="${r.dataset.rm}"]`).forEach(b=>b.setAttribute('aria-pressed','false'));}});
+$('mzBtn').addEventListener('click',()=>{mz();$('drawer').classList.add('on');$('closeMz').focus();});
+const closeMz=()=>$('drawer').classList.remove('on');$('closeMz').addEventListener('click',closeMz);$('shade').addEventListener('click',closeMz);
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMz();});
+$('shuffle').addEventListener('click',()=>{seed++;show();});
+$('again').addEventListener('click',()=>{Object.assign(st,{who:null,age:null,hob:[],any:false,bud:null,sty:null});cur=0;seed=0;seen=new Set();$('res').hidden=true;$('pic').classList.remove('open');render();window.scrollTo({top:0});});
+render();mz();
+}
+</script>
+</body>
+</html>

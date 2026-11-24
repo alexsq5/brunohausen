@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/:path*", "has": [{ "type": "host", "value": "inletztersekunde.de" }], "destination": "/ils/:path*" },
+    { "source": "/:path*", "has": [{ "type": "host", "value": "www.inletztersekunde.de" }], "destination": "/ils/:path*" }
+  ]
+}
